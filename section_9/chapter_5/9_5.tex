@@ -1,0 +1,151 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{mathtools}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\then}{\rightarrow}
+\newcommand{\bithen}{\leftrightarrow}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\Dom}{Dom}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\0}{\emptyset}
+\newcommand{\power}{\mathcal{P}}
+
+\newcommand{\divby}{\; \vdots \;}
+
+\title{MATH 381 Section 9.5}
+\author{Prof. Olivia Dumitrescu}
+\date{12 April 2024}
+
+\begin{document}
+    \maketitle
+    \begin{definition}
+        A relation $R$ on a set $A$ is a relation from $A$ to $A$.
+        \[xRy \leftrightarrow (x, y) \in R\]
+    \end{definition}
+    A matrix can be defined which is associated with a relation $R$
+    \[a_{ij} = \begin{cases}
+        1 & (i, j) \in R \\
+        0 & (i, j) \notin R
+    \end{cases}\]
+    The relation $R$ can be interpreted as a directed graph. The vertices of the directed graph 
+    consist of the points of $A$.
+    \begin{enumerate}
+        \item $\overline{xy}$ is a directed edge iff $(x, y) \in R$
+        \item $x \circlearrowright$ is a directed loop iff $(x, x) \in R$
+    \end{enumerate}
+    \section*{Section 9.5 Equivalence Relations}
+    \begin{definition}
+        A relation $R$ on a set $A$ is an equivalence relation if it satisfies:
+        \begin{enumerate}
+            \item reflexivity
+            \[\forall a \in A (a \overset{R}{\sim} a)\]
+            \item symmetry
+            \[\forall a, b \in A (a \overset{R}{\sim} b \then b \overset{R}{\sim} a)\]
+            \item transitivity
+            \[\forall a, b, c \in A 
+            (a \overset{R}{\sim} b \wedge b \overset{R}{\sim} c \then a \overset{R}{\sim} c)\]
+        \end{enumerate}
+    \end{definition}
+    \begin{remark}
+        None of the three conditions for an equivalence relation is redundant
+    \end{remark}
+    \begin{definition}
+        Two elements $a$ and $b$ that are related by an equivalence relation are called equivalent 
+        (denoted by $a \sim b$ if $a$ and $b$ are equivalent elements with respect to some 
+        equivalence.)
+    \end{definition}
+    \begin{example}
+        Let $R$ be a relation. \\
+        $a \overset{R}{\sim} b \iff$ either $a=b$ or $a=-b$. \\
+        Prove that this is an equivalence relation.
+        \begin{enumerate}
+            \item if $a \overset{R}{\sim} b$ then also $b \overset{R}{\sim} a$\\
+            i.e. if $a = b$ or $a=-b$ then either $b=a$ or $b=-a$.
+            \item $\forall a \in A (a \overset{R}{\sim} a)$ \\
+            i.e. either $a=a$ or $a=-a$
+            \item $\forall a, b, c \in A$
+            \[a \overset{R}{\sim} b \wedge b \overset{R}{\sim} c \then a \overset{R}{\sim} c\]
+            \[\begin{cases}
+                a = b \vee a = -b \\
+                b=c \vee b=-c
+            \end{cases} \then a = c \vee a = -c\]
+        \end{enumerate}
+    \end{example}
+    \begin{example}
+        $A = \R$ \\
+        \[a \overset{R}{\sim} b \iff a-b \in \Z\]
+        Is this an equivalence relation?
+    \end{example}
+    \begin{example}
+        Is $a \mid b$ an equivalence relation? No
+    \end{example}
+    \begin{example}
+        Prove that congruence modulo $m$ is an equivalence relation.
+        \[m \mid a - b \then a \overset{R}{\sim} b\]
+    \end{example}
+    \begin{example}
+        $A = \R \forall a, b \in \R$ \\
+        Define $a \overset{R}{\sim} b \iff |a-b| < 1$ \\
+        Prove that it is not an equivalence relation.
+    \end{example}
+    \begin{definition}
+        $R$ is an equivalence relation on a set $A$. \\
+        The set of elements that are related to $a \in A$ is called the \keyword{equivalence class} 
+        of $a$. The equivalence class of $a \in A$ with respect to relation $R$ can be written as 
+        \[[a]_R = \{s \in A \mid a \overset{R}{\sim} s\}\]
+    \end{definition}
+    \begin{theorem}
+        If $R$ is an equivalence relation on a set $A$ and taking $a, b \in A$, then the following 
+        two statements are equivalent
+        \begin{enumerate}
+            \item $a \overset{R}{\sim} b$
+            \item $[a]_R = [b]_R$
+            \item $[a]_R \cap [b]_R \ne \emptyset$
+        \end{enumerate}
+    \end{theorem}
+    \begin{corollary}
+        This theorem implies 
+        \[A = \bigsqcup_{a \in A} [a]_R\]
+        \begin{itemize}
+            \item i.e. if $a \overset{R}{\nsim} b$ then $[a]_R \cap [b]_R = \emptyset$
+            \item if $a \overset{R}{\sim} b$ then $[a]_R = [b]_R$
+        \end{itemize}
+    \end{corollary}
+    \begin{theorem}
+        Let $R$ be an equivalence relation on a set $S$. The equivalence classes with respect to 
+        $R$ form a partition of $S$. \\
+        Conversely, given any partition $\{A_i \mid i \in I\}$ of subsets of $S$ then there exists 
+        an equivalence relation $R$ that has these subsets as an equivalence class.
+    \end{theorem}
+    \begin{example}
+        of partition
+        \begin{align*}
+            S &= \{1,2,3,4,5,6\} \\
+            A_1 &= \{1,2,3\} \\
+            A_2 &= \{4,5\} \\
+            A_3 &= \{6\} \\
+            S &= A_1 \sqcup A_2 \sqcup A_3
+        \end{align*}
+    \end{example}
+\end{document}

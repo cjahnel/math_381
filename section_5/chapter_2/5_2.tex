@@ -1,0 +1,94 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\then}{\rightarrow}
+\newcommand{\bithen}{\leftrightarrow}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\0}{\emptyset}
+\newcommand{\power}{\mathcal{P}}
+
+\title{MATH 381 Section 5.2}
+\author{Prof. Olivia Dumitrescu}
+\date{1 March 2024}
+
+\begin{document}
+    \maketitle
+    \section*{Strong Induction and Well-Ordering}
+    Strong Induction
+    \begin{enumerate}
+        \item $P(1)$ holds
+        \item $\forall 1 \le j \le k \quad P(j) \then P(k + 1)$
+    \end{enumerate}
+    Then we conclude $P(n)$ holds for $n \ge 1$.
+    \begin{definition}
+        A number is called \keyword{prime} if it is non-unital and the only divisors of the 
+        number are 1 and itself.
+        \[1 \mid p \qquad p \mid p\]
+        ($p = 1$ is not prime by definition)
+    \end{definition}
+    \begin{example}
+        Show that if $n \in \Z$, then either $n$ is prime or $n$ can be written as a product 
+        of primes. (In fact, this decomposition is unique.)
+    \end{example}
+    \begin{proof} Strong Induction
+        \begin{align*}
+            P(n) &\quad n \text{ can be written as a product of primes.} \\
+            n \ge 2 &
+        \end{align*}
+        \begin{enumerate}
+            \item $P(2), P(3), P(4), P(5), P(6), P(8)$
+            \item Assume $P(j)$ holds for any $1 \le j \le n$. \\
+            We claim $P(n+1)$ holds.
+            \begin{flushleft}
+                Let $n + 1 \in \Z, n \ge 2$
+                \begin{enumerate}
+                \item either $n + 1$ is prime
+                \item or $n + 1$ is not prime i.e. $\exists d \in \N, d \ne 1 \wedge d = n + 1$
+                \begin{align*}
+                    d \mid n + 1 &\implies n + 1 = a \cdot d \\
+                    \begin{aligned}
+                        d \ne 1, n + 1 \\
+                        a \ne 1, n + 1
+                    \end{aligned} &\implies a, d < n + 1
+                    & 2 \le a, d \le n
+                \end{align*}
+                \end{enumerate}
+            \end{flushleft}
+        \end{enumerate}
+    \end{proof}
+    \begin{theorem}
+        A simple polygon with $n$ sides, where $n \in \{n \in \N \mid n \ge 3\}$, can be 
+        triangulated into $n - 2$ triangles.
+    \end{theorem}
+    \begin{definition} \hfill
+        \begin{enumerate}
+            \item A \keyword{polygon} is a closed geometric figure consisting of a sequence of 
+            line segments with $s_1, \dots, s_n$ as sides.
+            \item A polygon is \keyword{simple} if no consecutive sides intersect.
+            \item A polygon is \keyword{convex} if any line segment connecting 2 points in the 
+            interior of the polygon lies inside the polygon.
+            \item A \keyword{diagonal} is a line connecting 2 vertices of a polygon.
+        \end{enumerate}
+    \end{definition}
+\end{document}

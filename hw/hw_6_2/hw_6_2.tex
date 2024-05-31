@@ -1,0 +1,237 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\then}{\rightarrow}
+\newcommand{\bithen}{\leftrightarrow}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\rationals}{\mathbb{Q}}
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\complex}{\mathbb{C}}
+
+\title{MATH 381 Homework 6 part 2}
+\author{Christian Jahnel}
+\date{21 February 2024}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item Show that any integer is a multiple of 5 if and only if it square is a multiple of 5.
+\begin{flushleft}
+    $P(n)$: ``$n$ is a multiple of 5'' $\equiv \exists k \in \mathbb{Z} (n = 5k)$ \\
+    $Q(n)$: ``$n^2$ is a multiple of 5'' $\equiv \exists m \in \mathbb{Z} (n^2 = 5m)$ 
+\end{flushleft}
+Suppose $P(n)$.
+\begin{gather*}
+    n = 5k \quad k \in \mathbb{Z} \\
+    n^2 = (5k)^2 = (5^2 k^2) = 5(5k^2) = 5m \quad m = 5k^2 \in \mathbb{Z}
+\end{gather*}
+$\therefore Q(n)$ \\
+Suppose $Q(n)$.
+\begin{gather*}
+    n^2 = 5m \quad m \in \mathbb{Z} \\
+    \sqrt{n^2} = \sqrt{5m} = \sqrt{5}\sqrt{m}
+\end{gather*}
+Since $n^2$ is a square of an integer:
+\begin{align*}
+    & \sqrt{n^2} \in \mathbb{Z}_+ \\
+    &\implies \sqrt{5}\sqrt{m} \in \mathbb{Z}_+ \\
+    &\implies \sqrt{5}\sqrt{5}\sqrt{m/5} \in \mathbb{Z}_+ \\
+    &\implies 5\sqrt{m/5} \in \mathbb{Z}_+ \\
+    &\implies \sqrt{m/5} \in \mathbb{Z}_+ \because 5 \in \mathbb{Z}_+ \\
+    &\therefore \sqrt{n^2} = n = 5k \qquad k = \sqrt{m/5} \in \mathbb{Z}_+
+\end{align*}
+$\therefore P(n) \qed$
+\item Using the definition $|x| = \begin{cases}
+    x & \text{if } x \ge 0 \\
+    -x & \text{if } x < 0
+\end{cases}$, 
+prove that for all real numbers $x$ and $y$, $|x| \le y$ if and only if $-y \le x \le y$.
+\begin{flushleft}
+    Suppose $|x| \le y$.
+\end{flushleft}
+\begin{gather*}
+    |x| \le y = \begin{cases}
+        x \le y \quad \text{ if } x \ge 0 \\
+        -x \le y \quad \text{ if } x < 0
+    \end{cases} = \begin{cases}
+        x \le y \quad \text{ if } x \ge 0 \\
+        x \ge -y \quad \text{ if } x < 0
+    \end{cases}
+\end{gather*}
+\begin{align*}
+    &\iff (x \le y \wedge x \ge 0) \vee (x \ge -y \wedge x < 0) \\
+    &\iff (0 \le x \le y) \vee (-y \le x < 0) \\
+    &\iff x \in [0, y] \vee x \in [-y, 0) \\
+    &\iff x \in [0, y] \cup [-y, 0) \\
+    &\iff x \in [-y, y] \\
+    &\iff -y \le x \le y
+\end{align*}
+$\therefore |x| \le y \leftrightarrow -y \le x \le y \qed$
+\pagebreak
+\item Prove that if $ab > 0$ and $bc < 0$, then $ax^2 + bx + c = 0$ has two real solutions. \\
+\[x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}\]
+The quadratic equation has two real solutions when $b^2 - 4ac > 0 \iff b^2 > 4ac$.
+\begin{gather*}
+    (ab > 0) \then (a > 0 \wedge b > 0) \vee (a < 0 \wedge b < 0) \\
+    (bc < 0) \then (b < 0 \wedge c > 0) \vee (b > 0 \wedge c < 0)
+\end{gather*}
+\begin{flushleft}
+    There are two possibilities, since $a$ and $c$ are dependent on the value of $b$ to fulfill 
+    their inequalities. \\
+    If $b$ is negative, then $a$ must be negative as well, and $c$ must be positive. \\
+    If $b$ is positive, then $a$ must be positive as well, and $c$ must be negative.
+\end{flushleft}
+\begin{gather*}
+    (b > 0) \then (a > 0 \wedge c < 0) \\
+    (b < 0) \then (a < 0 \wedge c > 0)
+\end{gather*}
+Assume $b < 0$.
+\begin{gather*}
+    b^2 > 0 \\
+    a < 0 \implies 4ac < 0 \\
+    \therefore b^2 > 4ac
+\end{gather*}
+Assume $b > 0$.
+\begin{gather*}
+    b^2 > 0 \\
+    c < 0 \implies 4ac < 0 \\
+    \therefore b^2 > 4ac
+\end{gather*}
+\[\therefore (ab > 0 \wedge bc < 0) \then (b^2 - 4ac > 0) \qed\]
+\begin{flushleft}
+    Therefore, $ax^2 + bx + c = 0$ has two real solutions if $ab > 0$ and $bc < 0$.
+\end{flushleft}
+\pagebreak
+\item Show that there is a three-digit number less than 400 with distinct digits such that 
+the sum of the digits is 17 and the product of the digits is 108. Is there a unique such number? 
+Explain.
+\begin{gather*}
+    n = 100n_2 + 10n_1 + 1n_0 < 400 \\
+    n_2 + n_1 + n_0 = 17 \\
+    n_2 \cdot n_1 \cdot n_0 = 108 \\
+    108 = 12 \cdot 9 = 3 \cdot 4 \cdot 3^2 = 2^2 \cdot 3^3 \\
+    n_1, n_2, n_3 \ne 0 \because n_2 \cdot n_1 \cdot n_0 = 108 \ne 0
+\end{gather*}
+\begin{center}
+    \begin{tabular}{c | c | c | c | c}
+        $i$ & $j$ & $2^i$ & $3^j$ & $2^i \cdot 3^j$ \\
+        0 & 0 & 1 & 1 & *1 \\
+        0 & 1 & 1 & 3 & *3 \\
+        0 & 2 & 1 & 9 & *9 \\
+        0 & 3 & 1 & 27 & 27 \\
+        1 & 0 & 2 & 1 & *2 \\
+        1 & 1 & 2 & 3 & *6 \\
+        1 & 2 & 2 & 9 & 18 \\
+        1 & 3 & 2 & 27 & 54 \\
+        2 & 0 & 4 & 1 & *4 \\
+        2 & 1 & 4 & 3 & 12 \\
+        2 & 2 & 4 & 9 & 36 \\
+        2 & 3 & 4 & 27 & 108 \\
+    \end{tabular}
+\end{center}
+\begin{gather*}
+    n_1, n_2, n_3 \in \{1, 2, 3, 4, 6, 9\} \\
+    6 + 3 + 4 = 13 < 17 \implies (n_1 = 9) \vee (n_2 = 9) \vee (n_3 = 9) \\
+    17 - 9 = 8 = 6 + 2 \\
+    n_1, n_2, n_3 \in \{2, 6, 9\} \\
+    n_2 \ne 9 \because n \ge 900 > 400 \\
+    n_2 \ne 6 \because n \ge 600 > 400 \\
+    \implies n_2 = 2
+    (n_2 = 2 \wedge n_1 = 6 \wedge n_0 = 9) \then (n = 269) \\
+    (n = 269) \then (n < 400) \\
+    \therefore (n_2 = 2 \wedge n_1 = 6 \wedge n_0 = 9) \then (n < 400)
+    (n_2 = 2 \wedge n_1 = 9 \wedge n_0 = 6) \then (n = 296) \\
+    (n = 296) \then (n < 400) \\
+    \therefore (n_2 = 2 \wedge n_1 = 9 \wedge n_0 = 6) \then (n < 400) \qed
+\end{gather*}
+\begin{flushleft}
+    \textbf{Yes, there is such a number}. One such number is 269. Its digits were found by finding 
+    combinations of factors in the prime factorization in 108 that could possibly add to 17. 
+    9 must be a digit to reach 17 as a sum, and the only other factors that add to 8 are 2 and 
+    6. Since 6 and 9 as the first digit would make the number greater than 400, 2 must be the 
+    first digit, and a possible number was revealed to be 269 which is indeed less than 400. 
+    However, another possible number that fits the restrictions is 296, which is formed by 
+    interchanging the last two digits. Therefore, there does exist a number, \keyword{but it 
+    is not unique}, as there are two possible numbers that fit the requirements.
+\end{flushleft}
+\pagebreak
+\item Without trying to evaluate these numbers, show that the product of two of the numbers 
+$65^{1000} - 8^{2001} + 3^{177}$, $79^{2121} - 9^{2399} + 2^{2001}$, and $24^{4493} + 5^{8192} 
++ 7^{1777}$ is non-negative. \\
+\begin{gather*}
+    n_1 = 65^{1000} - 8^{2001} + 3^{177} \\
+    n_2 = 24^{4493} + 5^{8192} + 7^{1777}
+\end{gather*}
+\begin{gather}
+    (n_1 * n_2 > 0) \leftrightarrow (n_1 > 0 \wedge n_2 > 0) \vee (n_1 < 0 \wedge n_2 < 0) \\
+    n_2 > 0 = T \because (24^{4493} > 0) \wedge (5^{8192} > 0) \wedge (7^{1777} > 0) \\
+    \therefore (n_1 < 0 \wedge n_2 < 0) = F, \; (n_1 > 0 \wedge n_2 > 0) \equiv (n_1 > 0) \\
+    \implies (n_1 * n_2 > 0) \leftrightarrow (n_1 > 0)
+\end{gather}
+\begin{align}
+    65^{1000} > 8^{2001} &\implies 65^{1000} + 3^{177} > 8^{2001} \\
+    &\iff 65^{1000} - 8^{2001} + 3^{177} > 0
+\end{align}
+\begin{flushleft}
+    $p$: $65^{1000} - 8^{2001} + 3^{177} > 0$ \\
+    $q$: $65^{1000} + 3^{177} > 8^{2001}$ \\
+    $r$: $65^{1000} > 8^{2001}$ \\
+    $s$: $(n_1 * n_2 > 0)$
+\end{flushleft}
+\begin{gather*}
+    r \then q \qquad \text{(From equation 5)} \\
+    q \leftrightarrow p \qquad \text{(From equation 6)} \\
+    p \leftrightarrow s \qquad \text{(From equation 4)} \\
+    \therefore r \then s
+\end{gather*}
+\begin{align*}
+    \begin{split}
+        & 65^{1000} > 8^{2001} \\
+        &= (64 + 1)^{1000} > 8^{2(1000.5)} \\
+        &= (64 + 1)^{1000} > (8^2)^{1000.5} \\
+        &= (64 + 1)^{1000} > (64)^{1000.5} \\
+        &= (64 + 1)^{1000} > 64^{0.5}(64)^{1000} \\
+        &= (64 + 1)^{1000} > 8(64)^{1000} \\
+        &= \sqrt{65}(64 + 1)^{999.5} > 8(64)^{1000} \\
+        &= \sqrt{65}(64 + 1)^{999.5} > 8(64)^{1000} \\
+    \end{split}
+\end{align*}
+\begin{gather*}
+    \sqrt{65} > \sqrt{64} = 8 \\
+    \therefore (8(64 + 1)^{999.5} > 8(64)^{1000}) \then (\sqrt{65}(64 + 1)^{999.5} > 8(64)^{1000})
+\end{gather*}
+\begin{align*}
+    \begin{split}
+        & 8(64 + 1)^{999.5} > 8(64)^{1000} \\
+        &\iff (64 + 1)^{999.5} > (64)^{1000} \\
+        &\iff 999.5\ln(65) > 1000\ln(64) \\
+        &\iff \frac{\ln(65)}{\ln(64)} > \frac{1000}{999.5} \quad [1.003727969 > 1.00050025] \qed
+    \end{split}
+\end{align*}
+\begin{flushleft}
+    Since we have found a demonstrably true statement ($\frac{\ln(65)}{\ln(64)} > \frac{1000}{999.5}$) 
+    and it is logically equivalent to $8(64 + 1)^{999.5} > 8(64)^{1000}$, this statement must 
+    be true, which implies that $\sqrt{65}(64 + 1)^{999.5} > 8(64)^{1000}$ is true. Since this 
+    statement is ultimately equivalent to our original $r$, $r$ must be true. Finally, we showed 
+    that the biconditional statement $r \leftrightarrow s$ is true, so $s$ our original 
+    statement that the product of the two numbers we chose is positive is also true.
+\end{flushleft}
+\end{enumerate}
+\end{document}

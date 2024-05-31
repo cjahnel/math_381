@@ -1,0 +1,155 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{mathtools}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\then}{\rightarrow}
+\newcommand{\bithen}{\leftrightarrow}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\Dom}{Dom}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\0}{\emptyset}
+\newcommand{\power}{\mathcal{P}}
+
+\newcommand{\divby}{\; \vdots \;}
+
+\title{MATH 381 Section 6.2}
+\author{Prof. Olivia Dumitrescu}
+\date{15 April 2024}
+
+\begin{document}
+    \maketitle
+    \section*{Section 6.2 The Pigeonhole Principle}
+    If $k \in \Z_+$ and $k + 1$ or more objects are placed in $k$ boxes, then $\exists!$ at least 
+    one box containing at least 2 objects.
+    \begin{corollary}
+        A function from a set of $k+1$ or more elements to a set with $k$ elements is not 1-to-1.
+    \end{corollary}
+    \subsection*{The Generalized Pigeonhole Principle}
+    If $N$ objects are placed in $k$ boxes, then $\exists$ at elast one box containing at least 
+    \[\lceil \tfrac{N}{k} \rceil \text{ objects.}\]
+    \begin{example}
+        During a month of 30 days, a team plays at least 1 game per day but not more than 45 games. 
+        Show that there exists a period of some number of consecutive days where the team must play 
+        exactly 14 games. \\
+        \\
+        At most 15 extra games to play, so there are at most 15 days where the team plays at least 
+        2 games per day. \\
+        Let $a_j$ be the number of games played before day $j$ of the month.
+        \begin{gather*}
+            \intertext{Since at least one game per day}
+            a_1 < a_2 < \dots < a_{30} \\
+            15 \le a_j + 14 \le 45 + 14 = 59 \\
+            a_1 + 14 < a_2 + 14 < \dots < a_{30} + 14 \\
+            \intertext{Consider 60 numbers}
+            \begin{cases}
+                a_1 < a_2 < \dots < a_{30} \\
+                a_1 + 14 < a_2 + 14 < \dots < a_{30} + 14
+            \end{cases}
+            \intertext{So 60 positive integers all $\le$ 59 $\implies \exists$ two of them 
+            that are equal.}
+            \intertext{However, $a_i \ne a_j$ since $a_i < a_j$ and also $a_i + 14 \ne a_j + 14 
+            \quad \forall i, j$}
+            \implies \exists i, j \text{ so that } a_i = a_j + 14.
+            \intertext{i.e. in between day $j$ and day $i$ the team plays exactly 14 games}
+        \end{gather*}
+    \end{example}
+    \begin{example}
+        Show that among $n+1$ positive integers not exceeding $2n$, there must be an integer that 
+        divides one of the other integers. \\
+        \\
+        Write each of the $n+1$ integers $a_1,a_2,\dots,a_n$ as a power of 2 times an odd integer
+        \[a_j = 2^{k_j} \cdot q_j \quad \text{for } j = 1,2,\dots,n+1\]
+        \[\begin{cases}
+            k_j = \text{ non-negative integer} \\
+            q_j = \text{ odd}
+        \end{cases}\]
+        The integers $q_1,\dots,q_{n+1}$ are all odd positive integers less than $2n$. \\
+        There are only $n$ positive integers less than $2n \implies$ i.e. at least 2 integers 
+        $q_1,\dots,q_{n+1}$ must be equal. \\
+        Therefore, there exists distinct integers $i, j$ so that $q_i = q_j$.
+        \[q = \text{ common value of } q_i, q_j\]
+        \[\begin{cases}
+            a_i = 2^{k_i} \cdot q & \text{if } k_i < k_j \implies a_i \mid a_j \\
+            a_j = 2^{k_j} \cdot q & \text{if } k_j < k_i \implies a_j \mid a_i
+        \end{cases}\]
+    \end{example}
+    \begin{theorem}
+        Every sequence of $n^2 + 1$ distinct numbers contains a subsequence of length $n+1$ 
+        that is either strictly increasing or strictly decreasing.
+    \end{theorem}
+    \begin{proof}
+        Let $a_1, a_2, \dots, a_{n^2 + 1}$ be a sequence of $n^2 + 1$ distinct real numbers. 
+        For each term $a_k \rightsquigarrow$ associate an ordered pair $(i_k, d_k)$ where 
+        \begin{itemize}
+            \item $i_k =$ length of the longest increasing subsequence starting at $a_k$
+            \item $d_k =$ length of the longest decreasing subsequence starting at $a_k$
+        \end{itemize}
+        Assume by contradiction that there are no increasing or decreasing sequences of length 
+        $n+1$. Then $i_k, d_k \in \N; \quad i_k, d_k \le n$. \\
+        For any $k=1,2,\dots,n^2+1$ then both $i_k \le n$ and $d_k \le n$. Then by the product 
+        rule there are $n^2$ possible ordered pairs for $(i_k, d_k)$ of a total of 
+        $k=1,2,\dots,n^2+1$. Then two of them must be equal i.e. $\exists s < t$ so that 
+        $i_s = i_t \wedge d_s = d_t$. \\
+        We prove this is impossible. Since the terms of the sequence are all distinct, either 
+        $a_s < a_t$ or $a_s > a_t$. \\
+        \\
+        WLOG assume $\begin{cases}
+            a_s < a_t \\
+            i_s = i_t
+        \end{cases}$ \\
+        $\implies$ an increasing subsequence of length $i_t+1$ can be built starting from $a_s$, 
+        followex by an increasing subsequence of length $i_t$ beginning at $a_t$. Contradiction.
+    \end{proof}
+    \begin{example}
+        Assume that in a group of 6 people each pair of individuals consists of two friends or 
+        two enemies. Show that there are either 3 mutual friends or mutual enemies in a group. \\
+        \\
+        $(A, B)$ are either friends or enemies. \\
+        Let $A =$ one person in the group; and 5 other people remaining.
+        \[5 = 2+3\]
+        So out of these 5 people either 3 or more are friends of $A$ or 3 or more are enemies of $A$. \\
+        Because 5 objects are divided into 2 sets, one of the sets must have at least 
+        $\lceil \frac{5}{2} \rceil = 3$ elements. \\
+        Suppose $\{B,C,D\}$ are friends of $A$. \\
+        If any one of these 3 individuals are friends, then these three and $A$ form a group of 
+        3 mutual friends. Otherwise
+        \[\{B,C,D\} = \text{ set of 3 mutual enemies}\]
+    \end{example}
+    \subsection*{The Ramsey Number}
+    $R(m, n) = $ minimum  people at a party $\quad m, n \in \N; \quad m, n \ge 2$ \\
+    so that there are either $m$ mutual friends or $n$ mutual enemies assuming every 2 people 
+    are either friends or enemies.
+    \[R(3, 3) = 6\]
+    Properties:
+    \begin{align*}
+        R(m, n) &= R(n, m) \\
+        R(2, n) &= n \qquad \forall n \ge 2
+    \end{align*}
+    Known for $R(m, n) \quad 3 \le m \le n$:
+    \begin{gather*}
+        R(4, 4) = 16
+    \end{gather*}
+    For any other numbers, only bounds are known:
+    \[42 \le R(5, 5) \le 49\]
+\end{document}

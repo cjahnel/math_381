@@ -1,0 +1,82 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{mathtools}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\then}{\rightarrow}
+\newcommand{\bithen}{\leftrightarrow}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\Dom}{Dom}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\0}{\emptyset}
+\newcommand{\power}{\mathcal{P}}
+
+\newcommand{\divby}{\; \vdots \;}
+
+\title{MATH 381 Final Review}
+\author{Prof. Olivia Dumitrescu}
+\date{29 April 2024}
+
+\begin{document}
+    \maketitle
+    \subsection*{Final Exam Material}
+    \subsection*{Included}
+    \begin{enumerate}
+        \item 2 problems on Chapter 1
+        \item 3 problems on Divisibility
+        \item 2 problems on Induction
+        \item 2-3 problems on Relations 9.5
+        \item 2-3 problems on Binomial Coefficients 6.3 + 6.4
+    \end{enumerate}
+    \subsection*{Not Included}
+    \begin{enumerate}
+        \item All of chapter 2?
+        \item 2.5
+        \item 6.1 + 6.2
+        \item 6.5
+    \end{enumerate}
+    \pagebreak
+    \begin{example}
+        Are the following equivalence relations?
+        \[A = \{f: \Z \to \Z\}\]
+        \[\{(f, g) \mid f(1) = g(1)\}\]
+        Yes
+        \[\{(f, g) \mid f(0) = g(0) \vee f(1) = g(1)\}\]
+        No, transitivity
+        \[\{(f, g) \mid f(x) - g(x) = 1 \quad \forall x \in \Z\}\]
+        No, reflexivity, symmetry and transitivity?
+    \end{example}
+    \begin{example}
+        \hfill
+        \begin{enumerate}
+            \item Count \# functions from $\Z_7$ to $\Z_n$
+            \[n^7\]
+            \item Count \# injective functions $\Z_7$ to $\Z_n$
+            \[n \ge 7 \then \frac{n!}{(n-7)!} = n(n-1)(n-2)\dots(n-6)\]
+            \item Count \# of bijective functions from $\Z_7$ to $\Z_n$
+            \[n = 7 \then 7!\]
+            \item Count \# injective functions that do not contain 0 and 1 in the range
+            \[n \ge 9 \then \frac{(n-2)!}{(n-9)!} = (n-2)(n-3)\dots(n-8)\]
+        \end{enumerate}
+    \end{example}
+\end{document}

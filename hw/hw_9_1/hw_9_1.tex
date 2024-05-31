@@ -1,0 +1,152 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\then}{\rightarrow}
+\newcommand{\bithen}{\leftrightarrow}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\0}{\emptyset}
+
+\title{MATH 381 HW 9 part 1}
+\author{Christian Jahnel}
+\date{27 March 2024}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item Find all integer solutions to the following. If there are no integer solutions, explain why.
+    \begin{enumerate}
+    \item $3 + 2x \equiv -2 \pmod 7$
+    \begin{align*}
+        3 + 2x &\equiv -2 \pmod 7 \\
+        2x &\equiv -5 \pmod 7 \\
+        2x + 0 &\equiv -5 + 7 \pmod 7 \\
+        2x &\equiv 2 \pmod 7 \\
+        x &\equiv 1 \pmod 7 \\
+        x \in \hat{1} &= \{z \in \Z \mid z \bmod 7 = 1\} \\
+        &= \{\dots, -13, -6, 1, 8, 15, \dots\}
+    \end{align*}
+    \item $2x - 4 \equiv 0 \pmod 6$
+    \begin{align*}
+        2x - 4 &\equiv 0 \pmod 6 \\
+        2x &\equiv 4 \pmod 6 \\
+        x &\equiv 2 \pmod 6 \\
+        x \in \hat{2} &= \{z \in \Z \mid z \bmod 6 = 2\} \\
+        &= \{\dots, -10, -4, 2, 8, 14, \dots\}
+    \end{align*}
+    \item $x + y \equiv x - y \pmod 5$
+    \begin{align*}
+        x + y &\equiv x - y \pmod 5 \\
+        y &\equiv -y \pmod 5 \\
+        1 &\equiv -1 \pmod 5 \qquad y \ne 0\\
+        1 &\equiv 4 \pmod 5
+    \end{align*}
+    Let $y = 0$.
+    \begin{align*}
+        x + 0 &\equiv x - 0 \pmod 5 \\
+        x &\equiv x \pmod 5 \\
+        x &\in \Z
+    \end{align*}
+    \begin{flushleft}
+        The equation can be simplified to the equivalent equation that 1 and -1 are equivalent 
+        modulo 5. This is a contradiction because 1 and -1 are in their own equivalence classes: 
+        $\hat{1}$ and $\hat{4}$, respectively. However, this simplification assume $y \ne 0$. 
+        Consequently, in the case where $y = 0$, the equation is satisfied for any $x \in \Z$. 
+        Therefore, there are inifinite pairs of solutions: $\{(x, 0) \mid x \in \Z\}$.
+    \end{flushleft}
+    \end{enumerate}
+    \pagebreak
+    \item Prove that for all integers $n \ge 0$, $10^n \equiv 1 \pmod 9$. Then, use that result to show 
+    that a positive integer is divisible by 9 if and only if the sum of its digits is divisible by 9. \\
+    Basis step
+    \begin{align*}
+        10^0 &\equiv 1 \pmod 9 \\
+        \iff 1 &\equiv 1 \pmod 9 \\
+        \therefore P(0)
+    \end{align*}
+    Inductive step; assume $P(k)$.
+    \begin{align*}
+        10^k &\equiv 1 \pmod 9 \\
+        10^k \cdot 10 &\equiv 1 \cdot 1 \pmod 9 \\
+        10^{k+1} &\equiv 1 \pmod 9 \\
+        \therefore P(k) \then P(k+1)
+    \end{align*}
+    $\therefore \forall n \in \{z \in \Z \mid z \ge 0\} (10^n \equiv 1 \pmod 9) \qed$ \\
+    \\
+    Every positive integer can be written as a sum of its digits weighted by its place value in base-10.
+    \[k = k_0 + 10k_1 + 100k_2 + \dots + 10^nk_n = \sum_{i=0}^{n} 10^ik_i\]
+    \begin{align*}
+        10^0 \equiv 1 \pmod 9 &\implies 10^0k_0 \equiv k_0 \mod 9 \\
+        10^1 \equiv 1 \pmod 9 &\implies 10^1k_1 \equiv k_1 \mod 9 \\
+        10^2 \equiv 1 \pmod 9 &\implies 10^2k_2 \equiv k_2 \mod 9 \\
+        &\vdots \\
+        10^n \equiv 1 \pmod 9 &\implies 10^nk_n \equiv k_n \mod 9
+    \end{align*}
+    $\therefore \forall 0 \le i \le n (10^ik^i \equiv k_i \pmod 9)$
+    \begin{align*}
+        9 \mid k \iff 0 &\equiv k \pmod 9 \\
+        0 &\equiv \sum_{i=0}^{n} 10^ik_i \pmod 9 \\
+        0 &\equiv \sum_{i=0}^{n} k_i \pmod 9
+    \end{align*}
+    $\therefore 9 \mid k \iff 9 \mid (k_0 + k_1 + k_2 + \dots + k_n) \qed$
+\item Find gcd(620, 140) and give an integer solution to the equation $620x + 140y = \gcd(620, 140)$.
+\begin{align*}
+    620 &= 4(140) + 60 \iff 60 = 620 - 4(140) \\
+    140 &= 2(60) + 20 \iff 20 = 140 - 2(60) \\
+    60 &= 3(20) + 0
+\end{align*}
+$\therefore \gcd(620, 140) = 20$
+\begin{align*}
+    20 &= 140 - 2(60) \\
+    &= 140 - 2(620 - 4(140)) \\
+    &= 140 - 2(620) + 8(140) \\
+    &= 620(-2) + 140(9)
+\end{align*}
+$\therefore x = -2, y = 9$ is a possible integer solution for the equation.
+\item Show that an integer $a \in \Z_n$ has a multiplicative inverse, that is, an element 
+$a^{-1} \in \Z_n$ with $a \cdot_n a^{-1} = 1$, if and only if $a$ and $n$ are relatively prime.
+\begin{flushleft}
+    If $a, n \in \N$ are coprime, then there exists some integers $s, t$ such that
+    \begin{align*}
+        a \cdot s + n \cdot t &= 1 \\
+        a \cdot s + n \cdot t &\equiv 1 \pmod n \\
+        n \cdot t &\equiv 0 \pmod n \\
+        \implies a \cdot s &\equiv 1 \pmod n
+    \end{align*}
+    Since $a \in \Z_n$, then there exists an $s \in \Z_n$ such that the above is true, which 
+    is the definition of a multiplicative inverse (with respect to $n$).
+\end{flushleft}
+\begin{flushleft}
+    Now assume  there is a multiplicative inverse such that $a \cdot_n a^{-1} = 1$.
+    \begin{align*}
+        a \cdot_n a^{-1} &= 1 \\
+        a \cdot a^{-1} &\equiv 1 \pmod n \\
+        n \cdot t &\equiv 0 \pmod n \text{ for all } t \in \Z \\
+        \implies a \cdot a^{-1} + n \cdot t &\equiv 1 \pmod n \\
+        \implies \exists a \cdot_n a^{-1} &= 1 = \gcd(a, n)
+    \end{align*}
+\end{flushleft}
+$\therefore \forall a \in \Z_n \exists a^{-1} \in \Z_n 
+(a \cdot_n a^{-1} = 1 \bithen \gcd(a, n) = 1) \qed$
+\end{enumerate}
+\end{document}

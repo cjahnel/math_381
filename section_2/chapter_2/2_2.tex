@@ -1,0 +1,74 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+    \ifdim\lastskip<1.5em \hskip-\lastskip
+    \hskip1.5em plus0em minus0.5em \fi \nobreak
+    \vrule height0.75em width0.5em depth0.25em\fi}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\then}{\rightarrow}
+\newcommand{\bithen}{\leftrightarrow}
+
+\title{MATH 381 Section 2.2}
+\author{Olivia Dumitrescu}
+\date{9 February 2024}
+
+\begin{document}
+    \maketitle
+    \section*{Set Operations}
+    \begin{definition}
+        Let $A$ and $B$ be two sets.
+        \begin{align*}
+            &\text{Union:} & A \cup B &= \{x \mid x \in A \vee x \in B\} \\
+            &\text{Intersection:} & A \cap B &= \{x \mid x \in A \wedge x \in B\} \\
+            &\text{Difference:} & A - B &= \{x \mid x \in A \wedge x \notin B\} \\
+            &\text{Complement:} & \bar{A} &= \{x \in U \mid x \notin A\}
+        \end{align*}
+    \end{definition}
+    \begin{theorem}
+        Let $A, B$ be finite sets.
+        \[|A \cup B| = |A| + |B| - |A \cap B|\]
+        \[A \cup B - B = A \cap \bar{B}\]
+    \end{theorem}
+    \begin{definition}
+        Two sets $A$ and $B$ are disjoint if $A \cap B = \emptyset$ \\
+        The union between two disjoint sets i.e. disjoint union is denoted by $A \sqcup B$.
+    \end{definition}
+    \begin{remark}
+        Let $A_1, A_2, \dots, A_n$ be sets.
+        \[\bigcup_{i=1}^{n} A_i = A_1 \cup A_2 \cup \dots \cup A_n\]
+        \[\bigcap_{i=1}^{n} A_i = A_1 \cap A_2 \cap \dots \cap A_n\]
+    \end{remark}
+    \begin{example}
+        \[i \in \mathbb{N}\]
+        \[A_i = \{i, i+1, i+2, \dots, \infty\} = \{n \in \mathbb{N} \mid n \ge i\}\]
+        \begin{align*}
+            &A_1 = & \{1, 2, &3, \dots, \infty\} \\
+            &A_2 = & \{2, &3, 4, \dots, \infty\} \\
+            &A_3 = & \{&3, 4, 5, \dots, \infty\}
+        \end{align*}
+        \[A_1 \supset A_2 \supset A_3 \supset \dots \supset A_n\]
+        \begin{enumerate}
+            \item
+            \[\bigcup_{i=1}^{n} A_i = A_1 \cup A_2 \cup \dots \cup A_n = A_1\]
+            \[\bigcap_{i=1}^{n} A_i = A_1 \cap A_2 \cap \dots \cap A_n = A_n\]
+            \item
+            \[\bigcup_{i=1}^{\infty} A_i = A_1 = \mathbb{N}\]
+            \[\bigcap_{i=1}^{\infty} A_i = \emptyset\]
+        \end{enumerate}
+    \end{example}
+\end{document}

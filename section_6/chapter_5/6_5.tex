@@ -1,0 +1,119 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{mathtools}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\then}{\rightarrow}
+\newcommand{\bithen}{\leftrightarrow}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\Dom}{Dom}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\0}{\emptyset}
+\newcommand{\power}{\mathcal{P}}
+
+\newcommand{\divby}{\; \vdots \;}
+
+\title{MATH 381 Section 6.5 Generalized Permutations and Combinations}
+\author{Prof. Olivia Dumitrescu}
+\date{1 April 2024}
+
+\begin{document}
+    \maketitle
+    \section*{Section 6.5 Permutations with Repetitions}
+    \begin{theorem}
+        The number of $r$-permutations of a set of $n$-objects with reptition allowed is $n^r$.
+    \end{theorem}
+    \subsection*{Combinations with Repetitions}
+    \begin{theorem}
+        There are $\dbinom{n+r-1}{r} = \dbinom{n+r-1}{n-1}$ number of $r$-combinations from a 
+        set with $n$ elements when repetition of elements is allowed.
+    \end{theorem}
+    \begin{remark}
+        Recall that Gauss' formula for the sum of a series up to $n$ gives the number of 
+        lattice points in triangle.
+        \[1+2+3+\dots+n = \frac{n(n+1)}{2} = \binom{n+1}{2}\]
+    \end{remark}
+    \begin{theorem}
+        Say we have a hyperplane in $\R^n$
+        \[x_1 + x_2 + x_3 + \dots + x_n = d\]
+        Then the number of integer lattice points is 
+        \[\binom{d+n}{n} \qquad \dim_k k[x_1,\dots,x_n]\]
+        \[\binom{d+2}{2} = \frac{(d+2)(d+1)}{2} = 1 + 2 + \dots + (d+1)\]
+        the space of polynomials in $n$ variables $x_1,\dots,x_n$ of degree $\le d$ is a vector 
+        space of dimension
+        \[\binom{n+d}{n} = \binom{n+d}{d}\]
+    \end{theorem}
+    \begin{corollary}
+        The number of lattice points with non-negative integer coefficients inside the hyperplane is 
+        \[\binom{n+d-1}{n-1} = \binom{n+d}{n} - \binom{n+d-1}{n}\]
+    \end{corollary}
+    \begin{corollary}
+        i.e. homogeneous polynomial in $n+1$ variables $x_0,x_1,\dots,x_n$ of total degree $d$ 
+        forms a vector space $\binom{n+d}{n}$.
+        \[a + bx + cy + dxy + ex^2 + fy^2 \qquad \dim_k k[x, y]_{\le d=2} = \binom{2+2}{2} = 6\]
+    \end{corollary}
+    \begin{example}
+        How many solutions with non-negative integers are there to $x_1+x_2+x_3=11$?
+        \begin{enumerate}
+            \item \[\binom{11+3}{3} - \binom{10+3}{3} = \binom{13}{2}\]
+            \item Number of ways to select 11 items from a set with 3 elements so that \\
+            $x_1$ of first element \\
+            $x_2$ second element \\
+            $x_3$ third element
+        \end{enumerate}
+    \end{example}
+    \subsection*{Permutations with Indistinguishable Objects}
+    \begin{example}
+        How many different words do we have by rearranging the word SUCCESS?
+        \[\binom{7}{3}\binom{4}{2}\binom{2}{1}\binom{1}{1} = \frac{7!}{3!2!}\]
+    \end{example}
+    \begin{theorem}
+        The number of different permutations of $n$ objects \\
+        $n_1=$ Indistinguishable objects of type 1 \\
+        $n_2=$ Indistinguishable objects of type 2 \\
+        \vdots \\
+        $n_k=$ Indistinguishable objects of type k
+        \[\frac{n!}{n_1!n_2!n_3!\dots n_k!}\]
+    \end{theorem}
+    \begin{example}
+        What is the number of ways to distribute hands of 5 cards to 4 players from a standard 
+        deck of 52 cards?
+        \[\binom{52}{5}\binom{47}{5}\binom{42}{5}\binom{37}{5}\]
+    \end{example}
+    \begin{theorem}
+        The number of ways to distribute $n$ distinguishable objects into $k$ distinguishable 
+        boxes so that $n_i$ objects are in box $i$
+        \[\frac{n!}{n_1!n_2!\dots n_k!}\]
+    \end{theorem}
+    \begin{definition}
+        The Striling Numbers \\
+        $S(n, j) = $ number of ways to distribute $n$ distinguishable objects into $j$ 
+        indistinguishable boxes. A closed formula is not known.
+    \end{definition}
+    \begin{theorem}
+        \[S(n, j) = \frac{1}{j!} \cdot \sum_{i=0}^{j-1} (-1)^i \binom{j}{i} (j-i)^n\]
+        so the number of ways to distribute $n$ distinguishable objects into $k$ Indistinguishable 
+        boxes equals
+        \[\sum_{j=1}^{k} S(n, j) = \sum_{j=1}^{k} \frac{1}{j!} \cdot \sum_{i=0}^{j-1} (-1)^i \binom{j}{i} (j-i)^n\]
+    \end{theorem}
+\end{document}

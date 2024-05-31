@@ -1,0 +1,70 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\keyword}[1]{\textbf{#1}}
+
+\title{MATH 381 HW 1}
+\author{Christian Jahnel}
+\date{24 January 2024}
+
+\begin{document}
+    \maketitle
+    \begin{enumerate}
+    \item \hfill
+        \begin{enumerate}
+        \item $p \rightarrow q$
+        \item $\neg p \wedge \neg q \wedge r$
+        \item $q \wedge \neg p$
+        \end{enumerate}
+    \item \hfill
+        \begin{enumerate}
+        \item There are zeros in the decimal expansion of $\pi$.
+        \item The number 3 is not positive or the number 4 is not odd (or both).
+        \end{enumerate}
+    \item \hfill
+        \begin{itemize}
+        \item hypothesis: if you access the website
+        \item conclusion: you have to register your device or be within the temporary access period
+        \item converse: If you have to register your device or be within the temporary access period,
+        then you access the website.
+        \item inverse: If you do not access the website,
+        then you do not have to register your device nor be within the temporary access period.
+        \item contrapositive: If you do not have to register your device nor be within the temporary access period,
+        then you do not access the website.
+        \item negation: You access the website and you do not have to register your device nor be within the temporary access period.
+        \end{itemize}
+    \item Given that $x \rightarrow y$ is false
+        \begin{enumerate}
+        \item
+            \[x \wedge y\]
+            $x \rightarrow y$ is only false when $x$ is true and $y$ is false.
+            Since both $x$ and $y$ would need to be true for the conjunction of $x$ and $y$
+            to be true, it is \keyword{false}.
+        \item
+            \[(\neg x) \rightarrow y \equiv \neg(\neg x) \vee y \equiv x \vee y\]
+            Since this conditional statement can be reduced to the disjunction of $x$ and $y$,
+            and we know that $x$ must be true and $y$ must be false for $x \rightarrow y$
+            to be false, only one condition is needed to fulfill the disjunction,
+            and the $x$ is true, so this is \keyword{true}.
+        \item
+            \[x \vee \neg y\]
+            Since we know that $x$ must be true and $y$ must be false for $x \rightarrow y$
+            to be false, both conditions for this disjunction are fulfilled, so it is \keyword{true}.
+        \end{enumerate}
+    \item \hfill
+    \end{enumerate}
+\end{document}

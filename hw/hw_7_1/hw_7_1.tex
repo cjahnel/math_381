@@ -1,0 +1,194 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{enumerate}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\then}{\rightarrow}
+\newcommand{\bithen}{\leftrightarrow}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\0}{\emptyset}
+
+\title{MATH 381 HW 7 part 1}
+\author{Christian Jahnel}
+\date{28 February 2024}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item Prove that the following are equivalent for any subsets $A$ and $B$ of the same universal 
+set $U$:
+\begin{enumerate}
+\item $A \subseteq B$;
+\item $A \cap \bar{B} = \0$;
+\item $\bar{A} \cup B = U$.
+\end{enumerate}
+\begin{enumerate}[i.]
+    \item $A \subseteq B \implies A \cup \bar{B} = \0$
+    \begin{align*}
+        A \subseteq B &\equiv \forall x \in U(x \in A \then x \in B) \\
+        &\equiv \forall x \in U(\neg(x \in A) \vee x \in B) \\
+        &\equiv \forall x \in U(x \notin A \vee x \in B) \\
+        &\equiv \forall x \in U(x \in \bar{A} \vee x \in B) \\
+        &\equiv \forall x \in U(x \in \bar{A} \cup B) \\
+        &\implies \bar{A} \cup B = U
+    \end{align*}
+    $\therefore a \then c$
+    \item $\bar{A} \cup B = U \implies A \cap \bar{B} = \0$
+    \begin{align*}
+        \bar{A} \cup B &= U \\
+        \implies \overline{\bar{A} \cup B} &= \bar{U} \\
+        \implies \overline{\bar{A}} \cap \bar{B} &= \bar{U} \\
+        \implies A \cap \bar{B} &= \bar{U} \\
+        &= \{x \in U \mid x \notin U\} \\
+        &= \0
+    \end{align*}
+    $\therefore c \then b$
+    \item $A \cap \bar{B} = \0 \implies A \subseteq B$
+    \begin{align*}
+        A \cap \bar{B} &= \0 \\
+        \implies A - B &= \0 \\
+        \implies \{x \mid x \in A \wedge x \notin B\} &= \0
+    \end{align*}
+    \begin{align*}
+        \{x \mid x \in A \wedge x \notin B\} = \0 
+        &\implies \nexists x \in U(x \in A \wedge x \notin B) \\
+        &\equiv \neg(\exists x \in U (x \in A \wedge x \notin B)) \\
+        &\equiv \forall x \in U (\neg(x \in A) \vee x \in B) \\
+        &\equiv \forall x \in U (x \in A \then x \in B) \\
+        &\implies A \subseteq B
+    \end{align*}
+    $\therefore b \then a \qed$
+\end{enumerate}
+\item Prove or disprove: for any sets $A$, $B$, and $C$, if $A \cup B = B \cup C$, then $A = C$.
+Let $A = \{1\}, B = \{1, 2\}, C = \{2\}$.
+\[
+\begin{aligned}
+    A \cup B &= \{1, 2\} = B \\
+    B \cup C &= \{1, 2\} = B
+\end{aligned}
+\implies A \cup B = B \cup C
+\]
+$\therefore A \cup B = B \cup C \wedge A \ne C \qed$
+\begin{center}
+\begin{tabular}{c | c | c | c | c}
+    $A$ & $B$ & $C$ & $A \cup B$ & $B \cup C$ \\
+    \hline
+    1 & 1 & 1 & 1 & 1 \\
+    *1* & 1 & *0* & *1* & *1* \\
+    1 & 0 & 1 & 1 & 1 \\
+    1 & 0 & 0 & 1 & 0 \\
+    *0* & 1 & *1* & *1* & *1* \\
+    0 & 1 & 0 & 1 & 1 \\
+    0 & 0 & 1 & 0 & 1 \\
+    0 & 0 & 0 & 0 & 0 \\
+\end{tabular}
+\end{center}
+\begin{flushleft}
+    As seen in the above table, there are two cases in which $A \cup B = B \cup C$ does not 
+    imply that $A = C$. The starred rows show such cases. Since $B$ already contains the 
+    element that happens to be in $A$ and not $C$ or vice-versa depending on the case, the 
+    duplicate is not counted, since its membership in $B$ makes it qualify anyway. Therefore, 
+    \textbf{the proposition has been disproven generally}.
+\end{flushleft}
+\item Determine and prove a relationship among the sets \\ $X = (A \cap B) \cup (A \cap C)$, 
+$Y = A \cup (B \cap C)$, and $Z = A \cap (B \cup C)$, \\ where $A$, $B$, and $C$ are any subsets 
+of the same universal set $U$.
+\begin{align*}
+    Z &= A \cap (B \cup C) \\
+    Z &= (A \cap B) \cup (A \cap C) &\text{(Distributive law)} \\
+    \therefore Z &= X &\text{(Transitive POE)}
+\end{align*}
+\begin{align*}
+    &\quad\; X \cup Y \cup Z \\
+    &= X \cup Z \cup Y &\text{(Commutative law)}\\
+    &= X \cup Y &\text{(Idempotent law)}\\
+    &= (A \cap B) \cup (A \cap C) \cup A \cup (B \cap C) &\text{(Substitution)}\\
+    &= A \cup (A \cap B) \cup (A \cap C) \cup (B \cap C) &\text{(Commutative law)}\\
+    &= A \cup (A \cap C) \cup (B \cap C) &\text{(Absorption law)}\\
+    &= A \cup (B \cap C) &\text{(Absorption law)}\\
+    &= Y &\text{(Substitution)}
+\end{align*}
+$\therefore X \cup Y \cup Z = Y \qed$
+\pagebreak
+\item For each $n \in \Z^+$, let $A_n = [\frac{1}{n}, 2 - \frac{n}{n+1}] \subseteq \R$. Find, 
+with justification, the sets 
+\begin{enumerate}
+\item $\displaystyle\bigcup_{n=1}^{\infty} A_n$;
+\begin{align*}
+    \bigcup_{n=1}^{\infty} A_n &= \left[\frac{1}{1}, 2 - \frac{1}{1+1}\right] 
+    \cup \left[\frac{1}{2}, 2 - \frac{2}{2+1}\right] 
+    \cup \dots 
+    \cup \left[\frac{1}{n}, 2 - \frac{n}{n+1}\right] \\
+    &= \left[1, 2 - \frac{1}{2}\right] 
+    \cup \left[\frac{1}{2}, 2 - \frac{2}{3}\right] 
+    \cup \dots 
+    \cup \left[\frac{1}{n}, 2 - \frac{n}{n+1}\right] \\
+    &= \left[1, \frac{3}{2}\right] 
+    \cup \left[\frac{1}{2}, \frac{4}{3}\right] 
+    \cup \dots 
+    \cup \left[\frac{1}{n}, 2 - \frac{n}{n+1}\right]
+\end{align*}
+\begin{align*}
+    \lim_{n \to \infty} 2 - \frac{n}{n+1} = 2 - \lim_{n \to \infty} \frac{n}{n+1} = 2 - 1 = 1 \\
+    \lim_{n \to \infty} \frac{1}{n} = 0 \\
+\end{align*}
+\begin{align*}
+    1 = A_{11} > A_{21} > \dots > A_{n1} = 0 \\
+    \frac{3}{2} = A_{12} > A_{22} > \dots > A_{n2} = 1
+\end{align*}
+\[\therefore \bigcup_{n=1}^{\infty} A_n = \left[0, \frac{3}{2}\right] \qed\]
+The minimum bound of each interval in the series decreases from 1 to approach the limit at 0. 
+The maximum bound of each interval in the series decreases from $\frac{3}{2}$ to approach the 
+limit at 1. Consequently, the union will expand the set to push the minimum to the limit at 0 
+and keep the maximum at $\frac{3}{2}$. Therefore, the series will resolve to $(0, \frac{3}{2}]$.
+\item $\displaystyle\bigcap_{n=1}^{\infty} A_n$.
+\begin{align*}
+    \bigcap_{n=1}^{\infty} A_n &= \left[\frac{1}{1}, 2 - \frac{1}{1+1}\right] 
+    \cap \left[\frac{1}{2}, 2 - \frac{2}{2+1}\right] 
+    \cap \dots 
+    \cap \left[\frac{1}{n}, 2 - \frac{n}{n+1}\right] \\
+    &= \left[1, 2 - \frac{1}{2}\right] 
+    \cap \left[\frac{1}{2}, 2 - \frac{2}{3}\right] 
+    \cap \dots 
+    \cap \left[\frac{1}{n}, 2 - \frac{n}{n+1}\right] \\
+    &= \left[1, \frac{3}{2}\right] 
+    \cap \left[\frac{1}{2}, \frac{4}{3}\right] 
+    \cap \dots 
+    \cap \left[\frac{1}{n}, 2 - \frac{n}{n+1}\right]
+\end{align*}
+\begin{align*}
+    \lim_{n \to \infty} 2 - \frac{n}{n+1} = 2 - \lim_{n \to \infty} \frac{n}{n+1} = 2 - 1 = 1 \\
+    \lim_{n \to \infty} \frac{1}{n} = 0 \\
+\end{align*}
+\begin{align*}
+    1 = A_{11} > A_{21} > \dots > A_{n1} = 0 \\
+    \frac{3}{2} = A_{12} > A_{22} > \dots > A_{n2} = 1
+\end{align*}
+\[\therefore \bigcap_{n=1}^{\infty} A_n = [1, 1] = \{1\} \qed\]
+The minimum bound of each interval in the series decreases from 1 to approach the limit at 0. 
+The maximum bound of each interval in the series decreases from $\frac{3}{2}$ to approach the 
+limit at 1. Consequently, the union will keep the minimum at 1 and contract to pull the maximum 
+to the limit at 1. Therefore, the series will resolve to the singleton set $\{1\}$.
+\end{enumerate}
+\end{enumerate}
+\end{document}

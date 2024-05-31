@@ -1,0 +1,139 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\keyword}[1]{\textbf{#1}}
+
+\title{MATH 381 Section 1.3}
+\author{Olivia Dumitrescu}
+\date{17 January 2024}
+
+\begin{document}
+    \maketitle
+    \section*{Propositional Equivalences}
+    \begin{definition}
+        \hfill
+        \begin{itemize}
+            \item A compound proposition that is always true regardless of the
+            truth values of the propositional variables that occur within
+            it is called a \keyword{tautology}.
+            \item A compound proposition that is always false regardless of the
+            truth values of the propositional variables that occur within
+            it is called a \keyword{contradiction}.
+            \item A compound proposition that is neither true nor false neither
+            always true nor always false is called a \keyword{contingency}.
+        \end{itemize}
+    \end{definition}
+    \begin{example}
+        \hfill
+        \begin{itemize}
+            \item Tautology: $P \vee \neg P$ is always true. ($\equiv T$)
+            \item $P \wedge \neg P$ is a contradiction. ($\equiv F$)
+        \end{itemize}
+    \end{example}
+    \begin{remark}
+        2 compound propositions are \keyword{logically equivalent} if they
+        have the same truth values.\\
+        $p$ and $q$ are logically equivalent if $p \leftrightarrow q$ is a
+        tautology.
+        \[ p \leftrightarrow q \equiv (p \rightarrow q) \wedge
+        (q \rightarrow p) \]
+    \end{remark}
+    DeMorgan's Laws
+    \[ \neg (p \wedge q) = \neg p \vee \neg q\]
+    \[ \neg (p \vee q) = \neg p \wedge \neg q\]
+    Generalization of DeMorgan's Laws
+    \[ \neg (\bigvee_{i=1}^{n} P_i) = \bigwedge_{i=1}^{n} \neg P_i \]
+    \[ \neg (\bigwedge_{i=1}^{n} P_i) = \bigvee_{i=1}^{n} \neg P_i \]
+    \begin{example}
+        Show $p \rightarrow q$ and $\neg p \vee q$ are logically equivalent.
+    \end{example}
+    \begin{example}
+        Show that $p \vee (q \wedge r) \equiv (p \vee q) \wedge (p \vee r)$\\
+        The \keyword{distributive} law of disjunction over conjunction
+    \end{example}
+    Equivalences
+    \[ P \wedge T \equiv P \] identity law
+    \[ P \vee F \equiv P \] identity law [fill with a big brace to caputre both]
+    \[ P \vee T \equiv T \] dominstaion laws
+    \[ P \wedge F \equiv F \] domination laws
+    \[ P \vee P \equiv P \] idempotent law
+    \[ P \wedge P \equiv P \]
+    \[ \neg (\neg p) = p \] double negation law
+    \[ p \vee q \equiv q \vee p \] commutative laws
+    \[ p \wedge q \equiv q \wedge p \]
+    \[ p \vee (q \vee r) \equiv (p \vee q) \vee r \] associativity laws
+    \[ p \wedge (q \wedge r) \equiv (p \wedge q) \wedge r \]
+    \[ p \vee (q \wedge r) \equiv (p \vee q) \wedge (p \vee r) \] distributive laws
+    \[ p \wedge (q \vee r) \equiv (p \wedge q) \vee (p \wedge r) \]
+    \[ \neg (p \vee q) \equiv \neg p \wedge \neg q \] DeMorgan's Laws
+    \[ \neg (p \wedge q) \equiv \neg p \vee \neg q \]
+    \[ p \vee \neg p \equiv T \] Negation law
+    \[ p \wedge \neg p \equiv F \]
+    \[ p \vee (p \wedge q) \equiv p \] absorption laws
+    \[ p \wedge (p \vee q) \equiv p \]
+    \[ p \vee (p \wedge q) \equiv p \implies (p \vee p) \wedge (p \vee q)
+    = p \wedge (p \vee q) \]
+    \begin{enumerate}
+        \item $p \rightarrow q \equiv \neg p \vee q$
+        \item $p \rightarrow q \equiv \neg q \rightarrow \neg p$
+        \item $p \vee q \equiv \neg p \rightarrow q$
+        \item $p \wedge q \equiv \neg (p \rightarrow \neg q)$
+        \item $\neg (p \rightarrow q) \equiv p \wedge \neg q$
+        \item $(p \rightarrow q) \wedge (p \rightarrow r) \equiv
+        p \rightarrow (q \wedge r)$
+        \item $(p \rightarrow r) \wedge (q \rightarrow r) \equiv
+        p \vee q \rightarrow r$
+        \item $p \leftrightarrow q \equiv (p \rightarrow q)
+        \wedge (q \rightarrow p)$
+        \item $p \leftrightarrow q \equiv \neg p \leftrightarrow
+        \neg q$
+        \item $p \leftrightarrow q \equiv (p \wedge q) \vee
+        (\neg p \wedge \neg q)$
+        \item $\neg (p \leftrightarrow \neg q) \equiv p
+        \leftrightarrow \neg q$
+    \end{enumerate}
+    \subsection*{1.3.5}
+    \begin{example}
+        \[\neg (p \rightarrow q) \equiv \neg (p \rightarrow \neg q)\]
+    \end{example}
+    \begin{example}
+        \[\neg (p \vee (\neg p \wedge q )) \equiv \neg p \wedge \neg q\]
+    \end{example}
+    \begin{example}
+        Show $p \wedge q \rightarrow p \vee q$ is a tautology.
+    \end{example}
+    \begin{definition}
+        \begin{enumerate}
+            \item A compound proosition is \keyword{satisfiable} if there
+            is an assignment of the truth variables that makes it true.
+            \item When we have a particular assignment of truth values that
+            make a compound proposition true is a \keyword{solution}.
+            \item To show that a compound proposition is \keyword{not satisfiable}
+            you have to show that for any assignment of truth values it is false.
+        \end{enumerate}
+    \end{definition}
+    \begin{example}
+        Determine whether each compound proposition is satisfiable $\iff p, q$
+        and $r$ have the same truth value.
+        \begin{enumerate}
+            \item $(p \vee \neg q) \wedge (q \vee \neg r) \wedge (r \vee \neg p)$
+            \item $(p \vee q \vee r) \wedge (\neg p \vee \neg q \vee \neg r)$
+            \item $(p \vee \neg q) \wedge (q \vee \neg r) \wedge (r \vee \neg p)
+            \wedge (p \vee q \vee r) \wedge (p \vee \neg q \vee \neg r)$
+        \end{enumerate}
+    \end{example}
+\end{document}

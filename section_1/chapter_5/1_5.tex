@@ -1,0 +1,113 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\keyword}[1]{\textbf{#1}}
+
+\title{MATH 381 Section 1.5}
+\author{Olivia Dumitrescu}
+\date{24 January 2024}
+
+\begin{document}
+    \maketitle
+    \section*{Nested Quantifiers}
+    \[\forall x \exists y Q(x, y)\]
+    $x$ and $y$ are free variables within $Q(x, y)$
+    \begin{example}
+        Let $Q(x, y): x + y = 0; x, y \in \mathbb{R}$\\
+        What are the truth values for the quantifiers?
+        \begin{align*}
+            \exists y \forall x Q(x, y) &= \text{true: }
+            \text{There exists a $y$ so that regardless of $x$, we have $y + x = 0$.}\\
+            \forall x \exists y Q(x, y) &= \text{true: }
+            \text{For any $x$ there exists a $y$ so that $x + y = 0$.}
+        \end{align*}
+    \end{example}
+    \begin{example}
+        Let $Q(x, y, z)$ be $x + y = z$; $x, y, z \in \mathbb{R}$.\\
+        Find truth values
+        \begin{enumerate}
+            \item $\forall x \forall y \exists z Q(x, y, z)$ is True
+            \item $\exists z \forall x \forall y Q(x, y, z)$ is False
+        \end{enumerate}
+    \end{example}
+    \subsection*{The negation of nested qualifiers}
+    \begin{enumerate}
+        \item \[\neg(\forall x \forall y \exists z Q(x, y, z)) = F\]
+        \[\equiv \exists x \exists y \forall z (\neg Q(x, y, z))\]
+        \[\equiv \exists x \exists y \forall z (x + y \ne z)\]
+        \item \[\exists z \forall x \forall y Q(x, y, z) = F\]
+        \[\neg(\exists z \forall x \forall y Q(x, y, z)) \equiv T\]
+        \[\equiv \forall z \exists x \exists y \neg Q(x, y, z)\]
+    \end{enumerate}
+    Take $f: \mathbb{R} \rightarrow \mathbb{R}$ and $A, L \in \mathbb{R}$.
+    \[\lim_{x \rightarrow A} f(x) = L\]
+    \begin{definition}
+        For any $\epsilon > 0$ (consider $\epsilon$ to be small) there exists a $\delta > 0$
+        so that if $|x - A| < \delta$ then $|f(x) - L| < \epsilon$.
+        [delta becomes a function of epsilon]
+    \end{definition}
+    \begin{example}
+        Express the definition of a limit of a real-valued function as quantifiers.
+        Then, negate it.
+        \begin{enumerate}
+            \item The definition of $\lim_{x \rightarrow A} f(x) = L$ is
+            \[\forall \epsilon > 0 \; \exists \delta_\epsilon > 0 \text{ so that }
+            (|x - A| < \delta \rightarrow |f(x) - L| < \epsilon)\]
+            \item Write $\lim_{x \rightarrow A} f(x)$ does not exist
+            \begin{enumerate}
+                \item $\lim_{x \rightarrow A} f(x)$ exists?
+                \[\exists L \; \forall \epsilon > 0 \; \exists \delta_\epsilon > 0 \;
+                (|x - A| < \delta \rightarrow |f(x) - L| < \epsilon)\]
+                \item $\lim_{x \rightarrow A} f(x)$ does not exist if
+                \[\neg(\exists L \; \forall \epsilon > 0 \; \exists \delta_\epsilon > 0 \;
+                (|x - A| < \delta \rightarrow |f(x) - L| < \epsilon))\]
+                \[\equiv \forall L \; \exists \epsilon > 0 \; \forall \delta_\epsilon > 0 \;
+                \neg(|x - A| < \delta \rightarrow |f(x) - L| < \epsilon)\]
+                \[\equiv \forall L \; \exists \epsilon > 0 \; \forall \delta_\epsilon > 0 \;
+                (|x - A| < \delta \wedge |f(x) - L| \ge \epsilon)\]
+            \end{enumerate}
+        \end{enumerate}
+    \end{example}
+    \begin{example}
+        Mean Value Theorem
+    \end{example}
+    Any Theorem is a conditional statement.
+    \[p \rightarrow q\]
+    $p$ is the hypothesis, $q$ is the conclusion.\\
+    To prove a Theorem is false i.e. find a counterexample i.e. find an f(x) within
+    hypothesis where the conclusion does not hold.
+    \begin{example}
+        Every non-zero real number has a multiplicative inverse.
+        \[\forall x \; \exists y \; (x \ne 0 \implies xy = 1); \quad
+        x, y \in \mathbb{R}\]
+        \begin{definition}
+            \hfill
+            \begin{enumerate}
+                \item A ring is a set with an addition operation where the additive inverse
+                exists for every member and is itself a member.
+                \item A field is a set with a multiplication operation where the
+                multiplicative inverse exists for every member and is itself a member..
+            \end{enumerate}
+        \end{definition}
+        \begin{itemize}
+            \item $(\mathbb{R}, +, dot)$ is a ring and a field
+            \item $(\mathbb{Q}, +, dot)$ is a ring and a field
+            \item $(\mathbb{C}, +, dot)$ is a ring and a field
+            \item $(\mathbb{Z}, +, dot)$ is a ring
+        \end{itemize}
+    \end{example}
+\end{document}

@@ -1,0 +1,393 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+    \ifdim\lastskip<1.5em \hskip-\lastskip
+    \hskip1.5em plus0em minus0.5em \fi \nobreak
+    \vrule height0.75em width0.5em depth0.25em\fi}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\then}{\rightarrow}
+\newcommand{\bithen}{\leftrightarrow}
+
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\rationals}{\mathbb{Q}}
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\complex}{\mathbb{C}}
+
+\title{MATH 381 Section 2.5}
+\author{Olivia Dumitrescu}
+\date{16 February 2024}
+
+\begin{document}
+    \maketitle
+    \section*{Countable Sets}
+    \begin{remark}
+        Two finite sets $|A| = |B|$. \\
+        There are 2 ways of proving the equiality of 2 sets.
+        \begin{enumerate}
+            \item prove $A \mapsto B \wedge B \mapsto A \implies A = B$
+            \item Assume $A, B$ are finite. $A \mapsto B \implies A = B$.
+        \end{enumerate}
+    \end{remark}
+    \begin{definition}
+        \begin{enumerate}
+            \item A set is countable if either it is finite or it has a bijective correspondence with 
+            $\mathbb{N}$.
+            \[\exists f: \mathbb{N} \rightarrow A\]
+            where $f$ is a bijection.
+            i.e. The set has the same cardinality as $\mathbb{N}$ which is countable.
+            \item A set is uncountable if it is not countable. Ex:
+            \[\mathbb{Z}, \mathbb{Q}, \mathbb{R}, \mathbb{C}, (a, b)\]
+        \end{enumerate}
+    \end{definition}
+    \begin{example}
+        \begin{gather*}
+            E = \{2, 4, 6, 8, \dots\} \\
+            O = \{1, 3, 5, 7, \dots\}
+        \end{gather*}
+        Prove that $E$ and $O$ are countable sets.
+        \begin{enumerate}
+            \item \begin{gather*}
+                f: \naturals \rightleftarrows E \\
+                f(n) = 2n \forall n \in \naturals
+            \end{gather*}
+            \begin{gather*}
+                g: E \rightarrow \naturals \\
+                g(m) = \frac{m}{2} \in \naturals
+            \end{gather*}
+            Check \begin{gather*}
+                g \circ f = Id_\naturals \\
+                f \circ g = Id_E
+            \end{gather*}
+            \item \begin{gather*}
+                h: \naturals \rightleftarrows O \\
+                h(n) = 2n - 1 \forall n \in \naturals
+            \end{gather*}
+            \begin{gather*}
+                k: O \rightarrow \naturals \\
+                k(m) = \frac{k + 1}{2} \in \naturals
+            \end{gather*}
+        \end{enumerate}
+        Check \begin{gather*}
+            k \circ h = Id_\naturals \\
+            h \circ k = Id_O
+        \end{gather*}
+    \end{example}
+    \begin{example}
+        Prove that $\integers$ is countable.
+        \begin{proof}
+            Need $f: \naturals \rightarrow \integers$
+            \[f(n) =\begin{cases}
+                \frac{n - 1}{2} & n \text{ is odd} \\
+                -\frac{n}{2} & n \text{ is even}
+            \end{cases}\]
+        \end{proof}
+    \end{example}
+    \begin{example}
+        \hfill
+        \begin{enumerate}
+            \item The function $f(x) = \dfrac{x}{x^2 - 1} : (-1, 1) \rightarrow \reals$ is a 
+            bijection i.e. $(-1, 1) ~ \reals$.
+            \item $f(x) = \arctan(x) : \reals \rightarrow (-\frac{\pi}{2}, \frac{\pi}{2})$
+        \end{enumerate}
+    \end{example}
+    \begin{definition}
+        \hfill
+        \begin{enumerate}
+            \item $f$ is increasing if $x_1 \le x_2$, then $f(x_1) \le f(x_2)$.
+            \item $f$ is decreasing if $x_1 \le x_2$, then $f(x_1) \ge f(x_2)$.
+            \item $f$ is monotone if it is either increasing or decreasing over its domain.
+        \end{enumerate}
+    \end{definition}
+    \begin{remark}
+        If $f$ is monotone, then $f$ is injective.
+    \end{remark}
+    \begin{proof}
+        Assume $f$ is increasing.
+        \[\forall x_1, x_2in \mathbb{D} (x_1 \le x_2 \then f(x_1) \le f(x_2))\]
+    \end{proof}
+    \begin{theorem}
+        We claim \begin{enumerate}
+        \item $\rationals$ is countable
+        \begin{proof}
+            \[\rationals = A_1 \cup A_2 \cup A_3 \cup \dots \cup A_n \cup \dots\]
+            \begin{align*}
+                A_1 &= \left\{\frac{0}{1}\right\} \\
+                A_2 &= \left\{\frac{1}{1}, -\frac{1}{1}\right\} \\
+                A_3 &= \left\{\frac{1}{2}, -\frac{1}{2}, \frac{2}{1}, -\frac{2}{1}\right\} \\
+                A_4 &= \left\{\frac{1}{3}, -\frac{1}{3}, \frac{3}{1}, -\frac{3}{1}\right\} \\
+                A_5 &= \left\{\frac{1}{4}, -\frac{1}{4}, \frac{2}{3}, -\frac{2}{3}, 
+                \frac{3}{2}, -\frac{3}{2}, \frac{4}{1}, -\frac{4}{1}\right\}
+            \end{align*}
+            For a $z \in \rationals \implies z = \pm \frac{p}{q} \quad (p, q) = 1 
+            \implies z \in A_n \quad |p| + |q| = n$.
+        \end{proof}
+        \item $\reals$ is uncountable
+        \begin{theorem}
+            Nested Interval Property \\
+            For each $n \in \naturals$ assume we have
+            \[I_n = [a_n, b_n] = \{x \in \reals \mid a_n \le x \le b_n\}\]
+            \[I_n \supseteq I_{n+1} \text{ i.e. } I_1 \supseteq I_2 \supseteq I_3 \supseteq \dots\]
+            \[\bigcap_{n=1}^\infty I_i \ne \emptyset \quad \reals = \{x_1, x_2, x_3, \dots\}
+            \qquad \reals \{x_1, x_2, x_3, \dots\}\]
+        \end{theorem}
+        \begin{proof}
+            Assume by contradiction $\reals$ are countable and a bijection.
+            \begin{align*}
+                f: \naturals &\rightarrow \reals \\
+                f(1) &= x_1 \\
+                f(2) &= x_2 \\
+                f(3) &= x_3
+            \end{align*}
+            Choose $I_1$ which is a closed interval so that $x_i \notin I_i$.
+            \begin{enumerate}
+                \item $I_{n+1} \subseteq I_n$
+                \item $x_{n+1} \notin I_{n+1}$
+            \end{enumerate}
+            For any real number $x_{n_0}$
+            \[x_{n_0} \notin I_{n_0} \iff \bigcap_{i=1}^\infty I_i = \emptyset\]
+            Thus, we have contradiction with the previous theorem.
+        \end{proof}
+        \item $(0, 1)$ is uncountable (Cantor)
+        \begin{proof}
+            We assume by contradiction that $(0, 1)$ is countable i.e. 
+            $\exists f: \naturals \rightarrow (0, 1)$ that is a bijection i.e. 
+            \[f(n) \in (0, 1) \forall n \in \naturals\]
+            \begin{gather*}
+                f(n) = .a_{n_1}a_{n_2}a_{n_3}a_{n_4}\dots \\
+                a_{n_i} \in \{0, 1, 2, 3, \dots, 9\}
+            \end{gather*}
+            \begin{align*}
+                1 \leftrightarrow .a_{11}a_{12}a_{13}a_{14}a_{15}\dots \\
+                2 \leftrightarrow .a_{21}a_{22}a_{23}a_{24}a_{25}\dots \\
+                3 \leftrightarrow .a_{31}a_{32}a_{33}a_{34}a_{35}\dots \\
+                4 \leftrightarrow .a_{41}a_{42}a_{43}a_{44}a_{45}\dots \\
+            \end{align*}
+            Define $x \in (0, 1)$ such that $x = .b_1 b_2 b_3 b_4$.
+            \[b_n = \begin{cases}
+                2 & \text{if } a_{nn} \ne 2 \\
+                3 & \text{if } a_{nn} = 2
+            \end{cases}\]
+            \begin{align*}
+                x &\ne f(1) \implies x \notin f(\naturals) = Range f = (0, 1) \\
+                x &\ne f(n) \quad \forall n \in \naturals
+            \end{align*}
+            C
+        \end{proof}
+        \begin{corollary}
+            $\reals$ are uncountable $\because (0, 1) \subset \reals$.
+            \begin{align*}
+                \exists f : \reals &\rightarrow (0, 1) \text{a bijection} \\
+                f(x) &= \frac{2}{\pi} \cdot \frac{\arctan(x) + 1}{2}
+            \end{align*}
+        \end{corollary}
+        \begin{corollary}
+            Every open interval is uncountable.
+            \begin{align*}
+                \exists f (0, 1) &\xrightarrow{f} (a, b) \text{ a bijection} \\
+                f(x) &= mx + n \\
+                f(0) &= n = a \\
+                f(1) &= m + n = m + a = b \implies m = b - a \\
+                f(x) &= (b - a)x + a
+            \end{align*}
+        \end{corollary}
+        \begin{theorem}
+            Schröder-Bernstein \\
+            If $A, B$ are two infinite sets where $|A| \le |B| \le |A| \implies |A| = |B|$ 
+            ($A$ and $B$ are in bijective correspondence).
+            Assume $\exists f : A \to B$ is an injective map.
+            \begin{multline*}
+                (\exists g : B \to A \text{ which is an injective map}) \\
+                \then (\exists h: A \to B \text{ which is a bijection})
+            \end{multline*}
+        \end{theorem}
+        \begin{corollary}
+            Show that $(0, 1]$ is uncountable or $|(0, 1)| = |(0, 1]|$.
+            \begin{proof}
+                \begin{align*}
+                    (0, 1) &\xrightarrow{f} (0, 1] \quad \text{one-to-one}\\
+                    (0, 1] &\xrightarrow{g} (0, 1) \quad \text{one-to-one} \\
+                    g(x) &= \frac{x}{2} \\
+                    \therefore \exists h: (0, 1) &\to (0, 1]
+                \end{align*}
+            \end{proof}
+        \end{corollary}
+        \end{enumerate}
+    \end{theorem}
+    \begin{proposition}
+        You can construct a surjective function from a finite set $A$ to $\mathcal{P}(A)$.
+        \[\mathcal{P}(A) = \{B \mid B \subseteq A\}\]
+        \begin{proof}
+            Assume $A$ is a finite set and $\exists f: A \to \mathcal{P}(A)$ for any $a \in A$ 
+            then
+            \[f(a) \in \mathcal{P}(A)\]
+            i.e. $\forall a \in A$, $f(a) \subseteq A$ in such a way that it is an injection.
+            \begin{theorem}
+                Let $A, B$ be finite sets and $f: A \to B$ be a function between these finite sets.
+                \begin{enumerate}
+                    \item If $f$ is injective, then $|A| \le |B|$
+                    \item If $f$ is surjective, then $|B| \le |A|$
+                    \item If $f$ is bijective, then $|A| = |B|$
+                \end{enumerate}
+            \end{theorem}
+            Therefore, this proposition would imply $|A| \ge |\mathcal{P}(A)|$.
+            \begin{theorem}
+                If $A$ is a finite set,
+                \[|\mathcal{P}(A)| = 2^{|A|}\]
+            \end{theorem}
+            Recalling the above theorem, the proposition must be \textbf{false}.
+        \end{proof}
+    \end{proposition}
+    \begin{theorem}
+        Cantor's \\
+        If $A$ is an infinite set, then there is no surjective function from 
+        \[A \rightarrow \mathcal{P}(A).\]
+        \begin{proof}
+            Assume there exists a surjection
+            \[f: A \to \mathcal{P}(A)\]
+            A is infinite.
+            \[\forall a \in A \implies \begin{aligned}
+                f(a) &\in \mathcal{P}(A) \\
+                f(a) &\subseteq A
+            \end{aligned}\]
+            We claim that there exists a subset of $A$ that is not in the range of $f$.
+            \begin{align*}
+                B &\subseteq a \\
+                B &= \{a \in A \mid a \notin f(a)\}
+            \end{align*}
+            \begin{gather*}
+                a \notin f(a) \subseteq A \qquad f: A \to \mathcal{P}(A)
+            \end{gather*}
+            Assume that $f$ is surjective. Then $\exists a' \in A$ so that $f(a') = B$.
+            \begin{enumerate}
+                \item Assume $a' \in B$
+                \[\implies a' \notin f(a') = B \equiv F\]
+                \item Assume $a' \notin B$
+                \[\implies a' \in f(a') = B \equiv F\]
+            \end{enumerate}
+            Therefore, we cannot create a surjective function between $A$ and $\mathcal{P}(A)$ 
+            by proof of contradiction.
+        \end{proof}
+    \end{theorem}
+    \begin{example}
+        Let $S$ be the set consisting of all sequences of 0 and 1.
+        \[S = \{(a_1, a_2, a_3, a_4, \dots) \mid a_i \in \{0, 1\}\}\]
+        Prove that $S$ is not countable.
+        \begin{proof}
+            Assume $S$ is countable i.e. $\exists f : \naturals \rightarrow S$.
+            \begin{align*}
+                f(1) &= (1000\dots) \\
+                f(2) &= (0100\dots) \\
+                f(n) &= (a_{n_1}, a_{n_2}, a_{n_3}, a_{n_4})
+            \end{align*}
+            \begin{align*}
+                b_n &= \begin{cases}
+                    1 & a_{nn} = 0 \\
+                    0 & a_{nn} = 1
+                \end{cases} \\
+                b_{nn} &= b_1 b_2 b_3 b_4 \dots \\
+                b_{nn} \notin Image f = Range f
+            \end{align*}
+        \end{proof}
+        \[|S| = 2^{|\naturals|}\]
+        This is because for every natural number $i$ representing the $i$th digit, there are 
+        2 possibilities for $i$, 0 and 1.
+        \[|\naturals| = \chi_0\]
+        \[|S| = 2^{|\naturals|} = |\reals| \implies |\reals| = 2^{\chi_0}\]
+    \end{example}
+    \begin{proposition}
+        Continuum Hypothesis \\
+        Cantor presented in 1877, and Hilbert added it to his famous list of Open Problems 
+        at the ICM in 1900.
+        \[\nexists S: \aleph_0 < |S| < 2^{\aleph_0}\]
+    \end{proposition}
+    \subsection*{The Cantor Set (Topology of $\reals$)}
+    Define
+    \begin{align*}
+        C_0 &:= [0, 1] \\
+        C_1 &:= [0, 1] \setminus \left(\frac{1}{3}, \frac{2}{3}\right) 
+        = \left[0, \frac{1}{3}\right] \cup \left[\frac{2}{3}, 1\right] \\
+        C_2 &:= \left[0, \frac{1}{9}\right] \cup \left[\frac{2}{9}, \frac{1}{3}\right] 
+        \sqcup \left[\frac{2}{3}, \frac{7}{9}\right] \cup \left[\frac{8}{9}, 1\right]
+    \end{align*}
+    For every $n = 0, 1, 2, \dots$ then $C_n$ consists of $2^n$ closed intervals of length 
+    $\frac{1}{3^n}$. \\
+    \\
+    Define the Cantor Set to be 
+    \begin{gather*}
+        C := \bigcap_{n=1}^\infty C_n. \\
+        C = [0, 1] \setminus [\left(\frac{1}{3}, \frac{2}{3}\right) 
+        \cup \left(\frac{1}{9}, \frac{2}{9}\right) 
+        \cup \left(\frac{7}{9}, \frac{8}{9}\right)
+        \cup \dots] \\
+        0, 1 \in C
+    \end{gather*}
+    If $y \in C_n$ is an endpoint for one of these subintervals then $y \in C$.
+    \begin{example}
+        \begin{enumerate}
+            \item Is $C$ a countable set? \\
+            Let $S$ consist of sequeneces of $\{0\}$ and $\{1\}$.
+            \[S = \{(a_1, a_2, a_3, a_4, \dots) \mid a_i \in \{0, 1\}\}\]
+            The $S$ is not countable.
+            \[2^{|\naturals|} \sim |\reals|\]
+            For each $c \in C$, set $a_1 = 0$ if it falls in the left component of $C_1$ or 
+            $a_1 = 1$ if it falls in the right component of $C$. Once $a_1$ is chosen, we 
+            have 2 possibilities for $a_2$.
+            \[a_2 = \begin{cases}
+                0 & \text{if on left of $C_2$} \\
+                1 & \text{if on right of $C_2$}
+            \end{cases}\]
+            Therefore, we can associate every element in $C$ with a unique sequence $a_n$ 
+            where $n \in \naturals$, so $C$ is not countable.
+            \item Does it contain any subinterval?
+            Length of $C$:
+            \begin{align*}
+                &1 - \frac{1}{3} + \frac{2}{9} + \frac{4}{27} + \dots + \frac{2^{n-1}}{3^n} \\
+                = \quad &1 - \frac{1}{3}(1 + \frac{2}{9} + \frac{4}{9} + \dots + \frac{2^{n-1}}{3^{n-1}}) \\
+                = \quad &1 - \frac{1}{3}\left(\frac{1}{1 - \frac{2}{3}}\right) \\
+                = \quad &1 - \frac{1}{3} \cdot 3 \\
+                = \quad &1 - 1 \\
+                = \quad &0
+            \end{align*}
+            Therefore, there are no elements in $C$ which contain an interval, since each 
+            element is a single point (zero-dimensional). [Known as Cantor Dust.]
+            \item Does it contain any rational or irrational numbers?
+            \begin{definition}
+                $A$ is a \keyword{closed} set if it is the complement of an open set.
+            \end{definition}
+            \begin{definition}
+                $O$ is an \keyword{open} set if $\forall x \in O \implies \exists N(x) \subseteq O$.
+            \end{definition}
+            \begin{definition}
+                $A$ is \keyword{compact} if and only if it is closed and bounded.
+            \end{definition}
+            \begin{definition}
+                $A$ is \keyword{perfect} if it is closed and contains no isolated points.
+            \end{definition}
+            The Cantor Set is a \keyword{closed} and \keyword{compact} set. \\
+            The Cantor Set is also a \keyword{perfect} set.
+            \[\forall c \in C \quad \exists (x_n)_n \subset C \implies \lim_{n \to \infty} x_n = c\]
+            \[C = \left\{\sum_{n=1}^{\infty} \frac{C_n}{3^n}, \quad C_n \in \{0, 2\}\right\}\]
+            An irrational number is in the Cantor set if and only if 
+            in a base 3 expansion it consists only of 0 and 2.
+        \end{enumerate}
+        \begin{remark}
+            \[C \rightsquigarrow \dim \frac{\log 2}{\log 3} \approx 0.631\]
+        \end{remark}
+    \end{example}
+\end{document}

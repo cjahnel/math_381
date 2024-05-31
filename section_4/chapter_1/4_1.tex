@@ -1,0 +1,439 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\then}{\rightarrow}
+\newcommand{\bithen}{\leftrightarrow}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\0}{\emptyset}
+\newcommand{\power}{\mathcal{P}}
+
+\newcommand{\divby}{\; \vdots \;}
+
+\title{MATH 381 Section 4.1}
+\author{Prof. Olivia Dumitrescu}
+\date{8 March 2024}
+
+\begin{document}
+    \maketitle
+    \section*{Divisibility}
+    \begin{definition}
+        $a, b \in \Z \quad a \ne 0$. We say $a$ divides $b$ if $\exists c \in \Z \quad b = ac$ 
+        (or $a \mid b$ if $\frac{b}{a} \in \Z$). \\
+        If $a \mid b$ we say $b$ is a multiple of $a$ or $a$ is a divisor of $b$. \\
+        $a \mid 0$ since $\frac{0}{a} = 0 \in \Z$.
+    \end{definition}
+    \begin{remark} Notation \\
+        \[a \mid b \text { or } b \divby a \]
+    \end{remark}
+    \begin{remark}
+        \[1 \mid n \wedge n \mid n \quad \forall n \in \N\]
+    \end{remark}
+    \begin{example}
+        Assume $n$ and $d$ are positive integers. How many positive integers not exceeding $n$ 
+        are divisible by $d$? \\
+        \\
+        Fix $n$ and $d$.
+        \[\#\{a \in \Z \mid da \le n\} \quad 0 < da \le n\]
+        The positive integers divisible by $d$ are all integers of form $d \cdot k, k \in \Z$. \\
+        Therefore, the number of positive integers divisible by $d$ that do not exceed $n$ equals 
+        the number of integers $k$.
+        \[0 < dk \le n \quad \text{or} \quad 0 < k \le \frac{n}{d}\]
+        \[\# \{k \in \Z \mid 0 < k \le \frac{n}{d}\} = \lfloor \frac{n}{d} \rfloor\]
+    \end{example}
+    \subsection*{Floor function}
+    \[\lfloor \quad \rfloor : \R \to \Z\]
+    \[\lfloor \quad \rfloor = \{k \in \Z \mid x = k + a \quad a \in [0, 1)\}\]
+    \[\forall x \in \R \implies \exists! k \in \Z(x = k + a) \quad a \in [0, 1)\]
+    Returns the largest of all integers $k$ such that $k \le x$.
+    \subsection*{Ceiling function}
+    \[\lceil \quad \rceil : \R \to \Z\]
+    \[\lceil \quad \rceil = \{k \in \Z \mid x = k + a \quad a \in (-1, 0]\}\]
+    \[\forall x \in \R \implies \exists! k \in \Z(x = k + a) \quad a \in (-1, 0]\]
+    Returns the smallest of all integers $k$ such that $k \ge x$.
+    \begin{example}
+        Prove that if $x \in \R$
+        \[\lfloor 2x \rfloor = \lfloor x \rfloor + \lfloor x + \frac{1}{2} \rfloor\]
+    \end{example}
+    \begin{proof}
+        To prove this statement 
+        \[x = n + \varepsilon \quad n \in \Z \wedge \varepsilon \in [0, 1)\]
+        \begin{enumerate}
+            \item $0 \le \varepsilon \le \frac{1}{2}$
+            \begin{align*}
+                x = n + \varepsilon &\implies \lfloor x \rfloor = n \\
+                x + \frac{1}{2} = n + (\varepsilon + \frac{1}{2}) 
+                &\implies \lfloor x + \frac{1}{2} \rfloor = n \\
+                2x = 2n + 2\varepsilon &\implies \lfloor 2x \rfloor = 2n \\
+                2n &= n + n
+            \end{align*}
+            $\therefore \lfloor 2x \rfloor = \lfloor x \rfloor + \lfloor x + \frac{1}{2} \rfloor$
+            \item $\frac{1}{2} \le \varepsilon < 1$
+            \begin{align*}
+                x = n + \varepsilon &\implies \lfloor x \rfloor = n \\
+                x + \frac{1}{2} = n + (\varepsilon + \frac{1}{2}) 
+                &\implies \lfloor x + \frac{1}{2} \rfloor = n + 1 \\
+                2x = 2n + 2\varepsilon &\implies \lfloor 2x \rfloor = 2n + 1 \\
+                2n + 1 &= n + n + 1
+            \end{align*}
+            $\therefore \lfloor 2x \rfloor = \lfloor x \rfloor + \lfloor x + \frac{1}{2} \rfloor \qed$
+        \end{enumerate}
+    \end{proof}
+    \begin{example}
+        \[\lfloor 3x \rfloor = \lfloor x \rfloor + \lfloor x + \frac{1}{3} \rfloor 
+        + \lfloor x + \frac{2}{3} \rfloor\]
+        \begin{proof}
+            Proof by cases
+            \begin{enumerate}
+                \item $\varepsilon \in [0, \frac{1}{3})$
+                \item $\varepsilon \in [\frac{1}{3}, \frac{2}{3})$
+                \item $\varepsilon \in [\frac{2}{3}, 1)$
+            \end{enumerate}
+        \end{proof}
+    \end{example}
+    \begin{theorem}
+        Let $a, b, c \in \Z, a \ne 0$. Then 
+        \begin{enumerate}
+            \item if $a \mid b$ and $b \mid c$ then $a \mid c$
+            \[x \mid x \qquad \text{Reflexive}\]
+            \begin{proof}
+                \begin{gather*}
+                    a \mid b \implies \exists k \in \Z (b = k \cdot a) \\
+                    b \mid c \implies \exists n \in \Z (c = n \cdot b)
+                \end{gather*}
+                \begin{align*}
+                    \implies c &= n \cdot b \\
+                    &= n(k \cdot a) \implies a \mid c \\
+                    &n, k \in \Z
+                \end{align*}
+            \end{proof}
+            \item if $a \mid b$ and $a \mid c$ then $a \mid b + c$
+            \[x \mid y \wedge y \mid z \implies x \mid z \qquad \text{Transitive}\]
+            \item if $a \mid b$ then $a \mid bc$ for all integers $c$
+            \[x \mid y \wedge y \mid x \implies x = \pm 1\]
+        \end{enumerate}
+    \end{theorem}
+    \begin{corollary}
+        If $a, b, c \in \Z$, $a \ne 0$ \\
+        \[a \mid b \wedge a \mid c \implies a \mid mb + nc \quad m, n \in \Z\]
+    \end{corollary}
+    \begin{definition}
+        A number $p \ge 2$ is prime if the only integers that divide $p$ are 1 and $p$.
+    \end{definition}
+    \subsection*{Section 4.1.3: The Division algorithm}
+    \begin{theorem}
+        The Division Algorithm \\
+        Let $a \in \Z$ and $d \in \Z^+$. Then there exists unique integers $q$ (quotient) and 
+        $r$ (remainder), $0 \le r < d$ and $a = q \cdot d + r$. \\
+        \begin{gather*}
+            \begin{aligned}
+                d &= divisor \\
+                a &= dividend
+            \end{aligned}
+            \qquad
+            \begin{cases}
+                q := a \div d \\
+                r := a \bmod d
+            \end{cases}
+        \end{gather*}
+        \begin{gather*}
+            a, d \in \Z \\
+            q, r \in \Z \text{ such that } 0 \le r < d \text{ and } a = q \cdot d + r \\
+            a - r = qd \\
+            q \mid a - r \\
+            r = 0 \iff \frac{a}{d} \in \Z \iff d \mid a \qquad \begin{cases}
+                q = \lfloor\dfrac{a}{d}\rfloor \\
+                r = a - q \cdot d
+            \end{cases}
+        \end{gather*}
+    \end{theorem}
+    \begin{definition}
+        Modular Arithmetic \\
+        If $a, b \in \Z$ and $m \in \Z^+$, we say $a$ is \keyword{congruent} to $b \mod m$ if 
+        $m \mid a - b$. mod $m$ is an \keyword{equivalence relation}.
+        \[a \equiv b \pmod m \iff m \mid a - b\]
+        Relations
+        \begin{enumerate}
+            \item Reflexivity
+            \[a \equiv a \pmod m \iff m \mid a - a = 0\]
+            \item Symmetry
+            \[a \equiv b \pmod m \then b \equiv a \pmod m\]
+            \item Transitivity
+            \[a \equiv b \pmod m \wedge b \equiv c \pmod m \then a \equiv c \pmod m\]
+        \end{enumerate}
+    \end{definition}
+    \begin{theorem}
+        Let $m, a, b \in \Z$. If $m \mid a$ and $m \mid b$, then $k, \ell \in \Z$ we have 
+        $m \mid ak + b\ell$.
+    \end{theorem}
+    \begin{theorem}
+        Let $a$ and $b$ be two integers and $m \in \Z^+$. Then $a \equiv b \mod m$ if and only if 
+        $a \bmod m = b \bmod m$.
+    \end{theorem}
+    \begin{example}
+        Determine whether 17 is congruent to 5 modulo 6 and whether 24 and 14 are congruent 
+        modulo 6.
+        \begin{itemize}
+            \item $17 \equiv 5 \pmod 6 \iff 6 \mid 17 - 5$
+            \item $24 \not\equiv 14 \pmod 6 \iff 6 \nmid 24 - 14$
+        \end{itemize}
+    \end{example}
+    \begin{theorem}
+        Let $m \in \Z^+$ and $a, b \in \Z$ such that $a \equiv b \pmod m 
+        \iff \exists k \in \Z (a = b + k \cdot m)$.
+    \end{theorem}
+    \begin{proof}
+        \begin{gather*}
+            a \equiv b \pmod m \iff m \mid a - b \\
+            \text{i.e. $\exists k \in \Z$ so that} \\
+            a - b = k \cdot m \\
+            a = b + k \cdot m
+        \end{gather*}
+    \end{proof}
+    \begin{definition}
+        The set of all integers congruent to an integer $m$ is called the 
+        \keyword{congruence class} of $m$.
+    \end{definition}
+    \begin{theorem}
+        Let $m \in \Z^+$. If $ a \equiv b \pmod m$ and $c \equiv d \pmod m$, 
+        then $a + c \equiv b + d \pmod m$ and $a \cdot c \equiv b \cdot d \pmod m$.
+    \end{theorem}
+    \begin{proof}
+        \begin{gather*}
+            s, t \in \Z \\
+            \begin{aligned}
+                b &= a + s \cdot m \\
+                d &= c + t \cdot m
+            \end{aligned} \\
+            b \cdot d = (a + sm)(c + tm) = ac + m(sc + at + stm) \\
+            \implies b \cdot d \equiv ac \pmod m
+        \end{gather*}
+    \end{proof}
+    \begin{corollary}
+        $m \in \Z_+$ and $a, b \in \Z$. Then 
+        \[a + b \pmod m = (a \bmod m + b \bmod m) \mod m\]
+        \[a \cdot b \pmod m = (a \bmod m) \cdot (b \bmod m) \mod m\]
+    \end{corollary}
+    \begin{proof}
+        \begin{gather*}
+            \exists! q, 0 \le r < m \\
+            a = qm + r \\
+            m \mid a - r \\
+            a \equiv r \mod m \\
+            a \equiv (a \bmod m) \mod m \\
+            b \equiv (b \bmod m) \mod m \\
+            r = a \bmod m \implies a + b \equiv (a \bmod m + b \bmod m) \mod m \\
+            a \cdot b \equiv (a \bmod m) \cdot (b \bmod m) \mod m
+        \end{gather*}
+    \end{proof}
+    \subsection*{Section 4.1.4 Modular Arithmetic}
+    Let $m$ be a positive integer.
+    \begin{align*}
+        a &\equiv b \pmod m \\
+        c &\equiv d \pmod m \\
+        \hline
+        a + c &\equiv b + d \pmod m \\
+        a \cdot c &\equiv b \cdot d \pmod m
+    \end{align*}
+    \begin{example}
+        \begin{gather*}
+            (19^3 \bmod 31)^4 \mod 23 \\
+            19^3 = 6859 = 31 \cdot 221 + 8 \\
+            8^4 = 4096 = 178 \cdot 23 + 2
+        \end{gather*}
+    \end{example}
+    \begin{definition}
+        The \keyword{equivalence class} is defined as
+        \begin{gather*}
+            \Z_m = \{\hat{0}, \hat{1}, \hat{2}, \dots, \widehat{m - 1}\} \\
+            0 \le k < m \\
+            \hat{k} = \{z \in \Z \mid z \bmod m = k\} \\
+            \Z_4 = \{\hat{0}, \hat{1}, \hat{2}, \hat{3}\} \\
+            \begin{aligned}
+                S_0 &= \hat{0} = \{z \in \Z \mid z \bmod 4 = 0 \iff 4 \mid z\} \\
+                &= \{\dots, -8, -4, 0, 4, 8, 12, 16, 20, 24, \dots\} = \{4k \mid k \in \Z\} \\
+                S_1 &= \hat{1} = \{z \in \Z \mid z \bmod 4 = 1 \iff 4 \mid z - 1\} \\
+                &= \{\dots, -7, -3, 1, 5, 9, 13, \dots\} = \{4k + 1 \mid k \in \Z\} \\
+                S_2 &= \hat{2} = \{z \in \Z \mid z \bmod 4 = 2 \iff 4 \mid z - 2\} \\
+                &= \{\dots, -6, -2, 2, 6, 10, 14, \dots\} = \{4k + 2 \mid k \in \Z\} \\
+                S_3 &= \hat{3} = \{z \in \Z \mid z \bmod 4 = 3 \iff 4 \mid z - 3\} \\
+                &= \{\dots, -5, -1, 3, 7, 11, 15, \dots\} = \{4k + 3 \mid k \in \Z\}
+            \end{aligned} \\
+            \Z_4 = S_0 \sqcup S_1 \sqcup S_2 \sqcup S_3
+        \end{gather*}
+    \end{definition}
+    \[\Z \subset \Q \subset \R \subset \C\]
+    \begin{enumerate}
+        \setcounter{enumi}{-1}
+        \item $\forall z, w, v \in \Z ((z + w) + v = z + (w + v))$
+        \item $\exists z = 0$ so that $\forall z \in \Z (z + 0 = 0 + z = z)$
+        \item $\forall z \in \Z \; \exists! w \in \Z$ so that $z + w = 0$
+        \item $z + w = w + z$ for any $z, w \in \Z$ (abelian)
+    \end{enumerate}
+    \begin{itemize}
+        \item $(\N, +)$ is not an abelian group
+        \item $(\Q, +), (\R, +), (\C, +)$ are abelian groups
+    \end{itemize}
+    \begin{theorem}
+        \hfill
+        \begin{enumerate}
+            \item $(\Z, +), (\R, +), (\Q, +), (\C, +)$ are examples of abelian groups.
+            Yes
+            \item $(R \setminus \{0\}, \cdot), (\Q^*, \cdot), (\C^*, \cdot)$ are abelian groups.
+            Yes
+            \item $(\Z^* = \Z \setminus \{0\}, \cdot)$ is an abelian group.
+            NO
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof}
+        \hfill
+        \begin{enumerate}
+            \item $\exists 1 \in \Q \quad ab \ne 0 \quad z = \dfrac{a}{b} \implies w = \dfrac{b}{a}$
+            \item $\forall z \in \Q^* \implies \exists w$ so that $z \cdot w = w \cdot = 1$
+        \end{enumerate}
+    \end{proof}
+    \begin{definition}
+        $(k, +, \cdot)$ is a \keyword{field} if
+        \begin{enumerate}
+            \item $(k, +)$
+            \item $(k \setminus \{0\}, \cdot)$ is an abelian group
+            \item $(a + b) \cdot z = az + bz$ and/or $a(z + w) = az + aw$ 
+            (distribution law of multiplication over addition)
+        \end{enumerate}
+        $(k, +, \cdot)$ is a \keyword{ring} if it satisfies 1, 2, 3 
+        besides $\exists$ an inverse with respect to multiplication
+    \end{definition}
+    \begin{corollary}
+        \hfill
+        \begin{enumerate}
+            \item $(\Q, +, \cdot), (\R, +, \cdot), (\C, +, \cdot)$ are fields
+            \item $(\Z, +, \cdot)$ is a ring
+        \end{enumerate}
+    \end{corollary}
+    \begin{theorem}
+        \hfill \\
+        $(\Z_m, +, \cdot)$ is a commutative (abelian) ring. \\
+        If $m$ is prime, $(\Z_p, +, \cdot)$ is a field.
+    \end{theorem}
+    \[\Z_m = \{\hat{0}, \hat{1}, \hat{2}, \dots, \widehat{m-1}\}\]
+    \begin{enumerate}
+        \item $\hat{a} + \hat{b} \equiv \widehat{a + b} \pmod m$
+        \item $\hat{a} \cdot \hat{b} \equiv \widehat{a \cdot b} \pmod m$
+    \end{enumerate}
+    While working with equivalence relations, we always need to check that the operations are 
+    well-defined i.e. they don't depend on the representative of claim.
+    \begin{enumerate}
+        \item Closure \\
+        For any $\hat{a}, \hat{b} \in \Z_m$ then $\hat{a} + \hat{b} \in \Z_m$ and 
+        $\hat{a} \cdot \hat{b} \in \Z_m$.
+        \item Associativity
+        \[(\hat{a} + \hat{b}) + \hat{c} = \hat{a} + (\hat{b} + \hat{c})\]
+        \[(\hat{a} \cdot \hat{b}) \cdot \hat{c} = \hat{a} \cdot (\hat{b} \cdot \hat{c})\]
+        \item Commutativity
+        \[\hat{a} \cdot \hat{b} = \hat{b} \cdot \hat{a}\]
+        \[\hat{a} + \hat{b} = \hat{b} + \hat{a}\]
+        \item Identity elements
+        \[\hat{0} = \{m \cdot k \mid k \in \Z\}\]
+        \[\forall \hat{a} \in \Z_m \implies \begin{cases}
+            \hat{a} + \hat{0} = \hat{0} + \hat{a} = \hat{a} \\
+            \hat{a} \cdot \hat{1} = \hat{1} \cdot \hat{a} = \hat{a}
+        \end{cases}\]
+        \item $\Z_m$ has an additive inverse if $\hat{a} \in \Z_m \; \exists! \hat{b} \in \Z_m$ 
+        so that $\hat{b} + \hat{a} = \hat{a} + \hat{b} = \hat{0}$.
+        \item Distributivity $(+, \cdot)$
+        \[\hat{a}, \hat{b}, \hat{c} \in \Z_m\]
+        \[\]
+    \end{enumerate}
+    \begin{example}
+        \begin{gather*}
+            \forall z \in \Z_5 \setminus \{0\} \implies \exists w \in \Z_5(z \cdot w) = \hat{1} \\
+            (\Z_5, +, \cdot) \\
+            \Z_5 = \{\hat{0}, \hat{1}, \hat{2}, \hat{3}, \hat{4}\} \\
+            (\hat{1})^{-1} = \hat{1} \\
+            (\hat{2})^{-1} = \hat{3} \iff \hat{2} \cdot \hat{3} = \hat{6} = \hat{1} \\
+            (\hat{3})^{-1} = \hat{2} \\
+            (\hat{4})^{-1} = \hat{4}
+        \end{gather*}
+    \end{example}
+    \begin{example}
+        \begin{gather*}
+            a, b, k, m \in \Z \\
+            k \ge 1, m \ge 2
+        \end{gather*}
+        Prove that if $a \equiv b \mod m$ then $a^k \equiv b^k \mod m$.
+        \[m \mid a - b \then m \mid a^k - b^k\]
+        \[(a - b)(a^{k-1} + a^{k-2}b + \dots + ab^{k-2} +b^{k-1})\]
+    \end{example}
+    \begin{definition}
+        Euclidean domain
+        \[\Z[i] = \{a+bi \mid a,b \in \Z\}\]
+        Euclidean algorithm exists so that 
+        \[\frac{z_1}{z_2} = \frac{z_1 \cdot \bar{z_2}}{z_2 \cdot \bar{z_2}} 
+        = \frac{z}{|z_2|^2} \in \C \because z \in \C \wedge |z_2| \in \R\]
+        Ordering can be done in complex based on absolute value
+        \[z_1 \le z_2 \iff |z_1| \le |z_2|\]
+    \end{definition}
+    \begin{theorem}
+        If $p$ is prime, then $(\Z_p, +, \cdot)$ is a field.
+        \[\begin{cases}
+            (\Z_p, +) \text{ is an abelian group} \\
+            (\Z_p \setminus \{0\}, \cdot) \text{ is an abelian group} \\
+            +, \cdot \text{ is distributive}
+        \end{cases}\]
+        \begin{itemize}
+            \item $(\hat{a} + \hat{b}) + \hat{c} = \hat{a} + (\hat{b} + \hat{c})$
+            \item $\exists \hat{0} \in \Z_p (\hat{a} + \hat{0} = \hat{0} + \hat{a} = \hat{a})$
+            \item $\forall \hat{a} \in \Z_n \; \exists \hat{b} (\hat{a} + \hat{b} = \hat{0})$
+        \end{itemize}
+    \end{theorem}
+    \begin{lemma}
+        If $p$ is prime, then any non-zero element in $\Z_p$ is invertible with respect to 
+        multiplication.
+        \[\forall \hat{a} \in \Z_p [(a, p) = 1]\]
+    \end{lemma}
+    \begin{theorem}
+        If $n$ is not a prime 
+        \[(\Z_n, +, \cdot) \text{ is a ring}\]
+        \[U(\Z_n) = \{\hat{a} \mid (a, n) = 1\}\]
+        \[|U(\Z_n)| = \phi(n)\]
+    \end{theorem}
+    \begin{definition}
+        Euler Function \\
+        Let $n \in \N$.
+        \[\phi(n) = \#\{m \in \N \mid 1 \le m < n \text{ so that } (m, n) = 1\}\]
+        \[\phi(n) = n \prod_{d \mid n} \left(1 - \frac{1}{d}\right)\]
+    \end{definition}
+    \begin{theorem}
+        Let $n = p_1^{k_1} \dots p_r^{k_r}$.
+        \[\phi(n) = p_1^{k_1-1}(p_1-1)p_2^{k_2-1}(p_2-1) \dots p_r^{k_r-1}(p_r-1)\]
+    \end{theorem}
+    \begin{theorem}
+        Gauss' Divisor Sum Property
+        \[\sum_{d \mid n} \phi(d) = n\]
+    \end{theorem}
+    \begin{theorem}
+        Euler's theorem \\
+        If $(a, n) = 1$, then 
+        \[a^{\phi(n)} \equiv 1 \pmod n\]
+    \end{theorem}
+\end{document}

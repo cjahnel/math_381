@@ -1,0 +1,274 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+    \ifdim\lastskip<1.5em \hskip-\lastskip
+    \hskip1.5em plus0em minus0.5em \fi \nobreak
+    \vrule height0.75em width0.5em depth0.25em\fi}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\then}{\rightarrow}
+\newcommand{\bithen}{\leftrightarrow}
+
+\title{MATH 381 Homework 3}
+\author{Olivia Dumitrescu}
+\date{17 February 2024}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item Show that $(p \then q) \vee (p \then r)$ is logically equivalent to $p \then (q \vee r)$.
+\begin{align*}
+    &\quad \; (p \then q) \vee (p \then r) & \\
+    &\equiv \neg p \vee q \vee \neg p \vee r \qquad
+    &[\text{Conditional-disjunction equivalence}]\\
+    &\equiv \neg p \vee \neg p \vee q \vee r \qquad
+    &[\text{Commutative law}]\\
+    &\equiv \neg p \vee (q \vee r) \qquad
+    &\text{[Idempotent law]} \\
+    &\equiv p \then (q \vee r) \qquad
+    &\text{[Conditional-disjunction equivalence]}
+\end{align*}
+\item Show that $(q \wedge (p \then \neg q)) \then \neg p$ is a tautology using propositional 
+equivlance and the laws of logic (successive substitution). Do not use a truth table.
+\begin{align*}
+    &\quad\;& (q \wedge (p \then \neg q)) &\then \neg p \\
+    &\equiv & \neg(q \wedge (p \then \neg q)) &\vee \neg p \qquad
+    &\text{[Conditional-disjunction equivalence]} \\
+    &\equiv & (\neg q \vee \neg(p \then \neg q)) &\vee \neg p \qquad
+    &\text{[DeMorgan's law]} \\
+    &\equiv & (\neg q \vee \neg(\neg p \vee \neg q)) &\vee \neg p \qquad
+    &\text{[Conditional-disjunction equivalence]} \\
+    &\equiv & (\neg q \vee (p \wedge q)) &\vee \neg p \qquad
+    &\text{[DeMorgan's law]} \\
+    &\equiv & ((\neg q \vee p) \wedge (\neg q \vee q)) &\vee \neg p \qquad
+    &\text{[Distributive law]} \\
+    &\equiv & ((\neg q \vee p) \wedge T) &\vee \neg p \qquad
+    &\text{[Negation law]} \\
+    &\equiv & (\neg q \vee p) &\vee \neg p \qquad
+    &\text{[Identity law]} \\
+    &\equiv & \neg q \vee (p &\vee \neg p) \qquad
+    &\text{[Associative law]} \\
+    &\equiv & \neg q &\vee T \qquad
+    &\text{[Negation law]} \\
+    &\equiv & &T \qquad
+    &\text{[Domination law]}
+\end{align*}
+\pagebreak
+\item Show that $(p \wedge q) \then r$ and $(p \then r) \wedge (q \then r)$ are not logically equivalent.
+\begin{center}
+    \begin{tabular}{c | c | c | c | c | c | c | c}
+        $p$ & $q$ & $r$ & $(p \wedge q)$ & $(p \wedge q) \then r$ & $(p \then r)$ & $(q \then r)$ 
+        & $(p \then r) \wedge (q \then r)$ \\
+        \hline
+        T & T & T & T & T & T & T & T\\
+        T & T & F & T & F & F & F & F\\
+        T & F & T & F & T & T & T & T\\
+        T & F & F & F & *T & F & T & *F\\
+        F & T & T & F & T & T & T & T\\
+        F & T & F & F & *T & T & F & *F\\
+        F & F & T & F & T & T & T & T\\
+        F & F & F & F & T & T & T & T\\
+    \end{tabular}
+\end{center}
+\begin{flushleft}
+    For the cases in which $p$ is true and $q$ and $r$ are false, and $q$ is true and $p$ and 
+    $r$ are false, $(p \wedge q) \then r$ and $(p \then r) \wedge (q \then r)$ have different 
+    truth values. Therefore, they are not logically equivalent.
+\end{flushleft}
+\item Create a compound logical expression composed of at least two propositions ($p$, $q$, e.g.) 
+that is a contradiction. Show that your expression really is a contradiction.
+\begin{align*}
+    &\quad \; (\neg q \wedge \neg p) \wedge (p \vee q) \\
+    &\equiv (\neg q \wedge (p \vee q)) \wedge (\neg p \wedge (p \vee q)) \qquad
+    &\text{[Distributive law]} \\
+    &\equiv ((\neg q \wedge p) \vee (\neg q \wedge q)) \wedge ((\neg p \wedge p) \vee (\neg p \wedge q)) \qquad
+    &\text{[Distributive law]} \\
+    &\equiv ((\neg q \wedge p) \vee F) \wedge (F \vee (\neg p \wedge q)) \qquad
+    &\text{[Negation law]} \\
+    &\equiv (\neg q \wedge p) \wedge (\neg p \wedge q) \qquad
+    &\text{[Identity law]} \\
+    &\equiv \neg q \wedge (p \wedge \neg p) \wedge q \qquad
+    &\text{[Associative law]} \\
+    &\equiv \neg q \wedge F \wedge q \qquad
+    &\text{[Negation law]} \\
+    &\equiv F \qquad
+    &\text{[Domination law]}
+\end{align*}
+\pagebreak
+\item Determine whether each argument is valid or invalid. Explain your reasoning.
+\begin{enumerate}
+\item \parbox{3in}{$\begin{aligned}
+    p &\then q \\
+    p &\then r \\
+    \hline
+    \therefore q &\then r
+\end{aligned}$}
+\begin{align*}
+    &\quad & ((p \then q) \wedge (p \then r)) \then (q \then r) \\
+    &\equiv & \neg((p \then q) \wedge (p \then r)) \vee (q \then r) & 
+    &\parbox{1in}{[Conditional \\-disjunction \\ equivalence]} \\
+    &\equiv & (\neg(p \then q) \vee \neg(p \then r)) \vee (q \then r) & 
+    &\text{[DeMorgan's law]} \\
+    &\equiv & \neg(\neg p \vee q) \vee \neg(\neg p \vee r) \vee (\neg q \vee r) & 
+    &\parbox{1in}{[Conditional \\-disjunction \\ equivalence]} \\
+    &\equiv & (p \wedge \neg q) \vee (p \wedge \neg r) \vee \neg q \vee r & 
+    &\text{[DeMorgan's law]} \\
+    &\equiv & \neg q \vee (p \wedge \neg q) \vee r \vee (p \wedge \neg r) & 
+    &\text{[Commutative law]} \\
+    &\equiv & \neg q \vee r \vee (p \wedge \neg r) & 
+    &\text{[Absorption law]} \\
+    &\equiv & \neg q \vee ((r \vee p) \wedge (r \vee \neg r)) & 
+    &\text{[Distributive law]} \\
+    &\equiv & \neg q \vee ((r \vee p) \wedge T) & 
+    &\text{[Negation law]} \\
+    &\equiv & \neg q \vee r \vee p & 
+    &\text{[Identity law]}
+\end{align*}
+\begin{flushleft}
+    This is an \textbf{invalid} argument because the premises and conclusion can be strung 
+    together to form a conditional statement which is not a tautology, as it has been fully 
+    simplified to reveal a contingency. \\
+    Intuitively, $q$ and $r$ are only dependent on $p$, which is not even stated to be 
+    necessarily true. Since there is no direct relationship between $q$ and $r$, one can 
+    conclude that the argument is not valid.
+\end{flushleft}
+\item \parbox{3in}{$\begin{aligned}
+    (p \then q) &\wedge (r \then s) \\
+    p &\vee r \\
+    \hline
+    \therefore q &\vee s
+\end{aligned}$}
+\begin{align*}
+    &\quad & (((p \then q) \wedge (r \then s)) \wedge (p \vee r)) \then (q \vee s) & \\
+    &\equiv & \neg(((p \then q) \wedge (r \then s)) \wedge (p \vee r)) \vee q \vee s & 
+    &\parbox{1in}{[Conditional \\-disjunction \\ equivalence]} \\
+    &\equiv & \neg((p \then q) \wedge (r \then s)) \vee \neg(p \vee r) \vee q \vee s & 
+    &\text{[DeMorgan's law]} \\
+    &\equiv & \neg(p \then q) \vee \neg(r \then s) \vee \neg(p \vee r) \vee q \vee s & 
+    &\text{[DeMorgan's law]} \\
+    &\equiv & \neg(\neg p \vee q) \vee \neg(\neg r \vee s) \vee \neg(p \vee r) \vee q \vee s & 
+    &\parbox{1in}{[Conditional \\-disjunction \\ equivalence]} \\
+    &\equiv & (p \wedge \neg q) \vee (r \wedge \neg s) \vee (\neg p \wedge \neg r) \vee q \vee s & 
+    &\text{[DeMorgan's law]} \\
+    &\equiv & q \vee (p \wedge \neg q) \vee s \vee (r \wedge \neg s) \vee (\neg p \wedge \neg r) & 
+    &\text{[Commutative law]} \\
+    &\equiv & ((q \vee p) \wedge (q \vee \neg q)) 
+    \vee ((s \vee r) \wedge (s \vee \neg s)) 
+    \vee (\neg p \wedge \neg r) & 
+    &\text{[Distributive law]} \\
+    &\equiv & ((q \vee p) \wedge T) 
+    \vee ((s \vee r) \wedge T) 
+    \vee (\neg p \wedge \neg r) & 
+    &\text{[Negation law]} \\
+    &\equiv & (q \vee p) \vee (s \vee r) \vee (\neg p \wedge \neg r) & 
+    &\text{[Identity law]} \\
+    &\equiv & q \vee s \vee r \vee (p \vee (\neg p \wedge \neg r)) & 
+    &\text{[Commutative law]} \\
+    &\equiv & q \vee s \vee r \vee ((p \vee \neg p) \wedge (p \vee \neg r)) & 
+    &\text{[Distributive law]} \\
+    &\equiv & q \vee s \vee r \vee (T \wedge (p \vee \neg r)) & 
+    &\text{[Negation law]} \\
+    &\equiv & q \vee s \vee r \vee p \vee \neg r & 
+    &\text{[Identity law]} \\
+    &\equiv & q \vee s \vee p \vee (r \vee \neg r) & 
+    &\text{[Commutative law]} \\
+    &\equiv & q \vee s \vee p \vee T & 
+    &\text{[Negation law]} \\
+    &\equiv & T & 
+    &\text{[Domination law]}
+\end{align*}
+\begin{flushleft}
+    This is a \textbf{valid} argument because the premises and conclusion can be strung together 
+    to form a conditional statement which can be simplified to a tautology. \\
+    Intuitively, it is suggesting that two conditional statements are true and one of the 
+    hypotheses are true, so it is logical that one of the conclusions is true, i.e. the one 
+    corresponding with the hypothesis that fulfills the disjunction.
+\end{flushleft}
+\end{enumerate}
+\pagebreak
+\item Determine whether each of the following propositions is true or false, with explanation.
+\begin{enumerate}
+\item $\forall x P(x) \then \exists x P(x)$, where $P(x)$ is an arbitrary predicate function.
+\begin{flushleft}
+    This is necessarily \textbf{true} because if $P(x)$ holds for every $x$ in the domain, then 
+    there certainly exists an $x$ for which $P(x)$ holds. Only a single solution satisfies the
+    conclusion, and the hypothesis states that every single input satisfies the conclusion.
+\end{flushleft}
+\item $\exists x P(x) \then \forall x P(x)$, where $P(x)$ is an arbitrary predicate function.
+\begin{flushleft}
+    This is not necessarily true and therefore \textbf{false} in the general case because the 
+    hypothesis only supposes that at least one input exists such that $P(x)$ holds, so it is 
+    not certain that every element satisfies the conclusion. While it is true that it is 
+    \textit{possible} that every input satisfies the conclusion, the hypothesis only gurantees 
+    one, and therefore the conclusion cannot be proved from the hypothesis alone.
+\end{flushleft}
+\item $\forall x(2x \ge x)$, where the domain consists of all real numbers.
+\[2x \ge x \implies
+\begin{cases}
+    2 \ge 1 & x > 0 \\
+    2(0) \ge 0 & x = 0 \\
+    2 \le 1 & x < 0
+\end{cases}\]
+\begin{flushleft}
+    The predicate $2x \ge x$ is equivalent to $2 \ge 1$ (which is obviously true) by the division
+    property of equality for $x \in \mathbb{R}, \; x > 0$. For the case that $x = 0$,
+    $2(0) \ge 0 \implies 0 \ge 0$, which is obviously true. For the case that $x < 0$, the 
+    predicate is equivalent to the statement $2 \le 1$ (since the inequality must flip under 
+    division by a negative number). This is obviously false. Therefore, the universal quanitfier 
+    is \textbf{false} since not every case for $x$ makes the predicate hold.
+\end{flushleft}
+\pagebreak
+\item $\exists x(e^x = x^2)$, where the domain consists of all real numbers.
+\begin{align*}
+    e^x &= x^2 \\
+    \ln(e^x) &= \ln(x^2) \\
+    x &= 2\ln(x)
+\end{align*}
+\begin{align*}
+    f(x) &= x & \frac{df}{dx} &= 1 & \frac{d^2f}{dx^2} &= 0 \\
+    g(x) &= 2\ln(x) & \frac{dg}{dx} &= \frac{2}{x} & \frac{d^2g}{dx^2} &= \frac{-2}{x^2}
+\end{align*}
+\begin{align*}
+    f(x) &> 0 &\quad g(x) &< 0 &\quad g(x) &< f(x) &\quad 0 < &x < 1 \\
+    f(x) &= 1 &\quad g(x) &= 0 &\quad g(x) &< f(x) &\quad x &= 1 \\
+    f(x) &= e^{\frac{1}{2}} &\quad g(x) &= 1 & g(x) &< f(x) &\quad x &= e^{\frac{1}{2}} \\
+    f(x) &= 2 &\quad g(x) &= \ln(4) &\quad g(x) &< f(x) &\quad x &= 2 \\
+    \dfrac{df}{dx} &= 1 &\quad \dfrac{dg}{dx} &< 1 
+    &\quad \dfrac{dg}{dx} &< \dfrac{df}{dx} 
+    &\quad x &> 2 \\
+    \dfrac{d^2f}{dx^2} &= 0 &\quad \dfrac{d^2g}{dg^2} &< 0 
+    &\quad \dfrac{d^2g}{dg^2} &< \dfrac{d^2f}{dx^2} 
+    &\quad x &\in \mathbb{R} \setminus \{0\}
+\end{align*}
+\begin{flushleft}
+    The predicate produces the equivalent equation $x = 2\ln(x)$ when taking the natural 
+    logarithm of both sides. If we declare two functions $f$ and $g$ to represent each side 
+    of the equation, we can analyze them directly. Since $f$ and $g$ are both continuous, 
+    monotonic functions, we can compare their values and derivatives at certain intervals to 
+    see if there is a possible solution to $f(x) = g(x)$. For $x \in (0, 2]$, $g(x) < f(x)$, 
+    so there are no solutions where $x \le 2$ (and we've ruled out $x \le 0$ because $\ln(x)$ 
+    is only defined for $x \in \mathbb{R}_+$). For $x > 2$, there could be a possible solution 
+    if the graphs of $f$ and $g$ intersect. However, the slope of $g$ is less steep than that 
+    of $f$ for $x > 2$. Furthermore, the slope of $g$ only decreases as $x$ increases, whereas 
+    the slope of $f$ remains the same for all $x$. Consequently, the graph of $f$ has a headstart 
+    over that of $g$ at $x = 2$, and the graph of $g$ cannot ``catch up'' to the graph of $f$. 
+    Therefore, the existential quanitfier is \textbf{false}, as there is no $x \in \mathbb{R}$ 
+    for which the predicate holds.
+\end{flushleft}
+\end{enumerate}
+\end{enumerate}
+\end{document}

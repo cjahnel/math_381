@@ -1,0 +1,115 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+    \ifdim\lastskip<1.5em \hskip-\lastskip
+    \hskip1.5em plus0em minus0.5em \fi \nobreak
+    \vrule height0.75em width0.5em depth0.25em\fi}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\then}{\rightarrow}
+\newcommand{\bithen}{\leftrightarrow}
+
+\title{MATH 381 Section 2.1}
+\author{Olivia Dumitrescu}
+\date{7 February 2024}
+
+\begin{document}
+    \maketitle
+    \section*{Sets}
+    \begin{definition}
+        A set is an unordered collection of disjoint objects called elements or members.
+        A set is said to contain its elements. \\
+        We write $a \in A$ to denote that $a$ is an element of the set $A$. \\
+        We write $a \notin A$ to denote that $a$ is not an element of the set $A$.
+    \end{definition}
+    \begin{example}
+        \hfil
+        \begin{enumerate}
+            \item Set of vowels
+            \[V = \{a, e, i, o, u\}\]
+            \item odd positive integers less than 10
+            \[\{1, 3, 5, 7, 9\}\]
+        \end{enumerate}
+    \end{example}
+    \begin{definition}
+        \hfill
+        \begin{enumerate}
+            \item Two sets are equal if and only if they have the same elements.
+            \item A set $A$ is a subset of a set $B$
+            \[A \subseteq B (\forall x \in A \then x \in B)\]
+        \end{enumerate}
+    \end{definition}
+    \begin{remark}
+        To prove $A = B$ is to prove that $A \subseteq B$ and $B \subseteq A$.
+    \end{remark}
+    \begin{theorem}
+        For any set $S$
+        \begin{enumerate}
+            \item $\emptyset \subset S$
+            \item $S \subseteq S$
+        \end{enumerate}
+    \end{theorem}
+    \begin{definition}
+        If there are exactly $n$ distinct elements in set $S$ we call $n$ to be cardinality of $S$
+        \[|S| = n\]
+        E.g. $|\emptyset| = 0$ \\
+        A set is infinite if it has no finite cardinality.
+    \end{definition}
+    \begin{definition}
+        Given a set $S$ the power of $S$ is the set of all subsets of $S$
+        \[\mathcal{P}(S) = \{A | A \subseteq S\}\]
+    \end{definition}
+    \begin{theorem}
+        If $S$ is a finite set
+        \[|\mathcal{P}(S)| = 2^{|S|}\]
+    \end{theorem}
+    $\binom{n}{i}$: number of distinct subsets of cardinality $i$ of $S$ (with cardinality $n$)
+    \begin{theorem}
+        \[\binom{n}{k} = \binom{n}{n - k}\]
+        \[n \in \mathbb{N} \text{ and } 0 \le k \le n\]
+    \end{theorem}
+    \begin{theorem}
+        Binomial Theorem
+        \[(x + y)^n = \sum_{k = 0}^{n} \binom{n}{k} x^k y^{n - k}\]
+    \end{theorem}
+    \begin{theorem}
+        If $S$ is finite, then $|\mathcal{P}(S)| = 2^{|S|} = 2^n$
+    \end{theorem}
+    \begin{proof}
+        Plug in $x = y = 1$ into the binomial theorem.
+        \[2^n = \binom{n}{0} + \binom{n}{1} + \binom{n}{2} + \dots + \binom{n}{n-1} + \binom{n}{n}\]
+    \end{proof}
+    \subsection*{Cartesian Products of Sets}
+    \begin{definition}
+        $A, B$ are sets.
+        \begin{enumerate}
+            \item $A \times B = \{(a, b) \: | \: a \in A, b \in B\}$
+            \item consider $A_1, A_2, \dots, A_n$
+            \[A_1 \times A_2 \times \dots \times A_n = \{(a_1, a_2, \dots, a_n) \: | \: a_i \in A_i\}\]
+        \end{enumerate}
+    \end{definition}
+    \begin{remark}
+        If $A$ and $B$ are finite sets,
+        \begin{enumerate}
+            \item $|A \times B| = |A| \cdot |B|$
+            \[|A_1 \times A_2 \times \dots \times A_n| = |A_1| \cdot |A_2| \cdot \dots \cdot |A_n|\]
+            $A_i$ is a finite set
+            \item $|P(A_1 \times \dots \times A_n)| = 2^{|A_1 \times \dots \times A_n|}
+            = 2^{|A_1| \cdot |A_2| \cdot \dots \cdot |A_n|}$
+        \end{enumerate}
+    \end{remark}
+\end{document}

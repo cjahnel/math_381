@@ -1,0 +1,176 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+    \ifdim\lastskip<1.5em \hskip-\lastskip
+    \hskip1.5em plus0em minus0.5em \fi \nobreak
+    \vrule height0.75em width0.5em depth0.25em\fi}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\then}{\rightarrow}
+\newcommand{\bithen}{\leftrightarrow}
+
+\title{MATH 381 HW 4}
+\author{Christian Jahnel}
+\date{7 February 2024}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item Let the universe for $x$ be students and let the universe for $y$ be courses. Translate 
+the following English statements to logical expressions, using the following notation for 
+predicates:
+\begin{itemize}
+    \item $T(x, y)$: $x$ is taking $y$
+    \item $M(y)$: $y$ is a math course
+    \item $P(x)$: $x$ is a part-time student
+\end{itemize}
+Then, give a negation of your logical expression, simplifying as much as possible.
+\begin{enumerate}
+\item Every student is taking at least one course.
+\begin{align*}
+    p: \quad &\forall x \exists y T(x, y) \\
+    \neg p: \quad &\neg (\forall x \exists y T(x, y)) \equiv \exists x \forall y (\neg T(x, y))
+\end{align*}
+\item Some part-time student is not taking any math courses.
+\begin{align*}
+    q: \quad &\exists x \forall y((P(x) \wedge M(y)) \then \neg T(x, y)) \\
+    \neg q: \quad &\neg(\exists x \forall y((P(x) \wedge M(y)) \then \neg T(x, y))) \\
+    &\equiv \forall x \exists y \neg ((P(x) \wedge M(y)) \then \neg T(x, y)) \\
+    &\equiv \forall x \exists y \neg (\neg (P(x) \wedge M(y)) \vee \neg T(x, y)) \\
+    &\equiv \forall x \exists y (P(x) \wedge M(y) \wedge T(x, y)) \\
+    &\equiv \forall x \exists y ((P(x) \wedge M(y)) \then T(x, y))
+\end{align*}
+\end{enumerate}
+\item Let the universe for $x$ be people and let the universe for $y$ be movies. Translate the 
+following statements to English without using any variables, given the following notation for 
+predicates:
+\begin{itemize}
+\item $S(x, y)$: $x$ saw $y$
+\item $L(x, y)$: $x$ liked $y$
+\item $A(y)$: $y$ won an award
+\item $C(y)$: $y$ is a comedy
+\end{itemize}
+\begin{enumerate}
+\item $\forall y (C(y) \then L(Max, y))$
+\begin{flushleft}
+    Max likes all comedy movies.
+\end{flushleft}
+\item $\forall y \exists x (S(x, y) \wedge A(y))$
+\begin{flushleft}
+    Every movie has been seen by someone and won an award.
+\end{flushleft}
+\end{enumerate}
+\item Let $P(x, y)$ be the statement $x + 2y = xy$, where $x$ is an integer and $y$ is a real 
+number. Determine the truth value of each statement, with explanation.
+\begin{enumerate}
+\item $\exists y P(4, y)$
+\begin{align*}
+    P(4, y) \equiv 4 + 2y &= 4y \\
+    4 &= 2y \\
+    2 &= y
+\end{align*}
+\begin{flushleft}
+    This statement is \keyword{true} because the statement which the predicate forms can be 
+    solved algebraically to find that $y = 2$ is a solution to the predicate. Therefore, there 
+    does exist a real number such that $P$ holds, fulfilling the quantified predicate.
+\end{flushleft}
+\item $\forall x \exists y P(x, y)$
+\begin{align*}
+    x + 2y &= xy \\
+    2y - xy &= -x \\
+    y(2 - x) &= -x \\
+    &\implies \begin{cases}
+        y = \dfrac{-x}{2 - x} = \dfrac{x}{x - 2} &\qquad \text{ for } x \ne 2 \\
+        y(2 - 2) = -2 \implies 0 = 2 &\qquad \text{ for } x = 2
+    \end{cases}
+\end{align*}
+\begin{flushleft}
+    The statement which the predicate forms can be rearranged algebraically to find that $y$ is
+    a function with a domain of $\{x \: | \: x \ne 0, x \in \mathbb{Z}\}$ and a range of
+    $\{y \: | \: y \in \mathbb{R}\}$. Since $x = 0$ is not in the domain, not every $x$ is a 
+    solution to the predicate and therefore the statement is \keyword{false}.
+\end{flushleft}
+\item $\exists x \forall y P(x, y)$
+\begin{align*}
+    x + 2y &= xy \\
+    2y &= xy - x \\
+    2y &= x(y - 1) \\
+    &\implies \begin{cases}
+        x = \dfrac{2y}{y - 1} &\qquad \text{ for } y \ne 1 \\
+        2(1) = x(1 - 1) \implies 2 = 0 &\qquad \text{ for } y = 1
+    \end{cases}
+\end{align*}
+\begin{flushleft}
+    The statement which the predicate forms can be rearranged algebraically to find that $x$ is
+    a function of $y$. Since $y = 1$ produces a statement that implies $2 = 0$ which is obviously 
+    false, there is no integer value for $x$ in which $P(x, 1)$ holds. Therefore, the quantified 
+    predicate is \keyword{false}. Additionally, for certain values of $y$, $x$ will be a non-integer 
+    values (e.g. $y = 4 \implies x = \frac{8}{3} \notin \mathbb{Z}$).
+\end{flushleft}
+\end{enumerate}
+\item Let $a$ and $b$ be real numers with $a < b$, and let the universe for $x$ be $\mathbb{R}$. 
+Write the negation of the following statement without the symbol ``$\neg$'' and determine, with 
+explanation, whether the original statement or its negation is true.
+\[\exists x (a < x < b)\]
+\[\neg(\exists x (a < x < b)) \equiv \forall x \neg(a < x \wedge x < b) \equiv
+\forall x (a \ge x \vee x \ge b)\]
+\begin{flushleft}
+    The original statement is true for $a, b, x \in \mathbb{R}; a < b$ if we declare $x$ 
+    to be the arithmetic mean of $a$ and $b$ i.e. $x = \frac{a + b}{2}$.
+\begin{gather*}
+    x = \frac{a + b}{2} \\
+    a < b \implies a + a < a + b \implies 2a < a + b \\
+    a < b \implies a + b < b + b \implies a + b < 2b \\
+    2a < a + b < 2b \\
+    \dfrac{2a}{2} < \dfrac{a + b}{2} < \dfrac{2b}{2} \\
+    a < \dfrac{a + b}{2} < b
+\end{gather*}
+    Since it is demonstrated that the arithmetic mean is a solution to the statement, and 
+    additionally that $\frac{a + b}{2} \in \mathbb{R}$ because the real numbers is closed under 
+    addition and division (where the denominator is not zero, but it is two), the 
+    \keyword{original statement is true}.
+\end{flushleft}
+\item Let the universe for $m$ and $n$ be the set of positive integers and let the universe for 
+$z$ be the set of all integers. Write the negation of the following statement without the symbol 
+``$\neg$'' and determine, with explanation, whether the original statement or its negation is true.
+\[\forall z \exists n \forall m (n \le z^2 \vee z < n + m)\]
+\[\begin{cases}
+    n \le z^2 \\
+    \quad \text{OR} \\
+    z < n + m
+\end{cases}\]
+\begin{align*}
+    z^2 \ge 0 &\qquad \{z \: | \: z \in \mathbb{Z}\} \\
+    z^2 = 0 &\implies z = 0 \\
+    z^2 \ge 1 &\qquad \{z \: | \: z \ne 0, z \in \mathbb{Z}\}
+\end{align*}
+\begin{gather*}
+    z = 0 \\
+    z < n + m \\
+    \implies 0 < n + m \\
+    \implies n > -m
+\end{gather*}
+\begin{gather*}
+    m > 0 \\
+    \implies -m < 0
+\end{gather*}
+\begin{gather*}
+    n > 0 \\
+    \implies n > 0 > -m \\
+    \implies n > -m
+\end{gather*}
+\begin{flushleft}
+    To fulfill the disjunction in the predicate, one of two conditions has to be true. The first 
+    condition offers many solutions. For all $z$, $z^2 \ge 0$ because no real number (and therefore) 
+    integer squared is negative (as evidenced by the parabola it makes when graphed, which doesn't dip 
+    below the $x$-axis). Since the only value for which $z^2 = 0$ is $z = 0$, we can conclude that for 
+    any integer $z$, $z^2 \ge 1$, as -1 and/or 1 is the next integer which increases to only 1 for $z^2$.
+    So far, for all $z \in \mathbb{Z}, z \ne 1$, there exists an $n \in \mathbb{Z}_+$ such that the first
+    condition in the disjunction holds. For the condition where $z = 0$, the second condition holds when 
+    $z < n + m$. This can be algebraically rearranged to get $n > -m$. Since $m$ must be a positive integer, 
+    its additive inverse must be negative (less than zero) and since $n$ must be greater than zero as a positive
+    integer, we can choose an $n$ which is always greater than any $-m$. So, the second condition in the
+    disjunction holds for the only case in which the first does not. Therefore, the statement is \keyword{true}.
+\end{flushleft}
+\end{enumerate}
+\end{document}

@@ -1,0 +1,142 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\keyword}[1]{\textbf{#1}}
+
+\title{MATH 381 Section 1.4}
+\author{Olivia Dumitrescu}
+\date{22 January 2024}
+
+\begin{document}
+    \maketitle
+    \section*{Predicates and Quantifiers}
+    \begin{definition}
+        \keyword{Predicates} are statements involving equations and inequalities.
+        \[x > 3 \quad x = y + 3 \quad x + y = z\]
+    \end{definition}
+    \begin{example}
+        $P(x)$: the statement "x > 3"
+        $P(4)$: "4 > 3" -> true
+        $P(2)$: 2 > 3 -> false
+    \end{example}
+    \begin{example}
+        $R(x, y, z)$: "x + y = z"
+        $R(1, 2, 3)$: "1 + 2 = 3" -> true
+        $R(0, 0, 1)$: 0 + 0 = 1 -> false
+    \end{example}
+    \begin{definition}
+        \hfill
+        \begin{enumerate}
+            \item The notation $\forall x P(x)$ denotes the \keyword{universal quantifier}
+            of P(x) i.e. ``$P(x)$ holds for all $x$ in the domain.''
+            \item The notation $\exists x P(x)$ is the \keyword{existential quantifier}
+            of P(x) i.e. ``there exists an element $x$ in the domain so that P(x) holds.''
+        \end{enumerate}
+    \end{definition}
+    \begin{remark}
+        The domain must always be specified.
+        \begin{itemize}
+            \item there is $x$ so that $P(x)$
+            \item there is at least one $x$ so that $P(x)$
+            \item for some $x$ $P(x)$
+        \end{itemize}
+        $\exists!$ means ``there exists a unique element.''
+    \end{remark}
+    \begin{example}
+        $P(x)$: statement $x + 1 > x$\\
+        What are the truth values for the quantifications? [domain = $\mathbb{R}$]
+        \begin{itemize}
+            \item $\forall x P(x)$ is true.
+            \item $\exists x P(x)$ is true.
+        \end{itemize}
+        When are the universal and existential quantifiers false?
+        \begin{itemize}
+            \item $\forall x P(x)$ is false when not every $x$ makes $P(x)$ hold.
+            \item $\exists x P(x)$ is true when every $x$ does not make $P(x)$ hold.
+        \end{itemize}
+    \end{example}
+    \begin{example}
+        $Q(x)$: $x < 2$\\
+        What is the truth value for $\forall x Q(x)$ where $x \in \mathbb{R}$?\\
+        False for e.g. $x = 3, x = 4, x = 5$
+    \end{example}
+    \begin{example}
+        $P(x)$ is $x^2 > x$. [$x \in \mathbb{R}$]
+        \begin{itemize}
+            \item $\forall x P(x)$ is false e.g. $x = 1$.
+            \item $\exists x P(x)$ is true.
+        \end{itemize}
+    \end{example}
+    \begin{example}
+        What are the truth values for $p: \space \forall x (x^2 \ge x)$?
+        \begin{enumerate}
+            \item $x \in \mathbb{Z} \implies p \equiv T$
+            \item $x \in \mathbb{N} \implies p \equiv T$
+            \item $x \in \mathbb{Q} \implies p \equiv T$
+        \end{enumerate}
+    \end{example}
+    \begin{example}
+        $Q(x)$: $x = x + 1$
+    \end{example}
+    Quantifiers over finite domains
+    \[x \in \{x_1, x_2, \dots, x_n\}\]
+    \[\forall x P(x) = P(x_1) \wedge P(x_2) \wedge \dots \wedge P(x_n)\]
+    \[= \bigwedge{i = 1}{n} P(x_i)\]
+    \[\exists x P(x) = P(x_1) \vee P(x_2) \vee \dots \vee P(x_n)\]
+    \[= \bigvee{i = 1}{n} P(x_i)\]
+    \begin{example}
+        $P(x)$: $x^2 < 10 \quad x \in \{1, 2, 3, 4\}$
+        \begin{itemize}
+            \item $\forall x P(x)$ is false e.g. $x = 4$.
+            \item $\exists x P(x)$ is true e.g. $x = 1$.
+        \end{itemize}
+    \end{example}
+    \subsection*{Negation of quantifiers in finite domains}
+    \begin{enumerate}
+        \item Negation of universal quantifier
+        \begin{align*}
+            \forall x P(x) &= \bigwedge_{i = 1}^{n} P(x_i)\\
+            \neg(\forall x P(x)) &= \neg(\bigwedge_{i = 1}^{n} P(x_i))\\
+            &= \bigvee_{i = 1}^{n} \neg P(x_i)\\
+            &= \neg P(x_1) \vee \neg P(x_2) \vee \dots \vee \neg P(x_n)\\
+        \end{align*}
+        \item Negation of existential quantifier
+        \begin{align*}
+            \exists x P(x) &= \bigvee_{i = 1}^{n} P(x_i)\\
+            \neg(\exists x P(x)) &= \neg(\bigvee_{i = 1}^{n} P(x_i))\\
+            &= \bigwedge_{i = 1}^{n} \neg P(x_i)\\
+            &= \neg P(x_1) \wedge \neg P(x_2) \wedge \dots \wedge \neg P(x_n)\\
+        \end{align*}
+    \end{enumerate}
+    \subsection*{Negation of quantifiers in finite and infinite domains}
+    \begin{enumerate}
+        \item Negation of universal quantifier
+        \[\neg(\forall x P(x)) \text{ is true if }
+        \exists x \in \text{Domain} \text{ so that } \neg P(x).\]
+        \item Negation of existential quantifier
+        \[\neg(\exists x P(x)) \text{ is true if }
+        \forall x \in \text{Domain} \text{ so that } \neg P(x).\]
+    \end{enumerate}
+    \begin{example}
+        Show $\exists x (P(x) \wedge \neg Q(X)) \equiv
+        \neg(\forall x P(x) \rightarrow Q(x))$
+    \end{example}
+    \begin{example}
+        \[\neg(\forall x (x^2 > x)) \equiv \exists x (x^2 \le x) = false\]
+        \[\neg(\exists x (x^2 = 2)) \equiv \forall x (x^2 \ne 2) = false\]
+    \end{example}
+\end{document}

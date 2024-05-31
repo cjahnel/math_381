@@ -1,0 +1,201 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\then}{\rightarrow}
+\newcommand{\bithen}{\leftrightarrow}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\rationals}{\mathbb{Q}}
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\complex}{\mathbb{C}}
+
+\title{MATH 381 Homework 5 part 2}
+\author{Christian Jahnel}
+\date{21 February 2024}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item Show that an integer is divisible by 4 if and only if it can be written as the sum of 
+two consecutive odd numbers.
+\[\forall n \in \integers ((4 \mid n) \leftrightarrow 
+(\exists k \in \integers (n = (2k + 1) + (2(k + 1) + 1))))\]
+Suppose an integer can be written as the sum of two consecutive odd numbers.
+\begin{align*}
+    \exists k \in \integers (n &= (2k + 1) + (2(k + 1) + 1)) \\
+    \implies n &= (2k + 1) + 2(k + 1) + 1 \\
+    \implies n &= 2k + 1 + 2k + 2 + 1 \\
+    \implies n &= (2k + 2k) + (1 + 2 + 1) \\
+    \implies n &= 4k + 4 \\
+    \implies n &= 4(k + 1) \\
+    \implies \frac{n}{4} &= k + 1 \in \integers \\
+    \implies 4 &\mid n
+\end{align*}
+\begin{flushleft}
+    Therefore, the integer is divisible by 4.
+\end{flushleft}
+\pagebreak
+\begin{flushleft}
+    Suppose an integer is dibisible by 4.
+\end{flushleft}
+\begin{gather*}
+    4 \mid n \iff \frac{n}{4} \in \integers \\
+    \implies \left(\frac{n}{2}\right) / 2 \in \integers 
+    \iff 2 \mid \left(\frac{n}{2}\right) 
+    \iff \frac{n}{2} \text{ is even} \\
+    \implies 2\left(\frac{n}{4}\right) \in \integers 
+    \implies \frac{n}{2} \in \integers 
+    \iff 2 \mid n 
+    \iff n \text{ is even} \\
+    \frac{n}{2} \text{ is even} \implies \frac{n}{2} \pm 1 \text{ is odd}
+\end{gather*}
+\begin{align*}
+    n &= \left(\frac{n}{2}\right) + \left(\frac{n}{2}\right) \\
+    n &= \left(\frac{n}{2} - 1\right) + \left(\frac{n}{2} + 1\right) \\
+    \exists k, m \in \integers (n &= (2k + 1) + (2m + 1))
+\end{align*}
+\begin{align*}
+    \frac{n}{2} - 1 &= 2k + 1 &\implies \frac{n}{2} &= 2k + 2 &\implies n &= 4k + 4 \\
+    \frac{n}{2} + 1 &= 2m + 1 &\implies \frac{n}{2} &= 2m &\implies n &= 4m
+\end{align*}
+\[4k + 4 = n = 4m \implies 4k + 4 = 4m \implies 4(k + 1) = 4m \implies k + 1 = m\]
+\begin{align*}
+    \frac{n}{2} - 1 &= 2k + 1 \\
+    \frac{n}{2} + 1 &= 2m + 1 = 2(k + 1) + 1
+\end{align*}
+\[\therefore n = (2k + 1) + 2(k + 1) + 1 \qed\]
+Therefore, the integer can be written as the sum of two consecutive odd numbers.
+\pagebreak
+\item Prove that if $a^2 + b^2 = c^2$, then $abc$ is even.
+\begin{flushleft}
+    Suppose $abc$ is not even, meaning $abc$ is odd.
+\end{flushleft}
+\begin{gather*}
+    abc = 2k + 1 \iff ad = 2k + 1 \quad d = bc \\
+    \implies \begin{cases}
+        & \text{$a$ is odd and $d$ is even} \implies \begin{cases}
+            & \text{$b$ is odd and $c$ is odd} \\
+            \text{OR} & \text{$b$ is even and $c$ is even}
+        \end{cases} \\
+        \text{OR} & \text{$a$ is even and $d$ is odd} \implies \begin{cases}
+            & \text{$b$ is odd and $c$ is even} \\
+            \text{OR} & \text{$b$ is even and $c$ is odd}
+        \end{cases}
+    \end{cases}
+\end{gather*}
+\begin{enumerate}
+    \item $a$ is odd, $b$ is odd and $c$ is odd
+    \begin{align*}
+        a^2 \text{ is odd} \wedge b^2 \text{ is odd} &\implies a^2 + b^2 \text{ is even} \\
+        a^2 + b^2 \text{ is even} \wedge c^2 \text{ is odd} &\implies a^2 + b^2 \ne c^2
+    \end{align*}
+    \item $a$ is odd, $b$ is even and $c$ is even
+    \begin{align*}
+        a^2 \text{ is odd} \wedge b^2 \text{ is even} &\implies a^2 + b^2 \text{ is odd} \\
+        a^2 + b^2 \text{ is odd} \wedge c^2 \text{ is even} &\implies a^2 + b^2 \ne c^2
+    \end{align*}
+    \item $a$ is even, $b$ is odd and $c$ is even
+    \begin{align*}
+        a^2 \text{ is even} \wedge b^2 \text{ is odd} &\implies a^2 + b^2 \text{ is odd} \\
+        a^2 + b^2 \text{ is odd} \wedge c^2 \text{ is even} &\implies a^2 + b^2 \ne c^2
+    \end{align*}
+    \item $a$ is even, $b$ is even and $c$ is odd
+    \begin{align*}
+        a^2 \text{ is even} \wedge b^2 \text{ is even} &\implies a^2 + b^2 \text{ is even} \\
+        a^2 + b^2 \text{ is even} \wedge c^2 \text{ is odd} &\implies a^2 + b^2 \ne c^2
+    \end{align*}
+\end{enumerate}
+$\therefore (\text{$abc$ is odd}) \then (a^2 + b^2 \ne c^2) 
+\equiv (a^2 + b^2 = c^2) \then (\text{$abc$ is even}) \qed$
+\pagebreak
+\item Suppose that $x$ and $y$ are real numbers. Prove that if $x + y$ is irrational then $x$ 
+is irrational or $y$ is irrational.
+\begin{align*}
+    \forall x, y \in \reals (P(x, y) &\then Q(x, y)) \\
+    \forall x, y \in \reals ((x + y \notin \rationals) &\then (x \notin \rationals \vee y \notin 
+    \rationals))
+\end{align*}
+Suppose $\neg Q(x, y) \equiv (x \in \rationals \wedge y \in \rationals)$. \\
+\begin{align*}
+    x = \frac{a}{b} & \quad y = \frac{c}{d} &\quad a, b, c, d \in \mathbb{Z} &\quad b, d \ne 0 \\
+    x + y = \frac{a}{b} + \frac{c}{d} &= \frac{ad}{bd} + \frac{bc}{bd} = \frac{ad + bc}{bd}
+    = \frac{e}{f} &\quad e, f \in \mathbb{Z} &\quad f \ne 0 \\
+    & & \therefore \frac{e}{f} = x + y \in \mathbb{Q} \qed
+\end{align*}
+\begin{flushleft}
+    Therefore, $\neg Q \then \neg P \equiv P \then Q$.
+\end{flushleft}
+\item Prove that there are no positive integer solutions to $x^2 + x + 1 = y^2$.
+\begin{gather*}
+    \neg(\exists x \in \mathbb{Z}_+ \exists y \in \mathbb{Z}_+(x^2 + x + 1 = y^2)) \\
+    \equiv \forall x \in \mathbb{Z}_+ \forall y \in \mathbb{Z}_+(x^2 + x + 1 \ne y^2)
+\end{gather*}
+Assume $x, y \in \mathbb{Z}_+$.
+\begin{align*}
+    y^2 &= x^2 + x + 1 \\
+    y^2 - x^2 &= x + 1 \\
+    \implies (y + x)(y - x) &= x + 1
+\end{align*}
+There are three possible cases for $x$ and $y$.
+\begin{enumerate}
+    \item $y = x$
+    \begin{align*}
+        (y + x)(y - x) &= x + 1 \\
+        \implies 2y(0) &= y + 1 \\
+        0 &= y + 1 \equiv F \because y > 0 \\
+        \therefore (y + x)(y - x) = x + 1 \equiv F
+    \end{align*}
+    \item $y < x$
+    \begin{align*}
+        (y + x)(y - x) &= x + 1 \\
+        (y + x)(y - x) &< 0 \because (y + x) > 0 \wedge (y - x < 0 \iff y < x) \\
+        x + 1 &> 0 \because x > 0 \\
+        \therefore (y + x)(y - x) = x + 1 \equiv F
+    \end{align*}
+    \item $y > x$
+    \begin{align*}
+        (x + y) &\ge (x + 1) \because y \ge 1 \\
+        \implies (y - x)(x + y) &\ge x + 1 \because y - x > 0 \iff y > x \\
+        y - x = 1 \implies (x + y) &\ge (x + 1) \\
+        (x + y) = (x + 1) &\implies y = 1 \\
+        (y - x = 1) \wedge (y = 1) &\equiv (1 - x = 1 \iff - x = 0 \iff x = 0) \\
+        x = 0 \equiv F \because x \in \integers_+ \\
+        \therefore (y + x)(y - x) = x + 1 \equiv F \qed
+    \end{align*}
+\begin{flushleft}
+    Since in all three cases for positive integer solutions or $x$ and $y$ the proposition we 
+    are trying to prove implies a contradiction, the assumption that there are positive integer 
+    solutions must be false.
+\end{flushleft}
+\end{enumerate}
+\item Show that if you choose 92 different dates from a calendar, at least 14 of the chosen 
+dates must occur on the same day of the week.
+\begin{flushleft}
+    $r$: ``If you choose 92 different dates from a calendar.'' \\
+    $p$: ``At least 14 of the 92 chosen dates must occur on the same day of the week.'' \\
+    $\neg p$: ``At most 13 of the 92 chosen days fall on the same day of the week.'' \\
+    Suppose $\neg p$. Since there are 7 days in a week, 13 on each day would give us 91 total 
+    chosen days. Any more days chosen necessarily means that there would be a fourteenth date 
+    on a given day of the week. But we have to choose 92 dates. This suggests 
+    $\neg p \then (r \wedge \neg r)$. In other words, if $p$ was false, it would imply 
+    a contradiction. Therefore, $p$ must be true, and $p$ is dependent on $r$ for the number of 
+    chosen dates that was agreed upon (92). So, $r \then p$ is true. $\qed$
+\end{flushleft}
+\end{enumerate}
+\end{document}

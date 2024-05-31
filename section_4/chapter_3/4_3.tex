@@ -1,0 +1,312 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{mathtools}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\then}{\rightarrow}
+\newcommand{\bithen}{\leftrightarrow}
+\DeclareMathOperator{\lcm}{lcm}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\0}{\emptyset}
+\newcommand{\power}{\mathcal{P}}
+
+\newcommand{\divby}{\; \vdots \;}
+
+\title{MATH 381 Section 4.3}
+\author{Prof. Olivia Dumitrescu}
+\date{22 March 2024}
+
+\begin{document}
+    \maketitle
+    \section*{Section 4.3 Primes and GCDs}
+    Recall for any $n \in \N$, $1 \mid n$, $n \mid n$.
+    \begin{definition}
+        Let $p$ be an integer where $p \ge 2$. \\
+        $p$ is prime if its only positive factors are 1 and $p$. \\
+        An integer greater than 1 is called composite if it's not prime. \\
+        Note: 1 is neither prime nor composite.
+    \end{definition}
+    \begin{theorem}
+        Fundamental Theorem of Arithmetic \\
+        Every integer greater than 1 is either prime or uniquely a product of primes.
+    \end{theorem}
+    \begin{theorem}
+        If $n$ is a composite integer, then it has a prime factor less than or equal to $\sqrt{n}$.
+    \end{theorem}
+    \begin{proof}
+        $n$ is composite
+        \[
+            \begin{aligned}
+                1 < a < n \\
+                n = a \cdot b
+            \end{aligned}
+            \implies 1 < b < n
+        \]
+        Claim is false if $a > \sqrt{n} \wedge b > \sqrt{n}$.
+        \[a \cdot b > \sqrt{n} \cdot \sqrt{n} = n \implies n > n\]
+        Therefore, claim is true by contradiction.
+    \end{proof}
+    \begin{example}
+        Find prime factorization of 7007.
+    \end{example}
+    \begin{theorem}
+        There are infiinitely many primes.
+    \end{theorem}
+    \begin{proof}
+        Assume by contradiction this is not the case and we have finitely many primes.
+        \[\{p_1, \dots, p_n\}\]
+        \[q := p_1 \cdot p_2 \cdot p_3 \cdot \dots \cdot p_n + 1\]
+        \begin{enumerate}
+            \item has a unique prime factorization
+            \item or is a prime number
+        \end{enumerate}
+        \begin{gather*}
+            \exists 1 \le j \le n (p_j \mid q) \\
+            p_j \mid p_1 \cdot p_2 \cdot \dots \cdot p_n + 1 \implies p_j \mid 1
+        \end{gather*}
+        i.e. there is no prime number dividing $q$. Therefore $q$ has to be prime $q > p_n$ 
+        so it is not on the list. Therefore, there are infinitely many primes by contradiction.
+    \end{proof}
+    \begin{theorem}
+        The ratio of $\pi(x)$ (the number of primes, not exceeding $x$), and $\dfrac{x}{\ln x}$ 
+        approaches 1 when $x$ gets larger and larger.
+    \end{theorem}
+    \begin{proposition}
+        Goldbach's conjecture \\
+        1742 Goldbach wrote to Euler: Every odd integer is a sum of 3 primes $n > 5$ \\
+        Euler simplified it: Every even integer is a sum of 2 primes. \\
+        \textit{True for all positive numbers up to $4 \cdot 10^{18}$}
+    \end{proposition}
+    \begin{definition}
+        Let $a$ and $b$ be some integers not both zero.
+        \begin{enumerate}
+            \item The largest $d$ so that $d \mid a$ and $d \mid b$. The largest $d$ so that 
+            $d \mid a$ and $d \mid b$ is the greatest common divisor of $a$ and $b$. 
+            (We denote it $\gcd(a, b)$.)
+            \item The least common multiple of positive integers $a$ and b is the smallest 
+            positive integer divisible by both $a$ and $b$ ($\lcm(a, b)$).
+        \end{enumerate}
+        \begin{enumerate}
+            \item \begin{gather*}
+                \gcd(a, b) \mid a \\
+                \gcd(a, b) \mid b \\
+            \end{gather*}
+            Moreover, if $d$ is any other common divisor for $a$ and $b$:
+            \begin{gather*}
+                \begin{aligned}
+                    d \mid a \\
+                    d \mid b
+                \end{aligned}
+                \implies d \mid \gcd(a, b)
+            \end{gather*}
+            \item \begin{gather*}
+                a \mid \lcm(a, b) \\
+                b \mid \gcd(a, b) \\
+            \end{gather*}
+            Moreover, if $k$ is any other common multiple for $a$ and $b$:
+            \begin{gather*}
+                \begin{aligned}
+                    a \mid k \\
+                    b \mid k
+                \end{aligned}
+                \implies \lcm(a, b) \mid k
+            \end{gather*}
+        \end{enumerate}
+    \end{definition}
+    \begin{theorem}
+        $a, b \in \N$
+        \[\lcm(a, b) \cdot \gcd(a, b) = a \cdot b\]
+    \end{theorem}
+    \begin{example}
+        What is the $\gcd(24, 36)$?
+        \begin{align*}
+            \{d \mid d \mid 24\} &= \{1, 2, 3, 4, 6, 8, 12, 24\} \\
+            \{d \mid d \mid 36\} &= \{1, 2, 3, 4, 6, 9, 12, 18, 36\} \\
+            \gcd(24, 36) &= 12
+        \end{align*}
+    \end{example}
+    \begin{definition}
+        \hfill
+        \begin{enumerate}
+            \item We say that $a$ and $b$ are relatively prime (or coprime) if their greatest 
+            common divisor is 1.
+            \item The integers $a_1, \dots, a_n$ are pairwise relatively prime if 
+            $\gcd(a_i, a_j) = 1$ for any $1 \le i \le n$ and $1 \le j \le n$.
+        \end{enumerate}
+    \end{definition}
+    \begin{example}
+        \begin{enumerate}
+            \item 10, 17, and 21 are pairwise relatively prime
+            \item 10, 19, and 24 are not pairwise relatively prime because $\gcd(10, 24) \ne 1$.
+        \end{enumerate}
+    \end{example}
+    \begin{proof}
+        for \textbf{Theorem 0.6} \\
+        Nautral numbers $a$ and $b$ enjoy a unique prime factorization.
+        \begin{gather*}
+            \begin{aligned}
+                a = p_1^{a_1} p_2^{a_2} \dots p_n^{a_n} \\
+                b = p_1^{b_1} p_2^{b_2} \dots p_n^{b_n}
+            \end{aligned} \\
+            p_i \text{ are prime numbers} \\
+            0 \le a_i, b_i \in \N \\
+            \begin{aligned}
+                \gcd(a, b) = p_1^{\min(a_1, b_1)} p_2^{\min(a_2, b_2)} \dots p_n^{\min(a_n, b_n)} \\
+                \lcm(a, b) = p_1^{\max(a_1, b_1)} p_2^{\max(a_2, b_2)} \dots p_n^{\max(a_n, b_n)}
+            \end{aligned}
+        \end{gather*}
+        For any 2 numbers $a, b$
+        \[\min(a, b) + \max(a, b) = a + b\]
+        \begin{gather*}
+            \gcd(a, b) \cdot \lcm(a, b) \\
+            \left(p_1^{\min(a_1, b_1)} p_2^{\min(a_2, b_2)} \dots p_n^{\min(a_n, b_n)}\right)
+            \left(p_1^{\max(a_1, b_1)} p_2^{\max(a_2, b_2)} \dots p_n^{\max(a_n, b_n)}\right) \\
+            p_1^{\min(a_1, b_1) + \max(a_1, b_1)} p_2^{\min(a_2, b_2) + \max(a_2, b_2)} 
+                \dots p_n^{\min(a_n, b_n + \max(a_n, b_n))} \\
+            p_1^{a_1 + b_1} p_2^{a_2 + b_2} \dots p_n^{a_n + b_n} = a \cdot b \qed
+        \end{gather*}
+    \end{proof}
+    \begin{lemma}
+        Let $a = b \cdot q + r \quad a, b \in \Z$.
+        \begin{gather*}
+            q, r \in \Z \qquad 0 \le r < b \\
+            \gcd(a, b) = \gcd(b, r)
+        \end{gather*}
+        \begin{proof}
+            Let $d = \gcd(a, b)$, then $d \mid a$ and $d \mid b$.
+            \begin{enumerate}
+                \item \begin{gather*}
+                    \begin{cases}
+                        a = b \cdot q + r \\
+                        d \mid a \\
+                        d \mid b
+                    \end{cases}
+                    \implies d \mid a - b \cdot q = r \\
+                    \therefore d \mid r \\
+                    \implies \gcd(a, b) \mid b \wedge \gcd(a, b) \mid r \\
+                    \implies \gcd(a, b) \mid \gcd(b, r)
+                \end{gather*}
+                \item Take $k = \gcd(b, r)$ \\
+                \[\begin{cases}
+                    k \mid b \\
+                    k \mid r
+                \end{cases}
+                \implies k \mid b \cdot q + r = a
+                \]
+                but $a = b \cdot q + r \implies k \mid a$. \\
+                Therefore, $k \mid a$ and $k \mid b$ \\
+                so $k \mid \gcd(a, b) \implies \gcd(b, r) \mid \gcd(a, b)$
+            \end{enumerate}
+            \begin{enumerate}
+                \item Part 1 \(\implies \gcd(a, b) \mid \gcd(b, r)\)
+                \item Part 2 \(\implies \gcd(b, r) \mid \gcd(a, b)\)
+            \end{enumerate}
+            \begin{gather*}
+                \begin{rcases*}
+                    x \mid y \\
+                    y \mid x
+                \end{rcases*} \quad x = y \\
+                x, y \in \Z \\
+                x, y \ne 0 \\
+                \begin{aligned}
+                    y &= ax \\
+                    x &= by
+                \end{aligned} \implies a, b \in \{\pm 1\} \\
+                \begin{aligned}
+                    x = abx \\
+                    x(1 - ab) = 0
+                \end{aligned} \implies a \cdot b = 1
+            \end{gather*}
+        \end{proof}
+    \end{lemma}
+    There are three ways to compute $\gcd(a, b)$.
+    \begin{enumerate}
+        \item List factors
+        \item Find prime factorization
+        \item Euclidean Algorithm
+    \end{enumerate}
+    \begin{corollary}
+        Euclidean Algorithm \\
+        Knowing $\gcd(a, b)$, you know $\lcm(a, b)$.
+        Suppose we have $a, b \in \Z$ such that $a \ge b$. 
+        Apply division algorithm $\implies q_i \in \Z$.
+        \begin{align*}
+            r_0 = a &\qquad\qquad r_0 = r_1 \cdot q_2 + r_2 & 0 \le r_2 < r_1 \\
+            r_1 = b &\qquad\qquad r_1 = r_2 \cdot q_2 + r_3 & 0 \le r_3 < r_2 \\
+            &\qquad\qquad \vdots \\
+            &\qquad\qquad r_{n-2} = r_{n-1} \cdot q_{n-1} + r_n \\
+            &\qquad\qquad r_{n-1} = r_n \cdot q_n
+        \end{align*}
+        $a, b \in \N$
+        \[\gcd(a, b) = r_n\]
+    \end{corollary}
+    \begin{proof}
+        Lemma 0.7 + Relations 3
+        \begin{align*}
+            \then \gcd(a, b) &= \gcd(r_0, r_1) \\
+            &= \gcd(r_1, r_2) \\
+            &= \gcd(r_2, r_3) \\
+            &= \gcd(r_n, 0) = r_n
+        \end{align*}
+    \end{proof}
+    \begin{theorem}
+        Bézout theorem \\
+        If $a, b \in \Z_+$, then there exist integers $s$ and $t$ so that 
+        $a \cdot s + b \cdot t = \gcd(a, b)$.
+    \end{theorem}
+    \begin{corollary}
+        If $a, b \in \N$ are coprime, then $\gcd(a, b) = 1$. \\
+        $\implies s$ and $t$ so that $\in \Z$
+        \[a \cdot s + b \cdot t = 1\]
+    \end{corollary}
+    \begin{lemma}
+        If $a, b, c \in \Z_+$ such that 
+        \[\begin{cases}
+            a \mid b \cdot c \\
+            \gcd(a, b) = 1
+        \end{cases}\]
+        Then $a \mid c$.
+    \end{lemma}
+    \begin{proof}
+        By Bézout's theorem, $\gcd(a, b) = 1 \implies \exists m, n \in \Z$ such that 
+        \begin{gather*}
+            \begin{aligned}
+                am + bn &= 1 \\
+                amc + bnc &= c
+            \end{aligned} \\
+            \begin{aligned}
+                a &\mid amc \\
+                a &\mid bc
+            \end{aligned} \quad \implies \quad a \mid amc + bnc = c \qed
+        \end{gather*}
+    \end{proof}
+    \begin{corollary}
+        $p$ is prime and 
+        \[p \mid a_1 a_2 \dots a_n \qquad a_i \in \Z\]
+        Then $\exists i = \overline{1, n}$ so that $p \mid a_i$
+        \[\begin{aligned}
+            p &\mid b \cdot c \\
+            p &\nmid b \iff \gcd(p, b) = 1
+        \end{aligned} \qquad \text{then} \quad p \mid c\]
+    \end{corollary}
+\end{document}

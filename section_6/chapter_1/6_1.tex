@@ -1,0 +1,83 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{mathtools}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\then}{\rightarrow}
+\newcommand{\bithen}{\leftrightarrow}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\Dom}{Dom}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\0}{\emptyset}
+\newcommand{\power}{\mathcal{P}}
+
+\newcommand{\divby}{\; \vdots \;}
+
+\title{MATH 381 Section 6.1}
+\author{Prof. Olivia Dumitrescu}
+\date{15 April 2024}
+
+\begin{document}
+    \maketitle
+    \section*{Section 6.1 The Basics of Counting}
+    \subsection*{Counting Functions}
+    How many functions from a set of $m$ elements to a set of $n$ elements?
+    \[n^m\]
+    \subsection*{One-to-One Functions}
+    How many 1-to-1 functions from a set with $m$ elements to a set with $n$ elements?
+    \[n(n-1)\dots(n-m+1)\]
+    \begin{example}
+        Use the product rule to show that the no. of different subsets of a finite set $S$ is 
+        $2^{|S|}$. $S = \{x_1,\dots,x_n\}$.
+        \begin{flushleft}
+            Let $S$ = finite set. List the elements of $S$ in arbitrary order. Recall that there 
+            is a 1-to-1 correspondence between subsets of $S$ and bitstrings of length $2^{|S|}$.
+            \[\text{e.g. } \{x_2, x_3, x_5\} \to \{0, 1, 1, 0, 1, 0,\dots, 0\}\]
+            By the product rule, there are $2^{|S|}$ bitstrings of length $|S|$, i.e. 
+            $|\power(S)| = 2^{|S|}$
+        \end{flushleft}
+    \end{example}
+    \begin{example}
+        How many bitstrings of length 8 start with a 1 bit or end with the two bits 00?
+        \[|A_1 \cup A_2| = |A_1| + |A_2| - |A_1 \cap A_2| = 2^7 + 2^6 - 2^5 
+        = 2^5 (2^2 + 2 - 1) = 32 \dot 5 = 160\]
+    \end{example}
+    There are $n \mid d$ ways to do a task if it can be done using a procedure that can be carried 
+    out in $n$ ways and for each way $w$, exactly $d$ of the $n$ ways correspond to way $w$.
+    \begin{example}
+        How many ways are there to seat 4 people at a circular table? (2 sittings are the same if 
+        each person has the same left and right neighbors i.e. equal under rotation.)
+        \begin{align*}
+            4! &= 24 \text{ (to order)} \\
+            \frac{4!}{4} &= \frac{24}{4} = 6 \text{ (4 ways to choose a person in seat 1)}
+        \end{align*}
+    \end{example}
+    \begin{example}
+        How many different bitstrings of length 4 do not have consecutive 1s?
+        \begin{align*}
+            2^3 = 8 &= \text{\# of bitstrings that have 2 consecutive 1s} \\
+            2^4 = 16 &= \text{\# of total bitstrings} \\
+            2^4 - 2^3 = 8 &= \text{\# of bitstrings with no consecutive 1s}
+        \end{align*}
+    \end{example}
+\end{document}

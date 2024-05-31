@@ -1,0 +1,176 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+    \ifdim\lastskip<1.5em \hskip-\lastskip
+    \hskip1.5em plus0em minus0.5em \fi \nobreak
+    \vrule height0.75em width0.5em depth0.25em\fi}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\then}{\rightarrow}
+
+\title{MATH 381 HW 2}
+\author{Christian Jahnel}
+\date{31 January 2024}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item Show that $(p \then q) \vee (p \then r)$ is logically equivalent to $p \then (q \vee r)$.
+\begin{align*}
+    &\quad \; (p \then q) \vee (p \then r) \\
+    &\equiv \neg p \vee q \vee \neg p \vee r \qquad
+    &[\text{Conditional-disjunction equivalence}]\\
+    &\equiv \neg p \vee \neg p \vee q \vee r \qquad
+    &[\text{Commutative law}]\\
+    &\equiv \neg p \vee (q \vee r) \qquad
+    &\text{[Idempotent law]} \\
+    &\equiv p \then (q \vee r) \qquad
+    &\text{[Conditional-disjunction equivalence]}
+\end{align*}
+\item Show that $(q \wedge (p \then \neg q)) \then \neg p$ is a tautology using propositional
+equivalence and the laws of logic. Do not use a truth table.
+\begin{align*}
+    &\quad \; (q \wedge (p \then \neg q)) \then \neg p \\
+    &\equiv \neg (q \wedge (p \then \neg q)) \vee \neg p \qquad
+    &\text{[Conditional-disjunction equivalence]} \\
+    &\equiv (\neg q \vee \neg (p \then \neg q)) \vee \neg p \qquad
+    &\text{[De Morgan's law]} \\
+    &\equiv (\neg q \vee \neg (\neg p \vee \neg q)) \vee \neg p \qquad
+    &\text{[Conditional-disjunction equivalence]} \\
+    &\equiv (\neg q \vee (p \wedge q)) \vee \neg p \qquad
+    &\text{[De Morgan's law]} \\
+    &\equiv (\neg p \vee \neg q) \vee (\neg p \vee (p \wedge q)) \qquad
+    &\text{[Distributive law]} \\
+    &\equiv \neg p \vee \neg q \vee ((\neg p \vee p) \wedge (\neg p \vee q)) \qquad
+    &\text{[Distributive law]} \\
+    &\equiv \neg p \vee \neg q \vee (T \wedge (\neg p \vee q)) \qquad
+    &\text{[Negation law]} \\
+    &\equiv \neg p \vee \neg q \vee \neg p \vee q \qquad
+    &\text{[Identity law]} \\
+    &\equiv \neg p \vee \neg p \vee \neg q \vee q \qquad
+    &\text{[Commutative law]} \\
+    &\equiv \neg p \vee (\neg q \vee q) \qquad
+    &\text{[Idempotent law]} \\
+    &\equiv \neg p \vee T \qquad
+    &\text{[Negation law]} \\
+    &\equiv T \qquad
+    &\text{[Domination law]}
+\end{align*}
+\item Create a compound logical expression composed of at least two propositions ($p$, $q$, e.g.)
+that is a contradiction. Show that your expression really is a contradiction.
+\begin{align*}
+    &\quad \; (\neg q \wedge \neg p) \wedge (p \vee q) \\
+    &\equiv (\neg q \wedge (p \vee q)) \wedge (\neg p \wedge (p \vee q)) \qquad
+    &\text{[Distributive law]} \\
+    &\equiv ((\neg q \wedge p) \vee (\neg q \wedge q)) \wedge ((\neg p \wedge p) \vee (\neg p \wedge q)) \qquad
+    &\text{[Distributive law]} \\
+    &\equiv ((\neg q \wedge p) \vee F) \wedge (F \vee (\neg p \wedge q)) \qquad
+    &\text{[Negation law]} \\
+    &\equiv (\neg q \wedge p) \wedge (\neg p \wedge q) \qquad
+    &\text{[Identity law]} \\
+    &\equiv \neg q \wedge (p \wedge \neg p) \wedge q \qquad
+    &\text{[Associative law]} \\
+    &\equiv \neg q \wedge F \wedge q \qquad
+    &\text{[Negation law]} \\
+    &\equiv F \qquad
+    &\text{[Domination law]}
+\end{align*}
+\item Determine whether each of the following propositions is true or false, with explanation.
+\begin{enumerate}
+\item $\forall x P(x) \then \exists x P(x)$, where $P(x)$ is an arbitrary predicate function.
+\begin{flushleft}
+    This is necessarily \textbf{true} because if $P(x)$ holds for every $x$ in the domain, then there 
+    certainly exists an $x$ for which $P(x)$ holds. Only a single solution satisfies the
+    conclusion, and the hypothesis states that every single input satisfies the conclusion.
+\end{flushleft}
+\item $\exists x P(x) \then \forall x P(x)$, where $P(x)$ is an arbitrary predicate function.
+\begin{flushleft}
+    This is not necessarily true and therefore \textbf{false} in the general case because the hypothesis
+    only supposes that at least one input exists such that $P(x)$ holds, so it is not certain
+    that every element satisfies the conclusion. While it is true that it is \textit{possible}
+    that every input satisfies the conclusion, the hypothesis only gurantees one.
+\end{flushleft}
+\item $\forall x (2x \ge x)$, where the domain consists of all real numbers.
+\[2x \ge x \implies
+\begin{cases}
+    2 \ge 1 & x \ne 0 \\
+    2(0) \ge 0 & x = 0
+\end{cases}\]
+\begin{flushleft}
+    The predicate $2x \ge x$ is equivalent to $2 \ge 1$ (which is obviously true) by the division
+    property of equality for $x \in \mathbb{R}, \; x \ne 0$. For the case that $x = 0$,
+    $2(0) \ge 0 \implies 0 \ge 0$, which is true. Therefore, this proposition is \textbf{true}.
+\end{flushleft}
+\item $\exists n (n^2 < n)$, where the domain consists of all natural numbers (positive integers).
+\begin{gather*}
+    n^2 < n \implies n^2 - n < 0 \\
+    \text{ Let } f(n) = n^2 - n = n(n - 1) \\
+    \implies f(n) = 0 \text{ for } x \in \{0, 1\} \\
+    f(2) = 2^2 - 2 = 4 - 2 = 2 > 0 \\
+    \therefore f(n) \ge 0 \text{ for } n \in \mathbb{N} = \mathbb{Z}^+
+\end{gather*}
+\begin{flushleft}
+    We can rearrange $n^2 < n$ to get the equivalent proposition $n^2 - n < 0$ by the subtraction
+    property of equality. If we declare a function $f(n) = n^2 - n$, we can find the roots to get
+    any possible interval for which $n^2 - n < 0$ and therefore $n^2 < n$, where $n$ would fulfill
+    the proposition. There are only two real roots ($x \in \{0, 1\}$), which is the maximum number
+    for a quadratic function by the fundamental theorem of algebra. Since we are only considering
+    $n \ge 1$ since $n \in \mathbb{N} = \mathbb{Z}^+$, we only need to find whether $f(n)$ is
+    positive or negative after the root $n = 1$, as we know the function won't cross the $x$-axis
+    again for $x > 1$. Accordingly, $f(2) > 0$, so a natural number does not exist such that the
+    proposition will hold, meaning it is \textbf{false}.
+\end{flushleft}
+\item $\exists! x (x^3 = -1)$, where the domain consists of all real numbers.
+\begin{gather*}
+    x^3 = -1 \implies x = \sqrt[3]{-1} = -1
+\end{gather*}
+\begin{flushleft}
+    The quanitfied proposition can be rearranged algebraically to yield a single solution $x = -1$.
+    We also know that this because the function $f(x) = x^3$ is an injective function i.e. a 
+    one-to-one mapping of elements $f: \mathbb{R} \rightarrow \mathbb{R}$. If we look at the graph
+    of $f$, it passes a ``horizontal line test,'' where every single number $y$ is only the output
+    that corresponds to a single input $x$. Therefore, there exists a unique $x$ that fulfills
+    the predicate, so the proposition is \keyword{true}.
+\end{flushleft}
+\end{enumerate}
+\pagebreak
+\item Translate the following English statements to logical expressions, introducing notation as
+needed for predicates. Then, give a negation of the logical expression as well as a negation of
+the English statement.
+\begin{enumerate}
+\item Some of the students in the class are not here today.
+\[\exists s (\neg P(s))\]
+\begin{flushleft}
+    The domain of $s$ is the set of students in the class. \\
+    $P(s)$: $s$ is present today.
+\end{flushleft}
+\[\neg[\exists s (\neg P(s))] = \forall s P(s)\]
+\begin{flushleft}
+    \textit{``Every student in the class is here today.''}
+\end{flushleft}
+\item The number $\sqrt{x}$ is rational if $x$ is an integer.
+\begin{align*}
+    \forall x (\sqrt{x} &\in \mathbb{Q}) &x \in \mathbb{Z} \\
+    \neg[\forall x (\sqrt{x} &\in \mathbb{Q})] = \exists x (\sqrt{x} \notin \mathbb{Q})
+    &x \in \mathbb{Z}
+\end{align*}
+\begin{flushleft}
+    \textit{``There is an integer $x$ such that $\sqrt{x}$ is irrational''}
+\end{flushleft}
+\end{enumerate}
+\end{enumerate}
+\end{document}

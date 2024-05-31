@@ -1,0 +1,101 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{mathtools}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\then}{\rightarrow}
+\newcommand{\bithen}{\leftrightarrow}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\Dom}{Dom}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\0}{\emptyset}
+\newcommand{\power}{\mathcal{P}}
+
+\newcommand{\divby}{\; \vdots \;}
+
+\title{MATH 381 Section 6.3}
+\author{Prof. Olivia Dumitrescu}
+\date{1 April 2024}
+
+\begin{document}
+    \maketitle
+    \section*{Section 6.3 Permutations}
+    $n \in \N$ \\
+    $n! = n(n-1)(n-2)\dots2 \cdot 1$
+    \begin{example}
+        $S = \{1, 2, 3\}$
+        The arragement $\{3, 1, 2\}$ is a premutation of $S$
+        \begin{itemize}
+            \item 2-permutation of $S$
+            \[\{1, 2\} \quad \{2, 1\} 
+            \quad \{1, 3\} \quad \{3, 1\} 
+            \quad \{2, 3\} \quad \{3, 2\}\]
+        \end{itemize}
+    \end{example}
+    $n = 3, r = 2$ \\
+    $P(n, r)$ is the number of $r$-permutations of a set of order $n$.
+    \begin{theorem}
+        If $n$ is a positive integer and 
+        \[1 \le r \le n \qquad r \in \N\]
+        \[\begin{cases}
+            P(n, r) =  n(n-1)(n-2)\dots(n-r +1) \\
+            P(n, 0) = 1 \qquad n \in \N
+        \end{cases}\]
+    \end{theorem}
+    \begin{corollary}
+        $n \in \N \qquad 0 \le r \le n \qquad r \in \N$
+        \[P(n, r) = \frac{n!}{(n-r)!} = \frac{n(n-1)\dots(n-r +1)(n-r)\dots1}{(n-r)(n-r-1)\dots1}\]
+    \end{corollary}
+    \begin{example}
+        How many permutations of letters $ABCDEFGH$ contain the string $ABC$? \\
+        $ABC$ = $X$ \\
+        \# of permutations = $XDEFGH$ \\
+        i.e. \# rearrangements = $6! = 6 \cdot 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1$
+    \end{example}
+    \begin{remark}
+        $n! = \#$ of arrangements of a set of order $n$.
+    \end{remark}
+    \begin{definition}
+        An $r$-combination of a set of ordern $n$ is an unordered selection of $r$ elements of 
+        the set. (Equivalently, it is the number of subsets of order $r$ of a set of order $n$.)
+    \end{definition}
+    \begin{example}
+        \hfill
+        \begin{enumerate}
+            \item $P(3, 2) = 6$
+            \item $C(3, 2) = 3$
+        \end{enumerate}
+    \end{example}
+    \begin{theorem}
+        $n \in \N, 0 \le r \le n$
+        \begin{enumerate}
+            \item \[P(n, r) = \frac{n!}{(n-r)!} = n \cdot (n-1)\dots(n-r+1)\]
+            \item \[C(n, r) = \frac{n!}{r!(n-r)!} = \binom{n}{r}\]
+        \end{enumerate}
+    \end{theorem}
+    \begin{corollary}
+        $n, r \in \N \qquad 0 \le r \le n$ \\
+        Then $C(n, r) = C(n, n-r)$ or \\
+        \[\binom{n}{r} = \binom{n}{n-r}\]
+    \end{corollary}
+\end{document}

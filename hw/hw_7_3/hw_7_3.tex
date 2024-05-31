@@ -1,0 +1,151 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\graphicspath{{./images/}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\then}{\rightarrow}
+\newcommand{\bithen}{\leftrightarrow}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\0}{\emptyset}
+
+\title{MATH 381 HW 7 part 3}
+\author{Christian Jahnel}
+\date{28 February 2024}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item Let $U$ be a universe and $A \subseteq U$. Define the characteristic function of $A$, 
+$\chi_A : U \to \{0, 1\}$, by $\chi_A(x) = \begin{cases}
+    1 & \text{if $x \in A$} \\
+    0 & \text{if $x \notin A$}
+\end{cases}$
+\begin{enumerate}
+\item Consider $A = [0, 2) \subseteq \R$. Sketch the graph of $\chi_A$.
+\begin{center}
+\includegraphics[scale=0.3]{graph.jpeg}
+\end{center}
+\item Again consider $A = [0, 2) \subseteq \R$. Determine the sets $(\chi_A)^{-1}(1)$ and 
+$(\chi_A)^{-1}(2)$.
+\begin{gather*}
+    (\chi_A)^{-1}: \{0, 1\} \to U \\
+    (\chi_A)^{-1}(1) = \{(\chi_A)^{-1}(\chi_A(x)) \mid x \in A\} = \{x \mid x \in A\} = [0, 2)\\
+    (\chi_A)^{-1}(2) = \emptyset \because 2 \notin \{0, 1\} = \text{domain of } (\chi_A)^{-1}
+\end{gather*}
+\end{enumerate}
+\item Give examples of sets $S, T \subseteq \R$ and a function $f: \R \to \R$ for which 
+$f(S \cap T) \ne f(S) \cap f(T)$. Clearly justify why your sets and function satisfy the property.
+\begin{align*}
+    f(S) &= \{f(x) \mid x \in S\} \\
+    f(T) &= \{f(x) \mid x \in T\} \\
+    f(S \cap T) &= \{f(x) \mid x \in S \cap T\} = \{f(x) \mid x \in S \wedge s \in T\} \\
+    f(S) \cap f(T) &= \{f(x) \mid x \in S\} \cap \{f(x) \mid x \in T\}
+\end{align*}
+\begin{align*}
+    S &= \{0\} \\
+    T &= \{1\} \\
+    S \cap T &= \0 \\
+    f &: x \mapsto 1 \\
+    f(S) &= \{1\} \\
+    f(T) &= \{1\} \\
+    f(S \cap T) &= \0 \\
+    f(S) \cap f(T) &= \{1\} \\
+    \therefore f(S \cap T) &\ne f(S) \cap f(T) \qed
+\end{align*}
+\begin{flushleft}
+    Essentially, this phenomenon arises from the fact that the function is not injective since 
+    it maps both $x = 0$ and $x = 1$ to $f(x) = 1$. Since the two singleton sets are disjoint, 
+    their intersection is the empty set, and thus so is the image. However, the images of both 
+    sets are not disjoint, and therefore their intersection is a singleton set.
+\end{flushleft}
+\pagebreak
+\item Let $f: \R^2 \to \R$ be given by $f(x, y) = x - y$. Determine, with proofs, whether $f$ 
+is one-to-one, onto, both, or neither. Be sure to fully justify both your statement of 
+one-to-one and your statement of onto.
+\begin{enumerate}
+\item $P: \text{$f$ is an injective (i.e. one-to-one) function}$
+\[\begin{split}
+    P &\equiv \forall (x_1, y_1), (x_2, y_2) \in \R^2(f(x_1, y_1) = f(x_2, y_2) 
+    \then (x_1, y_1) = (x_2, y_2)) \\
+    &\equiv \forall (x_1, y_1), (x_2, y_2) \in \R^2((x_1, y_1) \ne (x_2, y_2) 
+    \then f(x_1, y_1) \ne f(x_2, y_2))
+\end{split}\]
+Suppose $(x_1, y_1) \ne (x_2, y_2)$ and let $x_1 = y_1$ and $x_2 = y_2$.
+\begin{gather*}
+\begin{aligned}
+    f(x_1, y_1) = x_1 - y_1 = x_1 - x_1 = 0 \\
+    f(x_2, y_2) = x_2 - y_2 = x_2 - x_2 = 0
+\end{aligned}
+\implies f(x_1, y_1) = f(x_2, y_2)
+\end{gather*}
+\[\begin{split}
+    &\therefore \exists (x_1, y_1), (x_2, y_2) \in \R^2 ((x_1, y_1) \ne (x_2, y_2) 
+    \then f(x_1, y_1) = f(x_2, y_2)) \\
+    &\implies \neg P
+\end{split}\]
+\item $Q: \text{$f$ is a surjective (i.e. onto) function}$
+\[Q \equiv \forall z \in \R \; \exists x, y \in \R^2(f(x, y) = z)\]
+Let $z \in \R$.
+\begin{align*}
+    \text{Fix } y &= 0 \in \R \\
+    \implies z = x - y &\iff z = x \\
+    z \in \R &\implies x \in \R
+\end{align*}
+$\therefore Q \qed$
+\end{enumerate}
+\begin{flushleft}
+    Consequently, \textbf{$f$ is a surjective (i.e. onto) function}, but \textbf{it is not an 
+    injective (i.e. one-to-one) function}, and thus it cannot be a bijective function. 
+    Intuitively, for every value $z$ on the $z$-axis of the 3-D graph of $f$, there must be a 
+    one-dimensional (linear) slice through the plane. Consequently, there are an infinite amount 
+    of solutions along each line, and therefore it cannot be injective. As for the surjective 
+    property, the plane spans all real numbers in its range since it is angled nonparallel to 
+    the $x$-axis, as seen by its coefficients.
+\end{flushleft}
+\item Suppose $f: A \to B$ is one-to-one and $g: B \to C$ is one-to-one. 
+Prove $g \circ f: A \to C$ is also one-to-one.
+\begin{multline*}
+    \forall x_A, y_A \in A(f(x_A) = f(y_A) \then x_A = y_A) \\
+    \wedge \forall x_B, y_B \in B(g(x_B) = g(y_B) \then x_B = y_B)
+\end{multline*}
+\[P: \forall x_A, y_A \in A((g \circ f)(x_A) = (g \circ f)(y_A) \then x_A = y_A)\]
+Let $x_A, y_A \in A$ and suppose $(g \circ f)(x_A) = (g \circ f)(y_A)$.
+\begin{align*}
+    (g \circ f)(x_A) &= (g \circ f)(y_A) \\
+    \implies g(f(x_A)) &= g(f(y_A))
+\end{align*}
+\begin{align*}
+    \text{Let } x_B &= f(x_A) \in B \\
+    \text{Let } y_B &= f(y_A) \in B
+\end{align*}
+\begin{align*}
+    g(f(x_A)) &= g(f(y_A)) \\
+    \implies g(x_B) &= g(y_B) \\
+    \implies x_B &= y_B \\
+    \implies f(x_A) &= f(y_A) \\
+    \implies x_A = y_A
+\end{align*}
+$\therefore P \qed$
+\end{enumerate}
+\end{document}

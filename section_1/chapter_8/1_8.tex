@@ -1,0 +1,103 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+    \ifdim\lastskip<1.5em \hskip-\lastskip
+    \hskip1.5em plus0em minus0.5em \fi \nobreak
+    \vrule height0.75em width0.5em depth0.25em\fi}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\then}{\rightarrow}
+\newcommand{\bithen}{\leftrightarrow}
+
+\title{MATH 381 Section 1.8}
+\author{Prof. Olivia Dumitrescu}
+\date{5 February 2024}
+
+\begin{document}
+    \maketitle
+    \section*{Proof methods and strategies}
+    Suppose we want to prove
+    \[p_1 \vee p_2 \vee p_3 \vee \dots \vee p_n \then q\]
+    is equivalent to
+    \[(p \then q) \wedge (p_2 \then q) \wedge \dots \wedge (p_n \then q)\].
+    \begin{example}
+        Prove $(n + 1)^3 \ge 3^n$ for positive integers $n \le 4$.
+    \end{example}
+    \begin{example}
+        Prove that for any $n \in \mathbb{Z}, \: n^2 \ge n$
+    \end{example}
+    \begin{example}
+        Use a proof by cases to show that
+        \[|x \cdot y| = |x| \cdot |y| \quad x, y \in \mathbb{R}\]
+    \end{example}
+    \begin{example}
+        Show there are no integer solutions $x$ and $y$ to the following
+        \[x^2 + 3y^2 = 18\]
+    \end{example}
+    \subsection*{Fermat's Last Theorem}
+    The equation $x^n + y^n = z^n$ has no integer solutions for $n > 2$.
+    \begin{example}
+        Show that if $x$ and $y$ are even numbers, then both $xy$ and $x + y$ are even integers.
+    \end{example}
+    \begin{example}
+        Open question: The $3x + 1$ or Collatz conjecture \\
+        \[\forall x \in \mathbb{Z}, \: \exists n \; (T^n(x) = 1)\]
+        Let $T$ be the transformation:
+        \begin{enumerate}
+            \item if $x$ is an even integer $\then \frac{x}{2}$
+            \item if $x$ is an odd interger $\then T(x) = 3x + 1$
+        \end{enumerate}
+    \end{example}
+    \begin{example}
+        Two distinct positive numbers $x$ and $y$
+        \[\frac{x + y}{2} > \sqrt{xy}\]
+        i.e. the arithmetic mean is greater than the geometric mean
+    \end{example}
+    \begin{proof}
+        Recall that for positive numbers
+        \[x^2 > y^2 \iff x > y\]
+        which can be proven through difference of squares.
+        \[\frac{x + y}{2} \ge \sqrt{xy}\]
+        It suffices to prove
+        \[(\frac{x + y}{2})^2 \ge (\sqrt{xy})^2\]
+    \end{proof}
+    \subsection*{Uniqueness Proofs}
+    $P(x)$: desired property
+    \begin{enumerate}
+        \item $\exists x (P(x) \wedge \forall y ( y \ne x \then \neg P(y)))$
+        \item Assume both $x$ and $y$ satisfy $P(x)$ show that $x = y$.
+    \end{enumerate}
+    \begin{example}
+        Show that every line that is not horizontal has a unique solution.
+    \end{example}
+    \begin{proof}
+        \hfill
+        \begin{enumerate}
+            \item existence
+            \item uniqueness
+        \end{enumerate}
+        Assume $x_1$ and $x_2$ are 2 solutions for a line. Claim: $x_1 = x_2$
+        \[y = ax + b\]
+        is not horizontal if $a \ne 0$ \\
+    \end{proof}
+    \begin{example}
+        Prove that there exists two irrational numbers $x, y$ so that $x^y \in \mathbb{Q}$.
+    \end{example}
+    \begin{proof}
+        \[\exists x, y \notin \mathbb{Q} \text{ s.t. } x^y \in \mathbb{Q}\]
+    \end{proof}
+\end{document}

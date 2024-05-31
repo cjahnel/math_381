@@ -1,0 +1,196 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{mathtools}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\then}{\rightarrow}
+\newcommand{\bithen}{\leftrightarrow}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\Dom}{Dom}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\0}{\emptyset}
+\newcommand{\power}{\mathcal{P}}
+
+\newcommand{\divby}{\; \vdots \;}
+
+\title{MATH 381 Section 6.4}
+\author{Prof. Olivia Dumitrescu}
+\date{1 April 2024}
+
+\begin{document}
+    \maketitle
+    \section*{Section 6.4 The Binomial Theorem}
+    \begin{theorem}
+        Binonmial Theorem \\
+        Let $x, y$ be variables and $n \ge 0$.
+        \[\begin{split} (x + y)^n &= \sum_{k=0}^{n} \binom{n}{k} x^k \cdot y^{n-k} \\
+            &= \sum_{k=0}^{n} \binom{n}{k} x^{n-k} \cdot y^k \\
+            &= \binom{n}{0}x^n + \binom{n}{1}x^{n-1}y + \dots 
+            + \binom{n}{n-1}xy^{n-1} + \binom{n}{n}y^n \\
+            &= x^n + nx^{n-1}y + \frac{n(n-1)}{2}x^{n-2}y^2 + \dots 
+            + nxy^{n-1} + y^n
+        \end{split}\]
+    \end{theorem}
+    \begin{corollary}
+        \[2^n = \sum_{k=0}^{n} \binom{n}{k} = 
+        \binom{n}{0} + \binom{n}{1} + \binom{n}{2} + \dots + \binom{n}{n-1} + \binom{n}{n}\]
+        $x = y = 1$ \\
+        $|\power(S)|$
+    \end{corollary}
+    $n \in \N$
+    \[(1 + x)^n = \sum_{k=0}^{n} \binom{n}{k} x^k\]
+    Taylor Series $\qquad x_0 \in \Dom f$
+    \[f(x) = \sum_{k=0}^{\infty} \frac{f^{(k)}(x_0)}{k!} (x - x_0)^k\]
+    Maclaurin Series Expansion if $x_0 = 0$. \\
+    $f(x) = (1 + x)^n$ \\
+    $m \notin \N, m \in \R$
+    \[(1 + x)^m = \sum_{k=0}^{\infty} \binom{m}{k} x^k\]
+    \[\binom{m}{k} = \begin{cases}
+        \dfrac{m(m-1)(m-2)\dots(m-k+1)}{k!} & k > 0 \\
+        1 & k = 0
+    \end{cases}\]
+    \begin{align*}
+        \binom{-2}{3} &= \frac{-2 \cdot -3 \cdot -4}{1 \cdot 2 \cdot 3} = \frac{-4}{1} = -4 \\
+        \binom{\frac{1}{2}}{3} &= \frac{\frac{1}{2}(\frac{1}{2}-1)(\frac{1}{2}-2)}{1 \cdot 2 \cdot 3} 
+        = \frac{\frac{1}{2} \cdot \frac{-1}{2} \cdot \frac{-3}{2}}{2 \cdot 3} 
+        = \frac{\frac{1}{2} \cdot \frac{-1}{2} \cdot \frac{-1}{2}}{2}  = \frac{1}{16}
+    \end{align*}
+    \begin{align*}
+        \binom{-1}{k} &= \frac{-1 \cdot -2 \cdot \dots \cdot (-1 - k + 1)}
+        {1 \cdot 2 \cdot \dots \cdot k} = \frac{-1 \cdot -2 \cdot \dots \cdot -k}
+        {1 \cdot 2 \cdot 3 \cdot \dots \cdot k} \\
+        &= (-1)^k = \begin{cases}
+            -1, & k \text{ is odd} \\
+            +1, & k \text{ is even}
+        \end{cases}
+    \end{align*}
+    Use binomial formula
+    \[\frac{1}{1-x} = (1-x)^{-1} = \sum_{k=0}^{\infty} \binom{-1}{k} (-x)^k\]
+    \[\frac{1}{1-x} = 1 + x + x^2 + x^3 + \dots + x^n + \dots \qquad |x| < 1\]
+    \begin{align*}
+        \frac{1}{1-x} &= (1-x)^{-1} \\
+        &= \sum_{k=0}^{\infty} \binom{-1}{k} (-x)^k \\
+        &= \sum_{k=0}^{\infty} (-1)^k (-1)^k \cdot x^k = \sum_{k=0}^{\infty} x^k
+    \end{align*}
+    \begin{corollary}
+        $n \in \N$
+        \[\sum_{k=0}^{n} (-1)^k \binom{n}{k} = 0\]
+        \[\binom{n}{0} - \binom{n}{1} + \binom{n}{2} + \dots + (-1)^n \binom{n}{n} = 0\]
+    \end{corollary}
+    \begin{proof}
+        $x = 1, y = -1$
+        \[\sum_{k=0}^{n} (-1)^k \binom{n}{k} = (1-1)^n = 0\]
+    \end{proof}
+    \begin{corollary}
+        \[\sum_{k=0}^{n} \binom{n}{k} 2^k = 3^n\]
+    \end{corollary}
+    \begin{proof}
+        $x = 2, y = 1$
+        \[\sum_{k=0}^{n} \binom{n}{k} 2^k = (2+1)^n = 3^n\]
+    \end{proof}
+    \begin{corollary}
+        \[n \cdot 2^{n-1} = \binom{n}{1} + 2\binom{n}{2} + \dots + n\binom{n}{n} 
+        = \sum_{k=1}^{n} k \binom{n}{k}\]
+    \end{corollary}
+    \begin{proof}
+        \[(1+x)^n = \sum_{k=0}^{n} \binom{n}{k} x^k\]
+        Differentiate (with respect to $x$) [possible $\because$ we expanded the domain to $\R$]
+        \[n(1+x)^{n-1} = \sum_{k=1}^{n} k \binom{n}{k} x^{k-1}\]
+        Let $x=1$.
+        \[n \cdot 2^{n-1} = \sum_{k=1}^{n} k \binom{n}{k}\]
+    \end{proof}
+    \begin{remark}
+        If $n \in \N, k \in \N, k \ge n + 1$
+        \[\binom{n}{k} = 0\]
+        \[\binom{n}{n+1} = \frac{n(n-1)\dots(n-(n+1)+1)}{(n+1)!} 
+        = \frac{n(n-1)\dots(0)}{(n+1)!} = 0\]
+    \end{remark}
+    \begin{theorem}
+        Pascal's Identity \\
+        Let $n, k \in \N \qquad k \le n$
+        \[\binom{n+1}{k} = \binom{n}{k-1} + \binom{n}{k}\]
+    \end{theorem}
+    \begin{proof}
+        \begin{align*}
+            \binom{n+1}{k} &= \frac{(n+1)n(n-1)\dots((n+1)-k+1)}{k!} \\
+            \binom{n}{k-1} &= \frac{n(n-1)\dots(n-(k-1)+1)}{(k-1)!} \\
+            \binom{n}{k} &= \frac{n(n-1)\dots(n-k+1)}{k!}
+        \end{align*}
+        \begin{align*}
+            \binom{n+1}{k} &= \binom{n}{k-1} + \binom{n}{k} \\
+            \frac{(n+1)!}{k!(n+1-k)!} &= \frac{n!}{(k-1)!(n-k+1)!} + \frac{n!}{k!(n-k)!} \\
+            &= \frac{n!}{(k-1)!(n-k)!} \left[\frac{1}{n-k+1}+\frac{1}{k}\right] \\
+            &= \frac{n!}{(k-1)!(n-k)!} \left[\frac{k}{k(n-k+1)}+\frac{(n-k+1)}{k(n-k+1)}\right] \\
+            &= \frac{n!}{(k-1)!(n-k)!} \left[\frac{k+(n-k+1)}{k(n-k+1)}\right] \\
+            &= \frac{n!}{(k-1)!(n-k)!} \cdot \frac{n+1}{k(n-k+1)} \\
+            &= \frac{(n+1)!}{k!(n-k+1)!}
+        \end{align*}
+    \end{proof}
+    \begin{theorem}
+        Vandermonde's Identity \\
+        Let $m, n, r \in \N$. $r \le m, n$
+        \[\binom{m+n}{r} = \sum_{k=0}^{r} \binom{m}{r-k} \binom{n}{k}\]
+    \end{theorem}
+    \begin{proof}
+        \begin{align*}
+            (1+x)^{m+n} &= (1+x)^m \cdot (1+x)^n \\
+            \sum_{r=0}^{m+n} \binom{m+n}{r} x^r 
+            &= \left(\sum_{i=0}^{m} \binom{m}{i} x^i\right)
+            \left(\sum_{j=0}^{n} \binom{n}{j} x^j\right) \\
+            &= \sum_{k=0}^{m+n} \left(\sum_{i+j=k} \binom{m}{i}\binom{n}{j}\right) x^k
+            \qquad k = r
+        \end{align*}
+    \end{proof}
+    \begin{corollary}
+        $n \in \N$
+        \[\binom{2n}{n} = \sum_{k=0}^{n} \binom{n}{k}^2\]
+    \end{corollary}
+    \begin{proof}
+        $m=n=r$
+        \[\begin{split}
+            \binom{2n}{n} &= \sum_{k=0}^{n} \binom{n}{n-k} \binom{n}{k} \\
+            &= \sum_{k=0}^{n} \binom{n}{k}^2
+        \end{split}\]
+    \end{proof}
+    \begin{theorem}
+        $n, r \in \N \qquad r \le n$
+        \[\binom{n+1}{r+1} = \binom{r}{r} + \binom{r+1}{r} + \binom{r+2}{r} + \dots 
+        + \binom{n}{r} = \sum_{j=r}^{n} \binom{j}{r}\]
+    \end{theorem}
+    \begin{proof}
+        \[\begin{alignedat}{3}
+            \binom{n+1}{r+1} = \binom{n}{r} + &\binom{n}{r+1} & & \\
+            &\binom{n-1}{r} + &\binom{n-1}{r+1} & \\
+            & &\binom{n-2}{r} + &\binom{n-2}{r+1} \\
+            & & &\binom{r}{r}
+        \end{alignedat}\]
+    \end{proof}
+    \begin{example}
+        What is the coefficient of $x^{12} \cdot y^{13}$ in the expansion $(2x-3y)^{35}$?
+    \end{example}
+    \begin{proof}
+        \[(2x-3y)^{25} = \sum_{k=0}^{25} \binom{25}{k}(2x)^{25-k} \cdot (-3y)^k\]
+        So, $k = 13$.
+        \[\binom{25}{13} \cdot 2^{12} \cdot (-3)^{13}\]
+    \end{proof}
+\end{document}

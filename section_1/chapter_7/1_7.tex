@@ -1,0 +1,156 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+    \ifdim\lastskip<1.5em \hskip-\lastskip
+    \hskip1.5em plus0em minus0.5em \fi \nobreak
+    \vrule height0.75em width0.5em depth0.25em\fi}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\then}{\rightarrow}
+\newcommand{\bithen}{\leftrightarrow}
+
+\title{MATH 381 Section 1.7}
+\author{Olivia Dumitrescu}
+\date{31 January 2024}
+
+\begin{document}
+    \maketitle
+    \section*{Introduction to Proofs}
+    \begin{definition}
+        \hfill
+        \begin{enumerate}
+            \item The integer $n =$ even number if $\exists$ an integer $k$ so that $n = 2k$.
+            \item The integer $n =$ odd number if $\exists$ an integer $k$ so that $n = 2k + 1$.
+        \end{enumerate}
+    \end{definition}
+    If $x \in \mathbb{Z}$, either $x =$ odd or $x = $ even.
+    \begin{example}
+        Give a proof for the statement \\
+        "If $n =$ odd integer, then $n^2$ is an odd integer". \\
+        \begin{align*}
+            \text{proof } P(n): n &= \text{ odd integer} \\
+            Q(n): n^2 &= \text{ odd integer}
+        \end{align*}
+        claim $\forall n (P(n) \then Q(n))$
+    \end{example}
+    \begin{example}
+        Give a direct proof to \\
+        "If $m$ and $n$ are both perfect squares, then $m \times n$ is also a perfect square."
+        \begin{proof}
+            Since $m$ and $n$ are both perfect squares $\implies \exists a, b \in \mathbb{Z}^+$
+            so that
+            \begin{enumerate}
+                \item $m \times n = a^2 \times b^2 = (ab)^2$ \qed
+            \end{enumerate}
+        \end{proof}
+    \end{example}
+    \subsection*{Section 1.7.6 proof by negation}
+    Assume we want to prove a conditional statement $p \then q \equiv \neg q \then \neg p$.
+    \begin{enumerate}
+        \item prove it by \keyword{contraposition} i.e. prove
+        \[\neg q \then \neg p.\]
+        \item prove it by \keyword{contradiction} i.e. assume \\
+        $p \then q$ is False i.e. $p = T$ and $q = F$.
+    \end{enumerate}
+    \begin{example} %4 because 3 is missing and I took a picture
+        Prove that if $n = a \cdot b$ where $a$ and $b$ are positive integers,
+        then $a \le \sqrt{n}$ or $b \le \sqrt{n}$.
+        \begin{align*}
+            q: \quad a \le \sqrt{n} \vee b \le \sqrt{n} \\
+            \neg q: \quad \neg(a \le \sqrt{n}) &\wedge \neg(b \le \sqrt{n}) \\
+            (a > \sqrt{n}) &\wedge (b > \sqrt{n})
+        \end{align*}
+    \end{example}
+    \begin{example} %5
+        Prove that $\sqrt{2}$ is an irrational number.
+        \begin{proof}
+            Assume by contradiction that $\sqrt{2} \in \mathbb{Q}$.
+            \[\mathbb{Q} = \{\frac{a}{b}, \; (a, b) = 1, \; b \ne 0; \; a, b \in \mathbb{Z}\}\]
+            \[\sqrt{2} \in \mathbb{Q} \implies \exists a, b \in \mathbb{Z}, \; b \ne 0, \; (a, b) = 1\]
+            \begin{align*}
+                \sqrt{2} &= \frac{a}{b} \\
+                \implies 2 &= (\frac{a}{b})^2 = \frac{a^2}{b^2} \\.
+                \implies a^2 &= 2b^2
+            \end{align*}
+        \end{proof}
+    \end{example}
+    \subsection*{Proof of Equivalences}
+    To prove a theorem that is a biconditional statement of the form $p \bithen q$,
+    you must prove two conditional statements: $p \then q$ and $q \then p$.
+    \[p \bithen q = (p \then q) \wedge (q \then p)\]
+    Sometimes a theorem stating that many propositions are equivalent
+    \[p_1, p_2, p_3, \dots, p_n\]
+    Show that TFAE (that the following are equivalent)
+    \begin{enumerate}
+        \item $p_1$
+        \item $p_2$
+        \item $p_3$
+        \item[n.] $p_n$
+    \end{enumerate}
+    bu definition it means prove
+    \begin{align*}
+        p_1 &\bithen p_2 \\
+        p_2 &\bithen p_3 \\
+        &\; \; \vdots \\
+        p_{n-1} &\bithen p_n
+    \end{align*}
+    i.e. $2(n - 1)$ statements to prove
+    \begin{theorem}
+        If we can prove a loop in the form
+        \begin{align*}
+            p_1 &\then p_2 \\
+            p_2 &\then p_3 \\
+            &\; \; \vdots \\
+            p_{n-1} &\then p_n \\
+            p_{n} &\then p_1
+        \end{align*}
+        i.e. $n$ statements then it suffices to show that $p_1, \dots, p_n$
+        are equivalent statements.
+    \end{theorem}
+    \begin{example}
+        Let $n \in \mathbb{Z}$ \\
+        Prove that $n$ is odd if and only if $n^2$ is odd.
+        \begin{proof}
+            \begin{align*}
+                p: \text{$n$ is odd} \\
+                q: \text{$n^2$ is odd}
+            \end{align*}
+        \end{proof}
+        \begin{enumerate}
+            \item Show that $p \then q$ i.e. if $n$ is odd then $n^2$ is odd.
+            \item Show that $q \then p$ i.e. if $n^2$ is odd then $n$ is odd.
+            We prove $q \then p$ by showing the contrapositive $\neg p \then \neg q$
+            i.e. if $n$ is even then $n^2$ is even.
+        \end{enumerate}
+    \end{example}
+    \begin{example}
+        Let $n \in \mathbb{Z}$. \\
+        Show that the following are equivalent:
+        \begin{align*}
+            p_1: \text{$n$ is even} \\
+            p_2: \text{$n - 1$ is odd} \\
+            p_3: \text{$n^2$ is even}
+        \end{align*}
+        $p_1 \then p_2$ is obvious. \\
+        $p_2 \then p_3$ can be proven with another integer $k$. \\
+        $p_3 \then p_1$ is proven by its equivalence with $\neg p_1 \then \neg p_3$.
+    \end{example}
+    \begin{example}
+        Show that the statement ``every positive integer is the sum of two squares of integers''
+        is false. \\ Counterexample is $n = 3$.
+    \end{example}
+\end{document}

@@ -1,0 +1,172 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\then}{\rightarrow}
+\newcommand{\bithen}{\leftrightarrow}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\0}{\emptyset}
+
+\title{MATH 381 HW 9 part 3}
+\author{Christian Jahnel}
+\date{27 March 2024}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item Find gcd(620, 140).
+\begin{align*}
+    620 &= 4(140) + 60 \iff 60 = 620 - 4(140) \\
+    140 &= 2(60) + 20 \iff 20 = 140 - 2(60) \\
+    60 &= 3(20) + 0
+\end{align*}
+$\therefore \gcd(620, 140) = 20$
+\item Show that an integer $a \in \Z_n$ has a multiplicative inverse, that is, an element 
+$a^{-1} \in \Z_n$ with $a \cdot_n (a^{-1}) = 1$, if and only if $a$ and $n$ are relatively prime.
+\begin{flushleft}
+    Assume $(a,n) = 1$.
+    By Bézout's Theorem, $\exists s, t \in \Z$ such that
+    \begin{align*}
+        a \cdot s + n \cdot t &= 1 \\
+        a \cdot s + n \cdot t &\equiv 1 \pmod n \\
+        n \cdot t &\equiv 0 \pmod n \\
+        \implies a \cdot s &\equiv 1 \pmod n \\
+        \implies a^{-1} &= \hat{s} \in \Z_n
+    \end{align*}
+\end{flushleft}
+\begin{flushleft}
+    Now assume $a$ has a multiplicative inverse, i.e. $\exists \hat{x} \in \Z_n$ such that
+    \begin{gather*}
+        \hat{a} \cdot \hat{x} = \hat{1} \qquad \Z_n \\
+        \implies n \mid ax-1 \\
+        \implies \exists y \in \Z \quad ny = ax - 1 \\
+        \iff ax-ny = 1
+    \end{gather*}
+    Assume $\begin{cases}
+        d \mid a \\
+        d \mid n
+    \end{cases} \implies d \mid ax - ny \implies d \mid 1$ \\
+    $\therefore d = 1 \implies (a, n) = 1 \qed$
+\end{flushleft}
+\item The numbers 307 and 220 are relatively prime.
+\begin{enumerate}
+\item Find integers $x$ and $y$ satisfying $307x + 220y = 1$.
+\begin{align*}
+    307 &= 220 + 87 \iff 87 = 307 - 220 \\
+    220 &= 2(87) + 46 \iff 46 = 220 - 2(87) \\
+    87 &= 46 + 41 \iff 41 = 87 - 46 \\
+    46 &= 41 + 5 \iff 5 = 46 - 41 \\
+    41 &= 8(5) + 1 \iff 1 = 41 - 8(5) \\
+    5 &= 5(1) + 0
+\end{align*}
+\begin{align*}
+    1 &= 41 - 8(5) \\
+    &= 41 - 8(46 - 41) \\
+    &= (87 - 46) - 8(46 - (87 - 46)) \\
+    &= (307 - 220 - (220 - 2(307 - 220))) - 8(220 - 2(307 - 220) \\
+    &\quad - (307 - 220 - (220 - 2(307 - 220)))) \\
+    & a=307,b=220 \\
+    1 &= (a - b - (b - 2(a - b))) - 8(b - 2(a - b) - (a - b - (b - 2(a - b)))) \\
+    &= (a - b - b + 2a - 2b) - 8(b - 2a + 2b - a + b + b - 2a + 2b) \\
+    &= 3a - 4b - 8(7b - 5a) \\
+    &= 3a - 4b - 56b + 40a \\
+    &= 43a - 60b = 307(43) + 220(60) = 1 \\
+    &\therefore x = 43, b = -60
+\end{align*}
+\item Use the equation found in (a) to determine the multiplicative inverse of 307 in $\Z_{220}$.
+\begin{align*}
+    307x + 220y = 1 &\implies 307x + 220y \equiv 1 \pmod {220} \\
+    220y \equiv 0 \pmod {220} &\implies 307x \equiv 1 \pmod {220} \\
+    \implies x = 43 &\equiv 307^{-1} \pmod {220}
+\end{align*}
+\end{enumerate}
+\item A U.S. Social Security number consists of 9 digits; the first digit may be a 0.
+\begin{enumerate}
+\item How many different Social Security numbers are there?
+\[
+    10^9 = 1,000,000,000
+\]
+\item How many Social Security numbers have all even digits?
+\[
+    5^9 = 1,953,125
+\]
+\end{enumerate}
+\item A group of 12 women and 12 men are to be lined up.
+\begin{enumerate}
+\item How many lines are there beginning with a woman and ending with a man?
+\begin{flushleft}
+    The line would look like this: \\
+    W \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ M \\
+    Since we have 12 options for the woman at the beginning and 12 options for the man at the end, 
+    by the product rule these numbers multiply with the number of permutations of the remaining 
+    22 people i.e. $22!$.
+\end{flushleft}
+\[
+    12 \cdot 22! \cdot 12 \approx 1.61856105\times10^{23}
+\]
+\item How many lines are available if no two men are allowed to be adjacent?
+\begin{flushleft}
+    Since no two men are allowed to be adjacent, the line must alternate between a man and a 
+    woman. Therefore, we can reduce the problem to two situations depending on the gender of 
+    the first in line.
+    \begin{enumerate}
+        \item MWMWMWMWMWMWMWMWMWMWMWMW
+        \item WMWMWMWMWMWMWMWMWMWMWMWM
+    \end{enumerate}
+    If we then only think about the order of the women and men separately, we can reduce the 
+    problem to the number of arrangements of men multiplied by the number of arrangements of 
+    women (by the product rule). We also have to multiply this by two since we consider two 
+    possibilities based on the gender of the person first in line.
+\end{flushleft}
+\begin{align*}
+    P_M &= 12! \\
+    P_W &= 12! \\
+    P &= 2 \cdot (12! \cdot 12!) \\
+    &\approx 4.58885066\times10^{17}
+\end{align*}
+\end{enumerate}
+\item How many functions are there from $\Z_5$ to $\Z_n$, $n \ge 2$ that 
+\begin{enumerate}
+\item are one-to-one?
+\[\begin{cases}
+    n(n-1)(n-2)(n-3)(n-4) & n \ge 5 \\
+    0 & n < 5
+\end{cases}\]
+\item have 0 in the range?
+\begin{enumerate}
+    \item Only 1 element in $Z_5$ maps to 0 \\
+    5 options for the 0; other 4 in domain give $n^4$ options
+    \item 2 elements in $Z_5$ maps to 0 \\
+    $5 \cdot 4$ options for the 0s; other 3 in domain give $n^3$ options
+    \item 3 elements in $Z_5$ maps to 0 \\
+    $5 \cdot 4$ options for the nonzeros which give $n^2$ options
+    \item 4 elements in $Z_5$ maps to 0 \\
+    5 options for the non-zero which has $n$ options
+    \item All 5 elements in $Z_5$ maps to 0 \\
+    1 function which maps all to 0
+\end{enumerate}
+\[5n^4 + (5 \cdot 4)n^3 + (5 \cdot 4)n^2 + 5n + 1\]
+\[= 5n^4 + 20n^3 + 20n^2 + 5n + 1\]
+\end{enumerate}
+\end{enumerate}
+\end{document}
